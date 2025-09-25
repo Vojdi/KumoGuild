@@ -32,6 +32,11 @@ public class Member : MonoBehaviour
         if (health <= 0) 
         {
             Debug.Log($"{gameObject.name} died");
+            GameManager.Instance.Members.Remove(this);
         }
+    }
+    private void OnMouseDown()
+    {
+        Debug.Log(gameObject.name);
     }
 }

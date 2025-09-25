@@ -49,7 +49,6 @@ public class Skill : ScriptableObject
         {
             foreach (Member member in GameManager.Instance.Members)
             {
-                Debug.Log(member.Position + "member Pos");//////
                 if (reachablePositions.Contains(member.Position))
                 {
                     return true;
