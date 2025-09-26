@@ -17,11 +17,13 @@ public class Member : MonoBehaviour
 
     protected List<Skill> skills;
     public List<Skill> Skills => skills;
+    public bool Targetable;
 
     protected virtual void Awake()
     {
         skills = new List<Skill>();
         health = maxHealth;
+        Targetable = false;
     }
     public virtual void YourTurn()
     {
@@ -37,6 +39,9 @@ public class Member : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        Debug.Log(gameObject.name);
+        if (Targetable)
+        {
+            ControlPanel.Instance.SkillPositionSelected(position);
+        }
     }
 }

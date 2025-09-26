@@ -9,5 +9,6 @@ public class Knight : AllyMember
         position = 1;// 
         base.Awake();
         skills.Add(ScriptableObject.CreateInstance<GuidedSlash>());
+        skills.Add(ScriptableObject.CreateInstance<PiercingLight>());
     }
 }
