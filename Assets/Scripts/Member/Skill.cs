@@ -13,8 +13,10 @@ public class Skill : ScriptableObject
     public int SkillValue => skillValue;
     protected string skillName;
     public string SkillName => skillName;
-
+    
     public string SkillType;
+    public string AnimName;
+
 
     public virtual void UseSkill(int targetPosition)
     {

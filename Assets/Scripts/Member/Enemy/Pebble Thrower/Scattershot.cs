@@ -4,6 +4,7 @@ public class Scattershot : Skill
     void OnEnable()
     {
         skillName = "Scattershot";
+        AnimName = "testEff";
         reachablePositions = new List<int> {2, 3 };
         SkillType = "area";
         skillValue = 3;

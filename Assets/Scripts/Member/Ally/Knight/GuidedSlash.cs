@@ -5,6 +5,7 @@ public class GuidedSlash : Skill
     void OnEnable()
     {
         skillName = "Guided Slash";
+        AnimName = "testEff";
         reachablePositions = new List<int> { 4, 5 };
         usableFromPositions = new List<int> { 1, 2 };
         SkillType = "single";

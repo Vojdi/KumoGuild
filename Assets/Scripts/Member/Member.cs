@@ -19,6 +19,7 @@ public class Member : MonoBehaviour
     public List<Skill> Skills => skills;
     public bool Targetable;
 
+
     protected virtual void Awake()
     {
         skills = new List<Skill>();
@@ -35,6 +36,7 @@ public class Member : MonoBehaviour
         {
             Debug.Log($"{gameObject.name} died");
             GameManager.Instance.Members.Remove(this);
+            Destroy(gameObject);
         }
     }
     private void OnMouseDown()
@@ -44,4 +46,9 @@ public class Member : MonoBehaviour
             ControlPanel.Instance.SkillPositionSelected(position);
         }
     }
+    protected void CallNextTurn()
+    {
+        GameManager.Instance.NextTurn();
+    }
+
 }

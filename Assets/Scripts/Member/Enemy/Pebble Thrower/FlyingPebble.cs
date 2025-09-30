@@ -5,6 +5,7 @@ public class FlyingPebble : Skill
     void OnEnable()
     {
         skillName = "Flying Pebble";
+        AnimName = "testEff";
         reachablePositions = new List<int> { 1, 2, 3 };
         SkillType = "single";
         skillValue = 5;

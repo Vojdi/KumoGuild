@@ -4,7 +4,8 @@ public class ClumsyStrike : Skill
 {
     void OnEnable()
     {
-        skillName = "Clumsy Strike";    
+        skillName = "Clumsy Strike";
+        AnimName = "testEff";
         reachablePositions = new List<int> { 1, 2, 3 };
         SkillType = "single";
         skillValue = 4;

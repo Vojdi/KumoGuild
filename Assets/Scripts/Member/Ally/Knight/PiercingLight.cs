@@ -6,6 +6,7 @@ public class PiercingLight : Skill
     void OnEnable()
     {
         skillName = "Piercing Light";
+        AnimName = "testEff";
         reachablePositions = new List<int> { 4, 5 };
         usableFromPositions = new List<int> { 1};
         SkillType = "area";

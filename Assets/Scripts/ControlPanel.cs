@@ -1,6 +1,5 @@
-using System.Collections.Generic;
+
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ControlPanel : MonoBehaviour
 {
@@ -10,12 +9,13 @@ public class ControlPanel : MonoBehaviour
     Skill selectedSkill;
     private void Awake()
     {
+
         instance = this;
     }
 
     public void AllyTurn(AllyMember member)
     {
-        EnableSKills();
+        EnableControls(true);
         memberOnTurn = member;
     }
     public void SkillClicked(int index)
@@ -36,8 +36,12 @@ public class ControlPanel : MonoBehaviour
     }
     public void SkillPositionSelected(int pos)
     {
+        Debug.Log($"{memberOnTurn.name} used {selectedSkill.SkillName} on member on position {pos}");//////
+        EffectManager.Instance.PlayEffectAnimation(selectedSkill.AnimName);
         selectedSkill.UseSkill(pos);
+        EnableControls(false);
         Untarget();
+
     }
     void Untarget()
     {
@@ -46,11 +50,11 @@ public class ControlPanel : MonoBehaviour
             member.Targetable = false;
         }
     }
-    void EnableSKills()
+    void EnableControls(bool parameter)
     {
         foreach (Transform child in transform)
         {
-            child.gameObject.SetActive(true);
+            child.gameObject.SetActive(parameter);
         }
     }
 }

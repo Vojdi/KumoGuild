@@ -22,19 +22,19 @@ public class EnemyMember : Member
                 Debug.Log("no skill found");///////
                 return;//////
             }/////
-            Skill chosenSKill = availableSkills[Random.Range(0, availableSkills.Count)];
+            Skill SelectedSkill = availableSkills[Random.Range(0, availableSkills.Count)];
             List<int> validTargetPositions = new List<int>();
             foreach (var member in GameManager.Instance.Members)
             {
-                if (chosenSKill.ReachablePositions.Contains(member.Position))
+                if (SelectedSkill.ReachablePositions.Contains(member.Position))
                 {
                     validTargetPositions.Add(member.Position);
                 }
             }
             int position = validTargetPositions[Random.Range(0, validTargetPositions.Count)];
-            Debug.Log($"{gameObject.name} used {chosenSKill.SkillName} on member on position {position}");//////
-            chosenSKill.UseSkill(position);
-            GameManager.Instance.NextTurn();
+            Debug.Log($"{gameObject.name} used {SelectedSkill.SkillName} on member on position {position}");//////
+            EffectManager.Instance.PlayEffectAnimation(SelectedSkill.AnimName);
+            SelectedSkill.UseSkill(position);
         }
     }
 }
