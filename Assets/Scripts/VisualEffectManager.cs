@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class EffectManager : MonoBehaviour
+public class VisualEffectManager : MonoBehaviour
 {
-    static EffectManager instance;
-    public static EffectManager Instance => instance;
+    static VisualEffectManager instance;
+    public static VisualEffectManager Instance => instance;
 
     Animator animator;
 

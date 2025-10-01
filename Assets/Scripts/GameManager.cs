@@ -67,10 +67,13 @@ public class GameManager : MonoBehaviour
     {
         if (membersTurnOrder.Count == 0)
         {
+            foreach (Member member in members) {
+                member.EffectsTime();
+                
+            }
             Debug.Log("New Round");
             DetermineTurnOrder();
         }
-        Debug.Log("New Turn");
         Member memberToPlay = membersTurnOrder[0];
         membersTurnOrder.RemoveAt(0);
         memberToPlay.YourTurn();

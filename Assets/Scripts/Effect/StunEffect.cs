@@ -1,0 +1,33 @@
+using System;
+using System.Linq;
+using UnityEngine;
+
+public class StunEffect : Effect
+{
+    int startRoundLasts;
+    public override void EffectDied()
+    {
+        base.EffectDied();
+        Effect stunResEffect = new StunResistEffect();
+        stunResEffect.SetValues(member, startRoundLasts + 1);
+        Debug.Log($"{member.MemberName} now has stun resistance for {startRoundLasts} turns");
+        stunResEffect.Attach(member);
+    }
+    public override void SetValues(Member member, int roundsLasts)
+    {
+        base.SetValues(member, roundsLasts);
+        startRoundLasts = roundsLasts;
+    }
+    public override void Attach(Member member)
+    {
+        if (member.Effects.OfType<StunEffect>().Any() || member.Effects.OfType<StunResistEffect>().Any()) 
+        {
+            Debug.Log($"{member.MemberName} couldn't be stunned" );
+        }
+        else
+        {
+            member.Effects.Add(this);
+            Debug.Log($"{member.MemberName} was stunned");
+        }
+    }
+}

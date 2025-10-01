@@ -14,6 +14,9 @@ public class GuidedSlash : Skill
     public override void UseSkill(int targetPosition)
     {
         Member targetMember = SingleTarget(targetPosition);
+        Effect stunEff = new StunEffect();
+        stunEff.SetValues(targetMember, 1);
+        stunEff.Attach(targetMember);
         targetMember.Damage(skillValue);
     }
 }

@@ -9,10 +9,8 @@ public class ControlPanel : MonoBehaviour
     Skill selectedSkill;
     private void Awake()
     {
-
         instance = this;
     }
-
     public void AllyTurn(AllyMember member)
     {
         EnableControls(true);
@@ -37,7 +35,7 @@ public class ControlPanel : MonoBehaviour
     public void SkillPositionSelected(int pos)
     {
         Debug.Log($"{memberOnTurn.name} used {selectedSkill.SkillName} on member on position {pos}");//////
-        EffectManager.Instance.PlayEffectAnimation(selectedSkill.AnimName);
+        VisualEffectManager.Instance.PlayEffectAnimation(selectedSkill.AnimName);
         selectedSkill.UseSkill(pos);
         EnableControls(false);
         Untarget();

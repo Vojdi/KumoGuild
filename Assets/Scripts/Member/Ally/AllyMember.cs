@@ -6,8 +6,14 @@ public class AllyMember : Member
 {
     public override void YourTurn()
     {
-        Debug.Log($"It is {gameObject.name}'s turn");////
-        ControlPanel.Instance.AllyTurn(this); 
+        if (health > 0)
+        {
+            base.YourTurn();
+            if (!stunnedThisRound)
+            {
+                Debug.Log($"It is {gameObject.name}'s turn");////
+                ControlPanel.Instance.AllyTurn(this);
+            }  
+        }
     }
-   
 }

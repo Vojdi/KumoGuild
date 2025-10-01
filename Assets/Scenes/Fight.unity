@@ -184,6 +184,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2adffa6f871cb534dbf92e0c003c6644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MemberName: 
+  Skills: []
   Targetable: 0
 --- !u!4 &229196068
 Transform:
@@ -418,6 +420,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82cbde45cf6e05740800526025951558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MemberName: 
+  Skills: []
   Targetable: 0
 --- !u!61 &471767133
 BoxCollider2D:
@@ -944,6 +948,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948644a25a3690348a47924a6934f1bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MemberName: 
+  Skills: []
   Targetable: 0
 --- !u!4 &924818541
 Transform:
@@ -1304,7 +1310,7 @@ GameObject:
   - component: {fileID: 1272583039}
   - component: {fileID: 1272583040}
   m_Layer: 0
-  m_Name: EffectManager
+  m_Name: VisualEffectManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
