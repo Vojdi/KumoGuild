@@ -36,9 +36,8 @@ public class EnemyMember : Member
                     }
                 }
                 int position = validTargetPositions[Random.Range(0, validTargetPositions.Count)];
-                Debug.Log($"{gameObject.name} used {SelectedSkill.SkillName} on member on position {position}");//////
-                VisualEffectManager.Instance.PlayEffectAnimation(SelectedSkill.AnimName);
-                SelectedSkill.UseSkill(position);
+                Debug.Log($"{gameObject.name} used {SelectedSkill.SkillName}");
+                VisualEffectManager.Instance.PlayEffectAnimation(SelectedSkill,position);
             }
         }
     }

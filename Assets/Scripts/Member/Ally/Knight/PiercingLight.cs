@@ -6,8 +6,8 @@ public class PiercingLight : Skill
     {
         skillName = "Piercing Light";
         AnimName = "testEff";
-        reachablePositions = new List<int> { 4, 5 };
-        usableFromPositions = new List<int> { 1};
+        reachablePositions = new List<int> { 3,4 };
+        usableFromPositions = new List<int> { 2};
         SkillType = "area";
         skillValue = 4;
     }

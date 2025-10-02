@@ -34,12 +34,10 @@ public class ControlPanel : MonoBehaviour
     }
     public void SkillPositionSelected(int pos)
     {
-        Debug.Log($"{memberOnTurn.name} used {selectedSkill.SkillName} on member on position {pos}");//////
-        VisualEffectManager.Instance.PlayEffectAnimation(selectedSkill.AnimName);
-        selectedSkill.UseSkill(pos);
+        Debug.Log($"{memberOnTurn.name} used {selectedSkill.SkillName}");//////
+        VisualEffectManager.Instance.PlayEffectAnimation(selectedSkill, pos);
         EnableControls(false);
         Untarget();
-
     }
     void Untarget()
     {

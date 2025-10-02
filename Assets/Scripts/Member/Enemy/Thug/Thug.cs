@@ -7,7 +7,6 @@ public class Thug : EnemyMember
         MemberName = "Thug";
         maxHealth = 11;
         speed = 3;
-        position = 4;//
         base.Awake();
         Skills.Add(ScriptableObject.CreateInstance<ClumsyStrike>());
     }

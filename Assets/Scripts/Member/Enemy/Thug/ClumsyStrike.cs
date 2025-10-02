@@ -6,7 +6,7 @@ public class ClumsyStrike : Skill
     {
         skillName = "Clumsy Strike";
         AnimName = "testEff";
-        reachablePositions = new List<int> { 1, 2, 3 };
+        reachablePositions = new List<int> {0, 1, 2 };
         SkillType = "single";
         skillValue = 4;
     }

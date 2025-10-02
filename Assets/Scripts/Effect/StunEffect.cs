@@ -9,8 +9,8 @@ public class StunEffect : Effect
     {
         base.EffectDied();
         Effect stunResEffect = new StunResistEffect();
-        stunResEffect.SetValues(member, startRoundLasts + 1);
-        Debug.Log($"{member.MemberName} now has stun resistance for {startRoundLasts} turns");
+        stunResEffect.SetValues(member, startRoundLasts * 2 + 1);
+        Debug.Log($"{member.name} now has stun resistance for {startRoundLasts} turns");
         stunResEffect.Attach(member);
     }
     public override void SetValues(Member member, int roundsLasts)
@@ -22,12 +22,12 @@ public class StunEffect : Effect
     {
         if (member.Effects.OfType<StunEffect>().Any() || member.Effects.OfType<StunResistEffect>().Any()) 
         {
-            Debug.Log($"{member.MemberName} couldn't be stunned" );
+            Debug.Log($"{member.name} couldn't be stunned" );
         }
         else
         {
-            member.Effects.Add(this);
-            Debug.Log($"{member.MemberName} was stunned");
+            base.Attach(member);
+            Debug.Log($"{member.name} was stunned");
         }
     }
 }

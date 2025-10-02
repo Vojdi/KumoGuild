@@ -6,8 +6,8 @@ public class GuidedSlash : Skill
     {
         skillName = "Guided Slash";
         AnimName = "testEff";
-        reachablePositions = new List<int> { 4, 5 };
-        usableFromPositions = new List<int> { 1, 2 };
+        reachablePositions = new List<int> { 3, 4, 5 };
+        usableFromPositions = new List<int> {0, 1, 2 };
         SkillType = "single";
         skillValue = 5;
     }

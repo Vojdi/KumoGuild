@@ -13,9 +13,7 @@ public class Member : MonoBehaviour
 
     protected int speed;
     public int Speed => speed;
- 
-    protected int position;
-    public int Position => position;
+    public int Position;
 
     public List<Skill> Skills;
     public List<Effect> Effects;
@@ -34,7 +32,7 @@ public class Member : MonoBehaviour
         if (Effects.OfType<StunEffect>().Any())
         {
             var stun = Effects.OfType<StunEffect>().First();
-            Debug.Log($"{MemberName} is skipping this turn due to Stun");
+            Debug.Log($"{name} is skipping this turn due to Stun");
             stun.EffectAbsorbed();
             stunnedThisRound = true;
             GameManager.Instance.NextTurn();
@@ -43,12 +41,12 @@ public class Member : MonoBehaviour
     }
     public void Damage(int damage)
     {
+        Debug.Log($"{name} got Attacked for {damage} damage");
         health -= damage;
         if (health <= 0) 
         {
             Debug.Log($"{gameObject.name} died");
-            GameManager.Instance.Members.Remove(this);
-            Destroy(gameObject);
+            GameManager.Instance.MemberDied(this);
         }
     }
     public void EffectsTime()
@@ -65,8 +63,7 @@ public class Member : MonoBehaviour
     {
         if (Targetable)
         {
-            ControlPanel.Instance.SkillPositionSelected(position);
+            ControlPanel.Instance.SkillPositionSelected(Position);
         }
     }
-    
 }

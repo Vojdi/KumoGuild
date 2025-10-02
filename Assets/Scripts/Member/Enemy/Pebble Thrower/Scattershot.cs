@@ -5,7 +5,7 @@ public class Scattershot : Skill
     {
         skillName = "Scattershot";
         AnimName = "testEff";
-        reachablePositions = new List<int> {2, 3 };
+        reachablePositions = new List<int> {0, 1 };
         SkillType = "area";
         skillValue = 3;
     }

@@ -16,6 +16,10 @@ public class GameManager : MonoBehaviour
         instance = this;
         Debug.Log("The game begins!");
         membersTurnOrder = new List<Member>();
+        for(int i  = 0; i < members.Count; i++)
+        {
+            Members[i].Position = i;
+        }
     }
     private void Start()
     {
@@ -75,7 +79,25 @@ public class GameManager : MonoBehaviour
             DetermineTurnOrder();
         }
         Member memberToPlay = membersTurnOrder[0];
-        membersTurnOrder.RemoveAt(0);
+        membersTurnOrder.RemoveAt(0);       
         memberToPlay.YourTurn();
     }
+    public void MemberDied(Member member)
+    {
+        Members.Remove(member);
+        if (membersTurnOrder.Contains(member))
+        {
+            membersTurnOrder.Remove(member);
+        }
+        member.GetComponent<SpriteRenderer>().color = Color.black;
+        CheckForBattleEnd();
+    }
+    void CheckForBattleEnd()
+    {
+        if (!Members.OfType<EnemyMember>().Any() || !Members.OfType<AllyMember>().Any())
+        {
+            Debug.Log("The Battle Ended");
+            Time.timeScale = 0;
+        }
+    } 
 }
