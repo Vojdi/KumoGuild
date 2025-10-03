@@ -16,6 +16,7 @@ public class Skill : ScriptableObject
     
     public string SkillType;
     public string AnimName;
+    public bool SelfOnly;
 
 
     public virtual void UseSkill(int targetPosition)
@@ -25,11 +26,11 @@ public class Skill : ScriptableObject
     
     protected Member SingleTarget(int targetPosition)
     {
-        foreach (var member in GameManager.Instance.Members)
+        foreach (var m in GameManager.Instance.Members)
         {
-            if (member.Position == targetPosition)
+            if (m.Position == targetPosition)
             {
-                return member;
+                return m;
             }
         }
         return null;
@@ -37,21 +38,25 @@ public class Skill : ScriptableObject
     protected List<Member> AreaAttack(int targetPosition)
     {
         List<Member> targets = new List<Member>();
-        foreach (var member in GameManager.Instance.Members)
+        foreach (var m in GameManager.Instance.Members)
         {
-            if (reachablePositions.Contains(member.Position)){
-                targets.Add(member);
+            if (reachablePositions.Contains(m.Position)){
+                targets.Add(m);
             } 
         }
         return targets;
     }
-    public bool SkillWorthUsingCheck()
+    public bool SkillWorthUsingCheck(int position)
     {
+        if (SelfOnly)
+        {
+            MakeSelfOnly(position);
+        }
         if (SkillType == "single")
         {
-            foreach (Member member in GameManager.Instance.Members)
+            foreach (Member m in GameManager.Instance.Members)
             {
-                if (reachablePositions.Contains(member.Position))
+                if (reachablePositions.Contains(m.Position))
                 {
                     return true;
                 }
@@ -76,6 +81,11 @@ public class Skill : ScriptableObject
             return true;
         }
         return false;
+    }
+    public void MakeSelfOnly(int selfPos)
+    {
+        reachablePositions.Clear();
+        reachablePositions.Add(selfPos);
     }
 }
 

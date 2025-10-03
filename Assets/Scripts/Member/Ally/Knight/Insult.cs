@@ -12,6 +12,7 @@ public class Insult : Skill
         usableFromPositions = new List<int> { 0, 1, 2 };
         SkillType = "single";
         skillValue = 3;
+        SelfOnly = true;
     }
     public override void UseSkill(int targetPosition)
     {

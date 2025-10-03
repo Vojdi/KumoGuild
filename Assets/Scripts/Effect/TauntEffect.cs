@@ -5,12 +5,15 @@ public class TauntEffect : Effect
 {
     public override void Attach(Member member)
     {
-        foreach (var m in GameManager.Instance.Members.Where(m => m.GetType() == member.GetType()))
+        foreach (var m in GameManager.Instance.Members)
         {
-            if (m.Effects.OfType<TauntEffect>().Any())
+            if ((member is EnemyMember && m is EnemyMember) || (member is AllyMember && m is AllyMember))
             {
-                Debug.Log($"Taunt was removed from {m.name}, because only one member per side can have it");
-                m.Effects.OfType<TauntEffect>().First().EffectDied();
+                if (m.Effects.OfType<TauntEffect>().Any())
+                {
+                    Debug.Log($"Taunt was removed from {m.name}, because only one member per side can have it");
+                    m.Effects.OfType<TauntEffect>().First().EffectDied();
+                }
             }
         }
         Debug.Log($"{member} taunted the opposite team");

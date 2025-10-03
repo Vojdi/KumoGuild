@@ -10,6 +10,7 @@ public class GuidedSlash : Skill
         usableFromPositions = new List<int> {0, 1, 2 };
         SkillType = "single";
         skillValue = 5;
+        SelfOnly = false;
     }
     public override void UseSkill(int targetPosition)
     {

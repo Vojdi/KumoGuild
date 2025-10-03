@@ -10,6 +10,7 @@ public class PiercingLight : Skill
         usableFromPositions = new List<int> { 2};
         SkillType = "area";
         skillValue = 4;
+        SelfOnly = false;
     }
     public override void UseSkill(int targetPosition)
     {

@@ -9,6 +9,7 @@ public class ClumsyStrike : Skill
         reachablePositions = new List<int> {0, 1, 2 };
         SkillType = "single";
         skillValue = 4;
+        SelfOnly = false;
     }
     public override void UseSkill(int targetPosition)
     {

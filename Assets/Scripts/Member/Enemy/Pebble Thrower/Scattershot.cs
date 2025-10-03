@@ -8,6 +8,7 @@ public class Scattershot : Skill
         reachablePositions = new List<int> {0, 1 };
         SkillType = "area";
         skillValue = 3;
+        SelfOnly = false;
     }
     public override void UseSkill(int targetPosition)
     {

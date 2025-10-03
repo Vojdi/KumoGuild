@@ -1,4 +1,7 @@
 
+using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ControlPanel : MonoBehaviour
@@ -19,16 +22,23 @@ public class ControlPanel : MonoBehaviour
     public void SkillClicked(int index)
     {
         selectedSkill = memberOnTurn.Skills[index];
-
-        foreach (Member member in GameManager.Instance.Members)
+        if (selectedSkill.SelfOnly)
         {
-            if (selectedSkill.ReachablePositions.Contains(member.Position))
+            selectedSkill.MakeSelfOnly(memberOnTurn.Position);
+        }
+        foreach (Member m in GameManager.Instance.Members)
+        {
+            if(m.Effects.OfType<TauntEffect>().Any() && m is EnemyMember)
             {
-                member.Targetable = true;
+                //dodelat logiku tauntu
+            }
+            if (selectedSkill.ReachablePositions.Contains(m.Position))
+            {
+                m.Targetable = true;
             }
             else
             {
-                member.Targetable = false;
+                m.Targetable = false;
             }
         }
     }
@@ -41,9 +51,9 @@ public class ControlPanel : MonoBehaviour
     }
     void Untarget()
     {
-        foreach (var member in GameManager.Instance.Members)
+        foreach (var m in GameManager.Instance.Members)
         {
-            member.Targetable = false;
+            m.Targetable = false;
         }
     }
     void EnableControls(bool parameter)
