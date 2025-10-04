@@ -5,12 +5,19 @@ public class Skill : ScriptableObject
 {
     protected List<int> reachablePositions;
     public List<int> ReachablePositions => reachablePositions;
-
     protected List<int> usableFromPositions;
     public List<int> UsableFromPositions => usableFromPositions;
 
+    protected int level;
+    public int Level => level;
+
+    protected List<int> skillValuesMin;
+    protected List<int> skillValuesMax;
     protected int skillValue;
-    public int SkillValue => skillValue;
+
+    protected List<int> effectLenghts;
+    protected List<int> effectValues;
+
     protected string skillName;
     public string SkillName => skillName;
     
@@ -18,10 +25,9 @@ public class Skill : ScriptableObject
     public string AnimName;
     public bool SelfOnly;
 
-
     public virtual void UseSkill(int targetPosition)
     {
-
+        skillValue = Random.Range(skillValuesMin[level], skillValuesMax[level] + 1);
     }
     
     protected Member SingleTarget(int targetPosition)
@@ -45,42 +51,6 @@ public class Skill : ScriptableObject
             } 
         }
         return targets;
-    }
-    public bool SkillWorthUsingCheck(int position)
-    {
-        if (SelfOnly)
-        {
-            MakeSelfOnly(position);
-        }
-        if (SkillType == "single")
-        {
-            foreach (Member m in GameManager.Instance.Members)
-            {
-                if (reachablePositions.Contains(m.Position))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-        else if (SkillType == "area")
-        {
-            List<int> memberPositions = new List<int>();
-            foreach (Member m in GameManager.Instance.Members)
-            {
-                memberPositions.Add(m.Position);
-            }
-
-            foreach (int pos in reachablePositions)
-            {
-                if (!memberPositions.Contains(pos))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
     }
     public void MakeSelfOnly(int selfPos)
     {

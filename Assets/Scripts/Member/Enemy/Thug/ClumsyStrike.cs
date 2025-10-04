@@ -8,11 +8,14 @@ public class ClumsyStrike : Skill
         AnimName = "testEff";
         reachablePositions = new List<int> {0, 1, 2 };
         SkillType = "single";
-        skillValue = 4;
         SelfOnly = false;
+        skillValuesMin = new List<int> { 1, 2, 3 };
+        skillValuesMax = new List<int> { 3, 5, 6 };
+        level = 0;
     }
     public override void UseSkill(int targetPosition)
     {
+        base.UseSkill(targetPosition);
         Member targetMember = SingleTarget(targetPosition);
         targetMember.Damage(skillValue);
     }

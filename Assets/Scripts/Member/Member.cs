@@ -32,7 +32,7 @@ public class Member : MonoBehaviour
         if (Effects.OfType<StunEffect>().Any())
         {
             var stun = Effects.OfType<StunEffect>().First();
-            Debug.Log($"{name} is skipping this turn due to Stun");
+            Debug.Log($"{this} is skipping this turn due to Stun");
             stun.EffectAbsorbed();
             stunnedThisRound = true;
             GameManager.Instance.NextTurn();
@@ -41,11 +41,11 @@ public class Member : MonoBehaviour
     }
     public void Damage(int damage)
     {
-        Debug.Log($"{name} got Attacked for {damage} damage");
+        Debug.Log($"{this} got Attacked for {damage} damage");
         health -= damage;
         if (health <= 0) 
         {
-            Debug.Log($"{gameObject.name} died");
+            Debug.Log($"{this} died");
             GameManager.Instance.MemberDied(this);
         }
     }

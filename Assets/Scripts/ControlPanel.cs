@@ -30,7 +30,11 @@ public class ControlPanel : MonoBehaviour
         {
             if(m.Effects.OfType<TauntEffect>().Any() && m is EnemyMember)
             {
-                //dodelat logiku tauntu
+                if (selectedSkill.ReachablePositions.Contains(m.Position)) {
+                    Untarget();
+                    m.Targetable = true;
+                    break;
+                }
             }
             if (selectedSkill.ReachablePositions.Contains(m.Position))
             {
@@ -44,7 +48,7 @@ public class ControlPanel : MonoBehaviour
     }
     public void SkillPositionSelected(int pos)
     {
-        Debug.Log($"{memberOnTurn.name} used {selectedSkill.SkillName}");//////
+        Debug.Log($"{memberOnTurn} used {selectedSkill.SkillName}");//////
         VisualEffectManager.Instance.PlayEffectAnimation(selectedSkill, pos);
         EnableControls(false);
         Untarget();

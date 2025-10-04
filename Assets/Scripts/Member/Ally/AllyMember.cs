@@ -11,7 +11,7 @@ public class AllyMember : Member
             base.YourTurn();
             if (!stunnedThisRound)
             {
-                Debug.Log($"It is {gameObject.name}'s turn");////
+                Debug.Log($"It is {this}'s turn");////
                 ControlPanel.Instance.AllyTurn(this);
             }  
         }

@@ -1,40 +1,108 @@
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 public class EnemyMember : Member
 {
     public override void YourTurn()
     {
-            base.YourTurn();
+        base.YourTurn();
         if (!stunnedThisRound)
         {
-            Debug.Log($"It is {gameObject.name}'s turn");////
-            List<Skill> availableSkills = new List<Skill>();
-            foreach (var skill in Skills)
+            Debug.Log($"It is {this}'s turn");
+
+            int tauntingMemberPosition = -1;
+            foreach (Member m in GameManager.Instance.Members)
             {
-                if (skill.SkillWorthUsingCheck(Position))
+                if (m.Effects.OfType<TauntEffect>().Any() && m is AllyMember)
                 {
-                    availableSkills.Add(skill);
-                    Debug.Log($"available skill to use {skill}");
+                    tauntingMemberPosition = m.Position;
                 }
             }
+
+            List<Skill> availableSkills = new List<Skill>();
+            string debug = "";
+            foreach (var skill in Skills)
+            {
+                if (SkillWorthUsingCheck(skill, tauntingMemberPosition))
+                {
+                    availableSkills.Add(skill);
+                    debug += $", {skill.ToString()}";
+                }
+            }
+            Debug.Log($"available skill to use {debug}");
+
             if (availableSkills.Count == 0)//////
             {
                 Debug.Log("no skill found");///////
                 return;//////
             }/////
+
             Skill SelectedSkill = availableSkills[Random.Range(0, availableSkills.Count)];
             List<int> validTargetPositions = new List<int>();
-            foreach (var member in GameManager.Instance.Members)
+            int position;
+            if (tauntingMemberPosition == -1)
             {
-                if (SelectedSkill.ReachablePositions.Contains(member.Position))
+                foreach (var member in GameManager.Instance.Members)
                 {
-                    validTargetPositions.Add(member.Position);
+                    if (SelectedSkill.ReachablePositions.Contains(member.Position))
+                    {
+                        validTargetPositions.Add(member.Position);
+                    }
                 }
+                position = validTargetPositions[Random.Range(0, validTargetPositions.Count)];
             }
-            int position = validTargetPositions[Random.Range(0, validTargetPositions.Count)];
-            Debug.Log($"{gameObject.name} used {SelectedSkill.SkillName}");
+            else
+            {
+                position = tauntingMemberPosition;
+            }
+
+            Debug.Log($"{this} used {SelectedSkill.SkillName}");
             VisualEffectManager.Instance.PlayEffectAnimation(SelectedSkill, position);
         }    
+    }
+    bool SkillWorthUsingCheck(Skill skill, int tauntingMemberPosition) {
+
+        if (skill.SelfOnly)
+        {
+            skill.MakeSelfOnly(Position);
+        }
+        if (tauntingMemberPosition != -1)
+        {
+            if (!skill.ReachablePositions.Contains(tauntingMemberPosition))
+            {
+                return false;
+            }
+        }
+        if (skill.SkillType == "single")
+        {
+            foreach (Member m in GameManager.Instance.Members)
+            {
+                if (skill.ReachablePositions.Contains(m.Position))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        else if (skill.SkillType == "area")
+        {
+            List<int> memberPositions = new List<int>();
+            foreach (Member m in GameManager.Instance.Members)
+            {
+                memberPositions.Add(m.Position);
+            }
+
+            foreach (int pos in skill.ReachablePositions)
+            {
+                if (!memberPositions.Contains(pos))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 }
