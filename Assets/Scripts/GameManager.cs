@@ -71,10 +71,7 @@ public class GameManager : MonoBehaviour
     {
         if (membersTurnOrder.Count == 0)
         {
-            foreach (Member member in members) {
-                member.EffectsTime();
-                
-            }
+            TimeEffects();
             Debug.Log("New Round");
             DetermineTurnOrder();
         }
@@ -100,4 +97,12 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
         }
     } 
+    void TimeEffects()
+    {
+        foreach (Member member in members)
+        {
+            member.EffectsTime();
+
+        }
+    }
 }

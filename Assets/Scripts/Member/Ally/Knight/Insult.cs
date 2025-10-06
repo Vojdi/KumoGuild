@@ -22,6 +22,6 @@ public class Insult : Skill
         Member targetMember = SingleTarget(targetPosition);
         Effect stunEff = new TauntEffect();
         stunEff.SetValues(targetMember, 3);
-        stunEff.Attach(targetMember);
+        stunEff.Attach();
     }
 }

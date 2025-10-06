@@ -12,16 +12,17 @@ public class GuidedSlash : Skill
         SelfOnly = false;
         skillValuesMin = new List<int> { 3, 4, 5 };
         skillValuesMax = new List<int> { 6, 7, 8 };
-        effectLenghts = new List<int> { 1, 2, 3 };
+        effectLenghts = new List<int> { 2, 3, 4 };
+        effectValues = new List<int> { 1, 2, 3 };
         level = 0;
     }
     public override void UseSkill(int targetPosition)
     {
         base.UseSkill(targetPosition);
         Member targetMember = SingleTarget(targetPosition);
-        Effect stunEff = new StunEffect();
-        stunEff.SetValues(targetMember, effectLenghts[level]);
-        stunEff.Attach(targetMember);
+        DoTEffect dotEff = new DoTEffect();
+        dotEff.SetValues(targetMember, effectLenghts[level], effectValues[level]);
+        dotEff.Attach();
         targetMember.Damage(skillValue);
     }
 }

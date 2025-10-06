@@ -53,9 +53,9 @@ public class Member : MonoBehaviour
     {
         for (int i = Effects.Count - 1; i >= 0; i--)
         {
-            if (Effects[i] is StunResistEffect stn)
+            if (Effects[i] is Effect eff && (eff is StunResistEffect || eff is DoTEffect))
             {
-                stn.EffectAbsorbed();
+                eff.EffectAbsorbed();
             }
         }
     }

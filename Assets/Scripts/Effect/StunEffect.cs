@@ -11,14 +11,14 @@ public class StunEffect : Effect
         Effect stunResEffect = new StunResistEffect();
         stunResEffect.SetValues(member, startRoundLasts * 2 + 1);
         Debug.Log($"{member} now has stun resistance for {startRoundLasts} turns");
-        stunResEffect.Attach(member);
+        stunResEffect.Attach();
     }
     public override void SetValues(Member member, int roundsLasts)
     {
         base.SetValues(member, roundsLasts);
         startRoundLasts = roundsLasts;
     }
-    public override void Attach(Member member)
+    public override void Attach()
     {
         if (member.Effects.OfType<StunEffect>().Any() || member.Effects.OfType<StunResistEffect>().Any()) 
         {
@@ -26,7 +26,7 @@ public class StunEffect : Effect
         }
         else
         {
-            base.Attach(member);
+            base.Attach();
             Debug.Log($"{member} was stunned");
         }
     }

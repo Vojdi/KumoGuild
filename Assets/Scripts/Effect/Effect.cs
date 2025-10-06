@@ -2,9 +2,8 @@ public class Effect
 {
     protected Member member;
     protected int roundsLasts;
-    
     public int RoundsLast => roundsLasts;
-    public void EffectAbsorbed()
+    public virtual void EffectAbsorbed()
     {
         roundsLasts--;
         if(roundsLasts <= 0)
@@ -21,7 +20,7 @@ public class Effect
         this.member = member;
         this.roundsLasts = roundsLasts;
     }
-    public virtual void Attach(Member member) { 
+    public virtual void Attach() { 
         member.Effects.Add(this);
     }
 }
