@@ -17,7 +17,6 @@ public class PiercingLight : Skill
     public override void UseSkill(int targetPosition)
     {
         base.UseSkill(targetPosition);
-        List<Member> targetMembers = AreaAttack(targetPosition);
         foreach (var targetMember in targetMembers)
         {
             targetMember.Damage(skillValue);

@@ -13,15 +13,19 @@ public class Insult : Skill
         usableFromPositions = new List<int> { 0, 1, 2 };
         SkillType = "single";
         SelfOnly = true;
+        skillValuesMin = new List<int> { 0, 0, 0 };
+        skillValuesMax = new List<int> { 0, 0, 0 };
         effectLenghts = new List<int> { 2, 3, 4 };
         level = 0;
     }
     public override void UseSkill(int targetPosition)
     {
-        
-        Member targetMember = SingleTarget(targetPosition);
-        Effect stunEff = new TauntEffect();
-        stunEff.SetValues(targetMember, 3);
-        stunEff.Attach();
+        base.UseSkill(targetPosition);
+        foreach (Member targetMember in targetMembers)
+        {
+            Effect stunEff = new TauntEffect();
+            stunEff.SetValues(targetMember, 3);
+            stunEff.Attach();
+        }  
     }
 }

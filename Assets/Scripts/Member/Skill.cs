@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Skill : ScriptableObject 
@@ -24,10 +25,12 @@ public class Skill : ScriptableObject
     public string SkillType;
     public string AnimName;
     public bool SelfOnly;
+    protected List<Member> targetMembers;
 
     public virtual void UseSkill(int targetPosition)
     {
         skillValue = Random.Range(skillValuesMin[level], skillValuesMax[level] + 1);
+        targetMembers = Target(targetPosition);
     }
     
     protected Member SingleTarget(int targetPosition)
@@ -56,6 +59,31 @@ public class Skill : ScriptableObject
     {
         reachablePositions.Clear();
         reachablePositions.Add(selfPos);
+    }
+    List<Member> Target(int targetPosition)
+    {
+        List<Member> targets = new List<Member>();
+        if (SkillType == "single")
+        {
+            foreach (var m in GameManager.Instance.Members)
+            {
+                if (m.Position == targetPosition)
+                {
+                    targets.Add(m);
+                }
+            }
+        }
+        else if (SkillType == "area")
+        {
+            foreach (var m in GameManager.Instance.Members)
+            {
+                if (reachablePositions.Contains(m.Position))
+                {
+                    targets.Add(m);
+                }
+            }
+        }
+        return targets;
     }
 }
 

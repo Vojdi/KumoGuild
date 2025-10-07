@@ -15,8 +15,9 @@ public class FlyingPebble : Skill
     }
     public override void UseSkill(int targetPosition)
     {
-        base.UseSkill(targetPosition);  
-        Member targetMember = SingleTarget(targetPosition);
-        targetMember.Damage(skillValue);
+        base.UseSkill(targetPosition);
+        foreach (Member targetMember in targetMembers) {
+            targetMember.Damage(skillValue);
+        }
     }
 }

@@ -19,10 +19,11 @@ public class GuidedSlash : Skill
     public override void UseSkill(int targetPosition)
     {
         base.UseSkill(targetPosition);
-        Member targetMember = SingleTarget(targetPosition);
-        DoTEffect dotEff = new DoTEffect();
-        dotEff.SetValues(targetMember, effectLenghts[level], effectValues[level]);
-        dotEff.Attach();
-        targetMember.Damage(skillValue);
+        foreach (Member targetMember in targetMembers) {
+            DoTEffect dotEff = new DoTEffect();
+            dotEff.SetValues(targetMember, effectLenghts[level], effectValues[level]);
+            dotEff.Attach();
+            targetMember.Damage(skillValue);
+        }
     }
 }

@@ -16,7 +16,9 @@ public class ClumsyStrike : Skill
     public override void UseSkill(int targetPosition)
     {
         base.UseSkill(targetPosition);
-        Member targetMember = SingleTarget(targetPosition);
-        targetMember.Damage(skillValue);
+        foreach (Member targetMember in targetMembers)
+        {
+            targetMember.Damage(skillValue);
+        }
     }
 }
