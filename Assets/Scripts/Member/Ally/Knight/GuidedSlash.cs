@@ -23,7 +23,7 @@ public class GuidedSlash : Skill
             DoTEffect dotEff = new DoTEffect();
             dotEff.SetValues(targetMember, effectLenghts[level], effectValues[level]);
             dotEff.Attach();
-            targetMember.Damage(skillValue);
+            targetMember.Damage(skillValue, false);
         }
     }
 }

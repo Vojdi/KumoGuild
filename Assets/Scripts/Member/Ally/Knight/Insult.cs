@@ -16,6 +16,7 @@ public class Insult : Skill
         skillValuesMin = new List<int> { 0, 0, 0 };
         skillValuesMax = new List<int> { 0, 0, 0 };
         effectLenghts = new List<int> { 2, 3, 4 };
+        effectValues = new List<int> { 20, 30, 40 };
         level = 0;
     }
     public override void UseSkill(int targetPosition)
@@ -26,6 +27,9 @@ public class Insult : Skill
             Effect stunEff = new TauntEffect();
             stunEff.SetValues(targetMember, 3);
             stunEff.Attach();
+            ProtEffect protEff = new ProtEffect();
+            protEff.SetValues(targetMember, 3, effectValues[0]);
+            protEff.Attach();
         }  
     }
 }

@@ -13,7 +13,7 @@ public class DoTEffect : Effect
     }
     public override void EffectAbsorbed()
     {
-        member.Damage(damageOverTime);
+        member.Damage(damageOverTime,true);
         base.EffectAbsorbed();
     }
     public override void EffectDied()
@@ -23,10 +23,11 @@ public class DoTEffect : Effect
     }
     public override void Attach()
     {
-        foreach (DoTEffect eff in member.Effects) {
-            if (damageOverTime == eff.damageOverTime)
+        foreach (Effect eff in member.Effects) {
+            if(eff is DoTEffect dotEff)
+            if (damageOverTime == dotEff.damageOverTime)
             {
-                eff.roundsLasts += roundsLasts;
+                dotEff.roundsLasts += roundsLasts;
                 Debug.Log($"{member}'s DoT got prolonged(effect stacking)");
                 return;
             }       

@@ -17,7 +17,7 @@ public class FlyingPebble : Skill
     {
         base.UseSkill(targetPosition);
         foreach (Member targetMember in targetMembers) {
-            targetMember.Damage(skillValue);
+            targetMember.Damage(skillValue, false);
         }
     }
 }

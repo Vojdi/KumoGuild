@@ -19,7 +19,7 @@ public class PiercingLight : Skill
         base.UseSkill(targetPosition);
         foreach (var targetMember in targetMembers)
         {
-            targetMember.Damage(skillValue);
+            targetMember.Damage(skillValue, false);
         }
     }
 }

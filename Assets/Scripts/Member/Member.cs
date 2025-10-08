@@ -32,30 +32,48 @@ public class Member : MonoBehaviour
         if (Effects.OfType<StunEffect>().Any())
         {
             var stun = Effects.OfType<StunEffect>().First();
-            Debug.Log($"{this} is skipping this turn due to Stun");
             stun.EffectAbsorbed();
+            Debug.Log($"{this} is skipping this turn due to Stun");
             stunnedThisRound = true;
             GameManager.Instance.NextTurn();
-                
         }
     }
-    public void Damage(int damage)
+    public void Damage(int damage, bool protectionBypass)
     {
-        Debug.Log($"{this} got Attacked for {damage} damage");
-        health -= damage;
-        if (health <= 0) 
+        if (protectionBypass)
         {
-            Debug.Log($"{this} died");
-            GameManager.Instance.MemberDied(this);
+            Debug.Log($"{this} got Damaged by DoT for {damage} damage");
+            health -= damage;
+            if (health <= 0)
+            {
+                Debug.Log($"{this} died");
+                GameManager.Instance.MemberDied(this);
+            }
+        }
+        else
+        {
+            int protection = 0;
+            foreach (Effect eff in Effects) {
+                if(eff is ProtEffect protEff)
+                protection += protEff.protectionValue;
+            }
+            int finalDamage = damage - (int)(damage / 100f * protection);
+            Debug.Log($"{this} got Damaged for {finalDamage} damage,he had {protection}% prot, base damage was {damage}");
+            health -= finalDamage;
+            if (health <= 0)
+            {
+                Debug.Log($"{this} died");
+                GameManager.Instance.MemberDied(this);
+            }
         }
     }
     public void EffectsTime()
     {
-        for (int i = Effects.Count - 1; i >= 0; i--)
+        foreach (var effect in Effects.ToList())
         {
-            if (Effects[i] is Effect eff && (eff is StunResistEffect || eff is DoTEffect))
+            if(!(effect is StunEffect))
             {
-                eff.EffectAbsorbed();
+                effect.EffectAbsorbed();
             }
         }
     }

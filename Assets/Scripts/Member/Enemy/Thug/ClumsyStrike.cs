@@ -11,6 +11,8 @@ public class ClumsyStrike : Skill
         SelfOnly = false;
         skillValuesMin = new List<int> { 1, 2, 3 };
         skillValuesMax = new List<int> { 3, 5, 6 };
+        effectLenghts = new List<int> { 1, 2, 3 };
+        effectValues = new List<int> { 0, 0, 0 };
         level = 0;
     }
     public override void UseSkill(int targetPosition)
@@ -18,7 +20,10 @@ public class ClumsyStrike : Skill
         base.UseSkill(targetPosition);
         foreach (Member targetMember in targetMembers)
         {
-            targetMember.Damage(skillValue);
+            StunEffect stunEff = new StunEffect();
+            stunEff.SetValues(targetMember, effectLenghts[level]);
+            stunEff.Attach();
+            targetMember.Damage(skillValue,false);
         }
     }
 }
