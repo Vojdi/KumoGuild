@@ -25,10 +25,10 @@ public class DoTEffect : Effect
     {
         foreach (Effect eff in member.Effects) {
             if(eff is DoTEffect dotEff)
-            if (damageOverTime == dotEff.damageOverTime)
+            if (roundsLasts == dotEff.roundsLasts)
             {
-                dotEff.roundsLasts += roundsLasts;
-                Debug.Log($"{member}'s DoT got prolonged(effect stacking)");
+                dotEff.damageOverTime += damageOverTime;
+                Debug.Log($"{member}'s DoT got stacked");
                 return;
             }       
         }
