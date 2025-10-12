@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<Member> members;
     public List<Member> Members => members;
     List<Member> membersTurnOrder;
+    public Member memberToPlay;
 
     private void Awake()
     {
@@ -75,8 +76,12 @@ public class GameManager : MonoBehaviour
             Debug.Log("New Round");
             DetermineTurnOrder();
         }
-        Member memberToPlay = membersTurnOrder[0];
-        membersTurnOrder.RemoveAt(0);       
+        memberToPlay = membersTurnOrder[0];
+        membersTurnOrder.RemoveAt(0);
+        VisualEffectManager.Instance.NextTurnEffect(memberToPlay);
+    }
+    public void MemberToPlayTurn()
+    {
         memberToPlay.YourTurn();
     }
     public void MemberDied(Member member)
