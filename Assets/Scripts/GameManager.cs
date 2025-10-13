@@ -104,10 +104,9 @@ public class GameManager : MonoBehaviour
     } 
     void TimeEffects()
     {
-        foreach (Member member in members)
+        foreach (Member member in members.ToList())
         {
             member.EffectsTime();
-
         }
     }
 }

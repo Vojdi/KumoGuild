@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class NewTurnTextEventBridge : MonoBehaviour
 {
-    public void EffectEnded()
+    void EffectEnded()
     {
         VisualEffectManager.Instance.NextTurnEffectEnd();
     }

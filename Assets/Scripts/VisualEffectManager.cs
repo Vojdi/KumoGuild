@@ -6,8 +6,10 @@ public class VisualEffectManager : MonoBehaviour
 {
     [SerializeField] Animator darkenOverlayAnimator;
     [SerializeField] GameObject newTurnTextGameObject;
+    [SerializeField] GameObject skillUsedTextGameObject;
     static VisualEffectManager instance;
     public static VisualEffectManager Instance => instance;
+    Member memberOnTurn;
 
     Animator animator;
     Skill attackingSkill;
@@ -22,8 +24,19 @@ public class VisualEffectManager : MonoBehaviour
     {
         attackingSkill = skill;
         attackingPos = pos;
+        skillUsedTextGameObject.GetComponent<TMPro.TMP_Text>().text = $"Skill Selected: {skill.SkillName}";
+        if(memberOnTurn is EnemyMember)
+        {
+            skillUsedTextGameObject.GetComponent<Animator>().Play("enemyUsedSkill", 0, 0);
+        }
+        else
+        {
+            skillUsedTextGameObject.GetComponent<Animator>().Play("allyUsedSkill", 0, 0);
+        }
+    }
+    public void SkillAnncounced()
+    {
         darkenOverlayAnimator.Play("darken", 0, 0);
-       
     }
     public void Darkened()
     {
@@ -40,6 +53,7 @@ public class VisualEffectManager : MonoBehaviour
     }
     public void NextTurnEffect(Member member)
     {
+        memberOnTurn = member;
         newTurnTextGameObject.GetComponent<TMPro.TMP_Text>().text = $"{member.MemberName}'s turn";
         newTurnTextGameObject.GetComponent<Animator>().Play("turnText", 0, 0);
     }
