@@ -24,7 +24,7 @@ public class VisualEffectManager : MonoBehaviour
     {
         attackingSkill = skill;
         attackingPos = pos;
-        skillUsedTextGameObject.GetComponent<TMPro.TMP_Text>().text = $"Skill Selected: {skill.SkillName}";
+        skillUsedTextGameObject.GetComponent<TMPro.TMP_Text>().text = $"Skill: {skill.SkillName}";
         if(memberOnTurn is EnemyMember)
         {
             skillUsedTextGameObject.GetComponent<Animator>().Play("enemyUsedSkill", 0, 0);
@@ -36,6 +36,7 @@ public class VisualEffectManager : MonoBehaviour
     }
     public void SkillAnncounced()
     {
+        memberOnTurn.TurnIndicatorAnimator.Play("New State");
         darkenOverlayAnimator.Play("darken", 0, 0);
     }
     public void Darkened()
@@ -51,13 +52,15 @@ public class VisualEffectManager : MonoBehaviour
     {
         darkenOverlayAnimator.Play("lighten", 0, 0);
     }
-    public void NextTurnEffect(Member member)
+    public void NewTurnEffect(Member member)
     {
         memberOnTurn = member;
+        memberOnTurn.TurnIndicatorAnimator.Play("turnIndicatorIdle",0,0);
+
         newTurnTextGameObject.GetComponent<TMPro.TMP_Text>().text = $"{member.MemberName}'s turn";
         newTurnTextGameObject.GetComponent<Animator>().Play("turnText", 0, 0);
     }
-    public void NextTurnEffectEnd()
+    public void NewTurnEffectEnd()
     {
         GameManager.Instance.MemberToPlayTurn();
     }

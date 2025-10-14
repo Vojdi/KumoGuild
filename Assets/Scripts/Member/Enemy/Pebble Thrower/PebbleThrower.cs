@@ -3,7 +3,7 @@ public class PebbleThrower : EnemyMember
 {
     protected override void Awake()
     {
-        MemberName = "Pebblethrower";
+        memberName = "Pebblethrower";
         maxHealth = 8;
         speed = 5;
         base.Awake();

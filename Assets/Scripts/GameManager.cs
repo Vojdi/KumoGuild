@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<Member> members;
     public List<Member> Members => members;
     List<Member> membersTurnOrder;
-    public Member memberToPlay;
+    Member memberToPlay;
 
     private void Awake()
     {
@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
         }
         memberToPlay = membersTurnOrder[0];
         membersTurnOrder.RemoveAt(0);
-        VisualEffectManager.Instance.NextTurnEffect(memberToPlay);
+        VisualEffectManager.Instance.NewTurnEffect(memberToPlay);
     }
     public void MemberToPlayTurn()
     {

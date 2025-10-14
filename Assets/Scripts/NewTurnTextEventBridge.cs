@@ -4,6 +4,6 @@ public class NewTurnTextEventBridge : MonoBehaviour
 {
     void EffectEnded()
     {
-        VisualEffectManager.Instance.NextTurnEffectEnd();
+        VisualEffectManager.Instance.NewTurnEffectEnd();
     }
 }

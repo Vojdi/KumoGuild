@@ -4,7 +4,9 @@ using System.Linq;
 
 public class Member : MonoBehaviour
 {
-    public string MemberName;
+    protected string memberName;
+    public string MemberName => memberName;
+    
     protected int maxHealth;
     public int MaxHealth => maxHealth;
 
@@ -19,12 +21,17 @@ public class Member : MonoBehaviour
     public List<Effect> Effects;
     public bool Targetable;
     protected bool stunnedThisRound;
+    public Animator TurnIndicatorAnimator;
     protected virtual void Awake()
     {
         Skills = new List<Skill>();
         Effects = new List<Effect>();
         health = maxHealth;
         Targetable = false;
+    }
+    private void Start()
+    {
+        TurnIndicatorAnimator = transform.Find("TurnIndicator").GetComponent<Animator>();
     }
     public virtual void YourTurn()
     {
