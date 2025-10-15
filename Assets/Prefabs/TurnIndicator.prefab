@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7001919604611021772}
   - component: {fileID: 18364351977387842}
   - component: {fileID: 3148390171300439936}
+  - component: {fileID: 4545486574163086314}
   m_Layer: 0
   m_Name: TurnIndicator
   m_TagString: Untagged
@@ -82,7 +83,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -110,3 +111,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4545486574163086314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313149858187380789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16fce1741859aad4384b8f83cbd1cc56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

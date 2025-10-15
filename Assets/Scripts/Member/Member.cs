@@ -28,9 +28,6 @@ public class Member : MonoBehaviour
         Effects = new List<Effect>();
         health = maxHealth;
         Targetable = false;
-    }
-    private void Start()
-    {
         TurnIndicatorAnimator = transform.Find("TurnIndicator").GetComponent<Animator>();
     }
     public virtual void YourTurn()

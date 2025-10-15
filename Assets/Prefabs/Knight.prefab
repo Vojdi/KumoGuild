@@ -51,6 +51,7 @@ MonoBehaviour:
   Position: 0
   Skills: []
   Targetable: 0
+  TurnIndicatorAnimator: {fileID: 0}
 --- !u!61 &2343081282985109948
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -192,7 +193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7001919604611021772, guid: 6fa73c8689cdc6e4e957035cabd330db, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: -1.8
       objectReference: {fileID: 0}
     - target: {fileID: 7001919604611021772, guid: 6fa73c8689cdc6e4e957035cabd330db, type: 3}
       propertyPath: m_LocalPosition.z

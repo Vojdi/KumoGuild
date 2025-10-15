@@ -36,7 +36,7 @@ public class VisualEffectManager : MonoBehaviour
     }
     public void SkillAnncounced()
     {
-        memberOnTurn.TurnIndicatorAnimator.Play("New State");
+        memberOnTurn.TurnIndicatorAnimator.Play("turnIndicatorDissappear");
         darkenOverlayAnimator.Play("darken", 0, 0);
     }
     public void Darkened()
@@ -55,7 +55,7 @@ public class VisualEffectManager : MonoBehaviour
     public void NewTurnEffect(Member member)
     {
         memberOnTurn = member;
-        memberOnTurn.TurnIndicatorAnimator.Play("turnIndicatorIdle",0,0);
+        memberOnTurn.TurnIndicatorAnimator.Play("turnIndicatorAppear",0,0);
 
         newTurnTextGameObject.GetComponent<TMPro.TMP_Text>().text = $"{member.MemberName}'s turn";
         newTurnTextGameObject.GetComponent<Animator>().Play("turnText", 0, 0);
