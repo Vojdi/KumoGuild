@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: a757c7c1394883d46a6bcd2b7df28f64
+guid: 0ef8144af427ecb4ab590f9974324b29
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2312014640633575102
-    second: frame_07_delay-0.48s_0
+      213: 573006692232263054
+    second: cloud108_0
   - first:
-      213: 4979381359901864534
-    second: frame_07_delay-0.48s_1
+      213: 5126825303492060368
+    second: cloud108_1
   - first:
-      213: 8775490477771881750
-    second: frame_07_delay-0.48s_2
+      213: -904477305993000357
+    second: cloud108_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -145,11 +145,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: frame_07_delay-0.48s_0
+      name: cloud108_0
       rect:
         serializedVersion: 2
         x: 3
-        y: 15
+        y: 14
         width: 39
         height: 21
       alignment: 0
@@ -160,20 +160,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 24988851fe21aefd0800000000000000
-      internalID: -2312014640633575102
+      spriteID: e85fc68fc8ab3f700800000000000000
+      internalID: 573006692232263054
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: frame_07_delay-0.48s_1
+      name: cloud108_1
       rect:
         serializedVersion: 2
         x: 45
-        y: 2
+        y: 1
         width: 14
-        height: 52
+        height: 53
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,19 +182,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 652f62607f05a1540800000000000000
-      internalID: 4979381359901864534
+      spriteID: 0d4e0205374262740800000000000000
+      internalID: 5126825303492060368
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: frame_07_delay-0.48s_2
+      name: cloud108_2
       rect:
         serializedVersion: 2
-        x: 11
+        x: 10
         y: 0
-        width: 25
+        width: 27
         height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -204,8 +204,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 61d7a61581ec8c970800000000000000
-      internalID: 8775490477771881750
+      spriteID: b5a82ecaea6a273f0800000000000000
+      internalID: -904477305993000357
       vertices: []
       indices: 
       edges: []
@@ -224,9 +224,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      frame_07_delay-0.48s_0: -2312014640633575102
-      frame_07_delay-0.48s_1: 4979381359901864534
-      frame_07_delay-0.48s_2: 8775490477771881750
+      cloud108_0: 573006692232263054
+      cloud108_1: 5126825303492060368
+      cloud108_2: -904477305993000357
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
