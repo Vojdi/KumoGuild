@@ -22,13 +22,15 @@ public class Member : MonoBehaviour
     public bool Targetable;
     protected bool stunnedThisRound;
     public Animator TurnIndicatorAnimator;
+    public Animator TargetedIndicatorAnimator;
     protected virtual void Awake()
     {
         Skills = new List<Skill>();
         Effects = new List<Effect>();
         health = maxHealth;
         Targetable = false;
-        TurnIndicatorAnimator = transform.Find("TurnIndicator").GetComponent<Animator>();
+        TurnIndicatorAnimator = GetComponentInChildren<TurnIndicatorStates>().gameObject.GetComponent<Animator>();
+        TargetedIndicatorAnimator = GetComponentInChildren<TargetIndicatorStates>().gameObject.GetComponent<Animator>();
     }
     public virtual void YourTurn()
     {

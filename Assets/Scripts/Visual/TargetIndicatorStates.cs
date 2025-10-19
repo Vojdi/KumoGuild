@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TurnIndicatorStates : MonoBehaviour
+public class TargetIndicatorStates : MonoBehaviour
 {
     Animator animator;
     private void Start()
@@ -9,6 +9,6 @@ public class TurnIndicatorStates : MonoBehaviour
     }
     void Appeared()
     {
-        animator.Play("turnIndicatorIdle",0,0);
+        animator.Play("targetIndicatorIdle", 0, 0);
     }
 }
