@@ -4,7 +4,7 @@ public class Knight : AllyMember
 {
     protected override void Awake()
     {
-        memberName = "Knight";
+        memberName = "Cloud1";
         maxHealth = 15;
         speed = 4;
         base.Awake();
