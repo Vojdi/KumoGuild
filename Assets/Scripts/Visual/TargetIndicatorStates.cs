@@ -2,13 +2,20 @@ using UnityEngine;
 
 public class TargetIndicatorStates : MonoBehaviour
 {
-    Animator animator;
+    [SerializeField] SpriteRenderer childSprite;
+    SpriteRenderer thisSprite;
     private void Start()
     {
-        animator = GetComponent<Animator>();
+        thisSprite = GetComponent<SpriteRenderer>();
     }
     void Appeared()
     {
-        animator.Play("targetIndicatorIdle", 0, 0);
+        childSprite.color = new Color32(255, 255, 255, 255);
+        thisSprite.color = new Color32(255, 255, 255, 0);
+    }
+    void StartedToDissapear()
+    {
+        thisSprite.color = new Color32(255, 255, 255, 255);
+        childSprite.color = new Color32(255, 255, 255, 0);
     }
 }
