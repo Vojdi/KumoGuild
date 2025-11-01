@@ -4,13 +4,11 @@ using UnityEngine;
 public class DoTEffect : Effect
 {
     int damageOverTime;
-    
-    public void SetValues(Member member, int roundsLasts, int damageOverTime)
+    public DoTEffect(int roundsLasts, int damageOverTime) : base(roundsLasts)
     {
-        this.member = member;
-        this.roundsLasts = roundsLasts;
         this.damageOverTime = damageOverTime;
     }
+   
     public override void EffectAbsorbed()
     {
         member.Damage(damageOverTime,true);
@@ -21,18 +19,18 @@ public class DoTEffect : Effect
         Debug.Log($"{member} is no longer affected by this DoT");
         base.EffectDied();
     }
-    public override void Attach()
+    public override void Attach(Member m)
     {
-        foreach (Effect eff in member.Effects) {
+        foreach (Effect eff in m.Effects) {
             if(eff is DoTEffect dotEff)
             if (roundsLasts == dotEff.roundsLasts)
             {
                 dotEff.damageOverTime += damageOverTime;
-                Debug.Log($"{member}'s DoT got stacked");
+                Debug.Log($"{m}'s DoT got stacked");
                 return;
             }       
         }
-        Debug.Log($"{member} got DoT");
-        base.Attach();
+        Debug.Log($"{m} got DoT");
+        base.Attach(m);
     }
 }

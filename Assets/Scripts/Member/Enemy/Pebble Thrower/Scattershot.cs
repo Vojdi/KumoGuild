@@ -3,13 +3,13 @@ public class Scattershot : Skill
 {
     void OnEnable()
     {
-        skillName = "Scattershot";
+        SkillName = "Scattershot";
         AnimName = "testEff";
         reachablePositions = new List<int> {0, 1 };
         SkillType = "area";
         SelfOnly = false;
-        skillValuesMin = new List<int> { 1, 2, 3 };
-        skillValuesMax = new List<int> { 3, 5, 6 };
+        skillValuesMin = new List<List<int>> { new List<int> { 1, 2, 3 } };
+        skillValuesMax = new List<List<int>> { new List<int> { 3, 5, 6 } };
         level = 0;
     }
     public override void UseSkill(int targetPosition)
@@ -17,7 +17,7 @@ public class Scattershot : Skill
         base.UseSkill(targetPosition);  
         foreach (var targetMember in targetMembers)
         {
-            targetMember.Damage(skillValue, false);
+            targetMember.Damage(skillValues[0], false);
         }
     }
 }

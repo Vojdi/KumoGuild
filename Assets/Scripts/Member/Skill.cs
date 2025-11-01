@@ -12,24 +12,31 @@ public class Skill : ScriptableObject
     protected int level;
     public int Level => level;
 
-    protected List<int> skillValuesMin;
-    protected List<int> skillValuesMax;
-    protected int skillValue;
+    protected List<List<int>> skillValuesMin;
+    protected List<List<int>> skillValuesMax;
+    protected List<int> skillValues;
 
-    protected List<int> effectLenghts;
-    protected List<int> effectValues;
+    protected List<List<int>> effectLenghts;
+    protected List<List<int>> effectValues;
 
-    protected string skillName;
-    public string SkillName => skillName;
+    
+    public string SkillName;
     
     public string SkillType;
     public string AnimName;
     public bool SelfOnly;
     protected List<Member> targetMembers;
 
+    private void Awake()
+    {
+        skillValues = new List<int>();
+    }
     public virtual void UseSkill(int targetPosition)
     {
-        skillValue = Random.Range(skillValuesMin[level], skillValuesMax[level] + 1);
+        for (int s = 0; s < skillValuesMin.Count; s++)
+        {
+            skillValues.Add(Random.Range(skillValuesMin[s][level], skillValuesMax[s][level] + 1));
+        }
         targetMembers = Target(targetPosition);
     }
     

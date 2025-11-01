@@ -3,6 +3,10 @@ public class Effect
     protected Member member;
     protected int roundsLasts;
     public int RoundsLast => roundsLasts;
+    protected Effect(int roundsLasts)
+    {
+        this.roundsLasts = roundsLasts;
+    }
     public virtual void EffectAbsorbed()
     {
         roundsLasts--;
@@ -15,12 +19,9 @@ public class Effect
     {
         member.Effects.Remove(this);
     }
-    public virtual void SetValues(Member member, int roundsLasts)
+    public virtual void Attach(Member m) 
     {
-        this.member = member;
-        this.roundsLasts = roundsLasts;
-    }
-    public virtual void Attach() { 
+        member = m;
         member.Effects.Add(this);
     }
 }

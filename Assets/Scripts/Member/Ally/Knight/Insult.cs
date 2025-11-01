@@ -7,16 +7,16 @@ public class Insult : Skill
 {
     void OnEnable()
     {
-        skillName = "Insult";
+        SkillName = "Insult";
         AnimName = "testEff";
-        reachablePositions = new List<int> { 0,1,2 };
+        reachablePositions = new List<int> { 0, 1, 2 };
         usableFromPositions = new List<int> { 0, 1, 2 };
         SkillType = "single";
         SelfOnly = true;
-        skillValuesMin = new List<int> { 0, 0, 0 };
-        skillValuesMax = new List<int> { 0, 0, 0 };
-        effectLenghts = new List<int> { 2, 3, 4 };
-        effectValues = new List<int> { 20, 30, 40 };
+        skillValuesMin = new List<List<int>> { new List<int> { 0, 0, 0 } };
+        skillValuesMax = new List<List<int>> { new List<int> { 0, 0, 0 } };
+        effectLenghts = new List<List<int>> { new List<int> { 2, 3, 4} };
+        effectValues = new List<List<int>> { new List<int> {20, 30, 40} };
         level = 0;
     }
     public override void UseSkill(int targetPosition)
@@ -24,12 +24,10 @@ public class Insult : Skill
         base.UseSkill(targetPosition);
         foreach (Member targetMember in targetMembers)
         {
-            Effect stunEff = new TauntEffect();
-            stunEff.SetValues(targetMember, 3);
-            stunEff.Attach();
-            ProtEffect protEff = new ProtEffect();
-            protEff.SetValues(targetMember, 3, effectValues[0]);
-            protEff.Attach();
+            Effect stunEff = new TauntEffect(3);
+            stunEff.Attach(targetMember);
+            ProtEffect protEff = new ProtEffect(3, effectValues[0][level]);
+            protEff.Attach(targetMember);
         }  
     }
 }

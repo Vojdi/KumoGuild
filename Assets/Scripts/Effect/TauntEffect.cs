@@ -3,21 +3,22 @@ using UnityEngine;
 
 public class TauntEffect : Effect
 {
-    public override void Attach()
+    public TauntEffect(int roundsLasts) : base(roundsLasts) { }
+    public override void Attach(Member m)
     {
-        foreach (var m in GameManager.Instance.Members)
+        foreach (var me in GameManager.Instance.Members)
         {
-            if ((member is EnemyMember && m is EnemyMember) || (member is AllyMember && m is AllyMember))
+            if ((m is EnemyMember && me is EnemyMember) || (m is AllyMember && me is AllyMember))
             {
-                if (m.Effects.OfType<TauntEffect>().Any())
+                if (me.Effects.OfType<TauntEffect>().Any())
                 {
-                    Debug.Log($"Taunt was removed from {m.name}, because only one member per side can have it");
-                    m.Effects.OfType<TauntEffect>().First().EffectDied();
+                    Debug.Log($"Taunt was removed from {me.name}, because only one member per side can have it");
+                    me.Effects.OfType<TauntEffect>().First().EffectDied();
                 }
             }
         }
-        Debug.Log($"{member} taunted the opposite team");
-        base.Attach();    
+        Debug.Log($"{m} taunted the opposite team");
+        base.Attach(m);    
     }
     public override void EffectDied()
     {
