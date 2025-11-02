@@ -24,7 +24,7 @@ public class ControlPanel : MonoBehaviour
         selectedSkill = memberOnTurn.Skills[index];
         if (selectedSkill.SelfOnly)
         {
-            selectedSkill.MakeSelfOnly(memberOnTurn.Position);
+            selectedSkill.MakeSelfOnly();
         }
         foreach (Member m in GameManager.Instance.Members)
         {

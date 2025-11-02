@@ -1,16 +1,15 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class Skill : ScriptableObject 
 {
-    protected List<int> reachablePositions;
-    public List<int> ReachablePositions => reachablePositions;
-    protected List<int> usableFromPositions;
-    public List<int> UsableFromPositions => usableFromPositions;
+    public List<int> ReachablePositions;
+    public List<int> UsableFromPositions;
 
-    protected int level;
-    public int Level => level;
+    
+    public int Level;
 
     protected List<List<int>> skillValuesMin;
     protected List<List<int>> skillValuesMax;
@@ -25,6 +24,7 @@ public class Skill : ScriptableObject
     public string SkillType;
     public string AnimName;
     public bool SelfOnly;
+    public bool HasSelfSkill;
     protected List<Member> targetMembers;
 
     protected virtual void OnEnable()
@@ -35,12 +35,12 @@ public class Skill : ScriptableObject
     {
         for (int s = 0; s < skillValuesMin.Count; s++)
         {
-            skillValues.Add(Random.Range(skillValuesMin[s][level], skillValuesMax[s][level] + 1));
+            skillValues.Add(Random.Range(skillValuesMin[s][Level], skillValuesMax[s][Level] + 1));
         }
         targetMembers = Target(targetPosition);
     }
     
-    protected Member SingleTarget(int targetPosition)
+    protected Member SingleAttack(int targetPosition)
     {
         foreach (var m in GameManager.Instance.Members)
         {
@@ -56,16 +56,15 @@ public class Skill : ScriptableObject
         List<Member> targets = new List<Member>();
         foreach (var m in GameManager.Instance.Members)
         {
-            if (reachablePositions.Contains(m.Position)){
+            if (ReachablePositions.Contains(m.Position)){
                 targets.Add(m);
             } 
         }
         return targets;
     }
-    public void MakeSelfOnly(int selfPos)
+    public void MakeSelfOnly()
     {
-        reachablePositions.Clear();
-        reachablePositions.Add(selfPos);
+        ReachablePositions.Add(selfMember.Position);
     }
     List<Member> Target(int targetPosition)
     {
@@ -84,7 +83,7 @@ public class Skill : ScriptableObject
         {
             foreach (var m in GameManager.Instance.Members)
             {
-                if (reachablePositions.Contains(m.Position))
+                if (ReachablePositions.Contains(m.Position))
                 {
                     targets.Add(m);
                 }
@@ -92,9 +91,19 @@ public class Skill : ScriptableObject
         }
         return targets;
     }
+    public virtual void SelfUseSkill()
+    {
+
+    }
     public void SetSelfMember(Member selfM)
     {
         selfMember = selfM; 
+    }
+    public static T Create<T>(Member sMember) where T : Skill
+    {
+        T skill = ScriptableObject.CreateInstance<T>();
+        skill.selfMember = sMember;
+        return skill;
     }
 }
 

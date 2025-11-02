@@ -76,7 +76,17 @@ public class VisualEffectManager : MonoBehaviour
     }
     public void Lightened()
     {
-        attackingSkill.UseSkill(attackingPos);
+        if (attackingSkill.SelfOnly)
+        {
+            attackingSkill.SelfUseSkill();
+        }else if (attackingSkill.HasSelfSkill)
+        {
+            attackingSkill.UseSkill(attackingPos);
+            attackingSkill.SelfUseSkill();
+        }else
+        {
+            attackingSkill.UseSkill(attackingPos);
+        }
         GameManager.Instance.NextTurn();
     }
     public void EffectEnded()

@@ -8,9 +8,9 @@ public class Knight : AllyMember
         maxHealth = 15;
         speed = 4;
         base.Awake();
-        Skills.Add(ScriptableObject.CreateInstance<GuidedSlash>());
-        //Skills.Add(ScriptableObject.CreateInstance<PiercingLight>());
-        Skills.Add(ScriptableObject.CreateInstance<Insult>());
-        AddCreatorAsParameter();
+        Skill.Create<GuidedSlash>(this);
+        Skill.Create<Insult>(this);
+       // Skill.Create<PiercingLight>(this);
+       
     }
 }

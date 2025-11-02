@@ -7,8 +7,7 @@ public class PebbleThrower : EnemyMember
         maxHealth = 8;
         speed = 1;
         base.Awake();
-        Skills.Add(ScriptableObject.CreateInstance<FlyingPebble>());
-        Skills.Add(ScriptableObject.CreateInstance<Scattershot>());
-        AddCreatorAsParameter();
+        Skill.Create<FlyingPebble>(this);
+        Skill.Create<Scattershot>(this);
     }
 }

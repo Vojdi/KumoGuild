@@ -6,12 +6,12 @@ public class Scattershot : Skill
         base.OnEnable();
         SkillName = "Scattershot";
         AnimName = "testEff";
-        reachablePositions = new List<int> {0, 1 };
+        ReachablePositions = new List<int> {0, 1 };
         SkillType = "area";
         SelfOnly = false;
         skillValuesMin = new List<List<int>> { new List<int> { 1, 2, 3 } };
         skillValuesMax = new List<List<int>> { new List<int> { 3, 5, 6 } };
-        level = 0;
+        Level = 0;
     }
     public override void UseSkill(int targetPosition)
     {
