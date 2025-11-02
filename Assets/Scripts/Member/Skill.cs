@@ -18,7 +18,7 @@ public class Skill : ScriptableObject
     protected List<List<int>> effectLenghts;
     protected List<List<int>> effectValues;
 
-    protected Member selfMember;
+    public Member SelfMember;
     public string SkillName;
     
     public string SkillType;
@@ -64,7 +64,7 @@ public class Skill : ScriptableObject
     }
     public void MakeSelfOnly()
     {
-        ReachablePositions.Add(selfMember.Position);
+        ReachablePositions.Add(SelfMember.Position);
     }
     List<Member> Target(int targetPosition)
     {
@@ -97,12 +97,12 @@ public class Skill : ScriptableObject
     }
     public void SetSelfMember(Member selfM)
     {
-        selfMember = selfM; 
+        SelfMember = selfM; 
     }
     public static T Create<T>(Member sMember) where T : Skill
     {
         T skill = ScriptableObject.CreateInstance<T>();
-        skill.selfMember = sMember;
+        skill.SelfMember = sMember;
         return skill;
     }
 }

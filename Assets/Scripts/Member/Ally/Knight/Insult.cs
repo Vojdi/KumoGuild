@@ -24,8 +24,8 @@ public class Insult : Skill
     public override void SelfUseSkill()
     {
         Effect stunEff = new TauntEffect(3);
-        stunEff.Attach(selfMember);
+        stunEff.Attach(SelfMember);
         ProtEffect protEff = new ProtEffect(3, effectValues[0][Level]);
-        protEff.Attach(selfMember);
+        protEff.Attach(SelfMember);
     }
 }

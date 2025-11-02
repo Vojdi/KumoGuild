@@ -66,7 +66,7 @@ public class EnemyMember : Member
 
         if (skill.SelfOnly)
         {
-            skill.MakeSelfOnly();
+            return true;
         }
         if (tauntingMemberPosition != -1)
         {

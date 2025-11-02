@@ -24,27 +24,41 @@ public class ControlPanel : MonoBehaviour
         selectedSkill = memberOnTurn.Skills[index];
         if (selectedSkill.SelfOnly)
         {
-            selectedSkill.MakeSelfOnly();
-        }
-        foreach (Member m in GameManager.Instance.Members)
-        {
-            if(m.Effects.OfType<TauntEffect>().Any() && m is EnemyMember)
+            foreach (Member m in GameManager.Instance.Members)
             {
-                if (selectedSkill.ReachablePositions.Contains(m.Position)) {
-                    Untarget();
+                if (selectedSkill.SelfMember.Position ==  m.Position)
+                {
                     m.Targetable = true;
-                    break;
+                }
+                else
+                {
+                    m.Targetable = false;
                 }
             }
-            if (selectedSkill.ReachablePositions.Contains(m.Position))
-            {
-                m.Targetable = true;
-            }
-            else
-            {
-                m.Targetable = false;
-            }
         }
+        else
+        {
+            foreach (Member m in GameManager.Instance.Members)
+            {
+                if (m.Effects.OfType<TauntEffect>().Any() && m is EnemyMember)
+                {
+                    if (selectedSkill.ReachablePositions.Contains(m.Position))
+                    {
+                        Untarget();
+                        m.Targetable = true;
+                        break;
+                    }
+                }
+                if (selectedSkill.ReachablePositions.Contains(m.Position))
+                {
+                    m.Targetable = true;
+                }
+                else
+                {
+                    m.Targetable = false;
+                }
+            }
+        }    
     }
     public void SkillPositionSelected(int pos)
     {
