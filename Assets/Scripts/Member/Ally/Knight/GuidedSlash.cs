@@ -2,8 +2,9 @@ using System.Collections.Generic;
 
 public class GuidedSlash : Skill
 {
-    void OnEnable()
+    override protected void OnEnable()
     {
+        base.OnEnable();
         SkillName = "Guided Slash";
         AnimName = "slash";
         reachablePositions = new List<int> { 3, 4, 5 };

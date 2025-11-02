@@ -83,6 +83,14 @@ public class Member : MonoBehaviour
             }
         }
     }
+
+    protected void AddCreatorAsParameter()
+    {
+        foreach (Skill s in Skills)
+        {
+            s.SetSelfMember(this);
+        }
+    }
     private void OnMouseDown()
     {
         if (Targetable)

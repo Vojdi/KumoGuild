@@ -9,5 +9,6 @@ public class PebbleThrower : EnemyMember
         base.Awake();
         Skills.Add(ScriptableObject.CreateInstance<FlyingPebble>());
         Skills.Add(ScriptableObject.CreateInstance<Scattershot>());
+        AddCreatorAsParameter();
     }
 }

@@ -2,8 +2,9 @@ using System.Collections.Generic;
 
 public class FlyingPebble : Skill
 {
-    void OnEnable()
+    override protected void OnEnable()
     {
+        base.OnEnable();
         SkillName = "Flying Pebble";
         AnimName = "testEff";
         reachablePositions = new List<int> {0,1,2 };

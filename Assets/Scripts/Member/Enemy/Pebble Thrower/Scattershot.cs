@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 public class Scattershot : Skill
 {
-    void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         SkillName = "Scattershot";
         AnimName = "testEff";
         reachablePositions = new List<int> {0, 1 };

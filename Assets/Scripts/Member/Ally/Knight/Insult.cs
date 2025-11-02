@@ -5,8 +5,9 @@ using UnityEngine.UIElements;
 
 public class Insult : Skill
 {
-    void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         SkillName = "Insult";
         AnimName = "testEff";
         reachablePositions = new List<int> { 0, 1, 2 };

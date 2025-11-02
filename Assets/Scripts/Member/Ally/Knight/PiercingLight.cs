@@ -2,8 +2,9 @@ using System.Collections.Generic;
 
 public class PiercingLight : Skill
 {
-    void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         SkillName = "Piercing Light";
         AnimName = "testEff";
         reachablePositions = new List<int> { 3,4 };

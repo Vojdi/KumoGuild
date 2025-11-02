@@ -19,7 +19,7 @@ public class Skill : ScriptableObject
     protected List<List<int>> effectLenghts;
     protected List<List<int>> effectValues;
 
-    
+    protected Member selfMember;
     public string SkillName;
     
     public string SkillType;
@@ -27,7 +27,7 @@ public class Skill : ScriptableObject
     public bool SelfOnly;
     protected List<Member> targetMembers;
 
-    private void Awake()
+    protected virtual void OnEnable()
     {
         skillValues = new List<int>();
     }
@@ -91,6 +91,10 @@ public class Skill : ScriptableObject
             }
         }
         return targets;
+    }
+    public void SetSelfMember(Member selfM)
+    {
+        selfMember = selfM; 
     }
 }
 
