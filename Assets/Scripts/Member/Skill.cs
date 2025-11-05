@@ -62,10 +62,6 @@ public class Skill : ScriptableObject
         }
         return targets;
     }
-    public void MakeSelfOnly()
-    {
-        ReachablePositions.Add(SelfMember.Position);
-    }
     List<Member> Target(int targetPosition)
     {
         List<Member> targets = new List<Member>();
@@ -94,10 +90,6 @@ public class Skill : ScriptableObject
     public virtual void SelfUseSkill()
     {
 
-    }
-    public void SetSelfMember(Member selfM)
-    {
-        SelfMember = selfM; 
     }
     public static T Create<T>(Member sMember) where T : Skill
     {

@@ -15,14 +15,14 @@ public class Member : MonoBehaviour
 
     protected int speed;
     public int Speed => speed;
-    public int Position;
+    [HideInInspector] public int Position;
 
-    public List<Skill> Skills;
-    public List<Effect> Effects;
-    public bool Targetable;
+    [HideInInspector] public List<Skill> Skills;
+    [HideInInspector] public List<Effect> Effects;
+    [HideInInspector] public bool Targetable;
     protected bool stunnedThisRound;
-    public Animator TurnIndicatorAnimator;
-    public Animator TargetedIndicatorAnimator;
+    [HideInInspector] public Animator TurnIndicatorAnimator;
+    [HideInInspector] public Animator TargetedIndicatorAnimator;
     protected virtual void Awake()
     {
         Skills = new List<Skill>();
