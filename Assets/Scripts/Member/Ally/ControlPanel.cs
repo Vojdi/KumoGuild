@@ -1,7 +1,5 @@
 
-using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ControlPanel : MonoBehaviour
@@ -58,7 +56,8 @@ public class ControlPanel : MonoBehaviour
                     m.Targetable = false;
                 }
             }
-        }    
+        }
+        VisualEffectManager.Instance.TargetArrows();
     }
     public void SkillPositionSelected(int pos)
     {
@@ -73,6 +72,7 @@ public class ControlPanel : MonoBehaviour
         {
             m.Targetable = false;
         }
+        VisualEffectManager.Instance.TargetArrows();
     }
     void EnableControls(bool parameter)
     {

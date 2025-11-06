@@ -23,6 +23,7 @@ public class Member : MonoBehaviour
     protected bool stunnedThisRound;
     [HideInInspector] public Animator TurnIndicatorAnimator;
     [HideInInspector] public Animator TargetedIndicatorAnimator;
+    [HideInInspector] public Animator TargetedArrowAnimator;
     protected virtual void Awake()
     {
         Skills = new List<Skill>();
@@ -31,6 +32,7 @@ public class Member : MonoBehaviour
         Targetable = false;
         TurnIndicatorAnimator = GetComponentInChildren<TurnIndicatorStates>().gameObject.GetComponent<Animator>();
         TargetedIndicatorAnimator = GetComponentInChildren<TargetIndicatorStates>().gameObject.GetComponent<Animator>();
+        TargetedArrowAnimator = GetComponentInChildren<TargetArrowStates>().gameObject.GetComponent<Animator>();
     }
     public virtual void YourTurn()
     {

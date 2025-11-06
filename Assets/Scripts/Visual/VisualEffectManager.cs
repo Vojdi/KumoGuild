@@ -10,7 +10,8 @@ public class VisualEffectManager : MonoBehaviour
     static VisualEffectManager instance;
     public static VisualEffectManager Instance => instance;
     Member memberOnTurn;
-    List<Member> targetMembers = new List<Member>();
+    List<Member> targetMembers;
+    List<Member> prevTargetables;
 
     Animator animator;
     Skill attackingSkill;
@@ -20,6 +21,8 @@ public class VisualEffectManager : MonoBehaviour
     {
         instance = this;
         animator = GetComponent<Animator>();
+        targetMembers = new List<Member>();
+        prevTargetables = new List<Member>();
     }
     public void PlayEffectAnimation(Skill skill, int pos)
     {
@@ -104,5 +107,28 @@ public class VisualEffectManager : MonoBehaviour
     public void NewTurnEffectEnd()
     {
         GameManager.Instance.MemberToPlayTurn();
+    }
+    public void TargetArrows()
+    {
+        // get current targetable members
+        var currentTargetables = GameManager.Instance.Members
+            .Where(m => m.Targetable)
+            .ToList();
+
+        //  became targetable  appear
+        foreach (var m in currentTargetables.Except(prevTargetables))
+        {
+            m.TargetedArrowAnimator.Play("targetArrowAppear");
+        }
+          
+
+        //  stopped being targetable  disappear
+        foreach (var m in prevTargetables.Except(currentTargetables))
+        {
+            m.TargetedArrowAnimator.Play("targetArrowDisappear");
+        }
+
+        // remember for next call
+        prevTargetables = currentTargetables;
     }
 }
