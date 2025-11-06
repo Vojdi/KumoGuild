@@ -110,25 +110,20 @@ public class VisualEffectManager : MonoBehaviour
     }
     public void TargetArrows()
     {
-        // get current targetable members
         var currentTargetables = GameManager.Instance.Members
             .Where(m => m.Targetable)
             .ToList();
 
-        //  became targetable  appear
         foreach (var m in currentTargetables.Except(prevTargetables))
         {
             m.TargetedArrowAnimator.Play("targetArrowAppear");
         }
           
-
-        //  stopped being targetable  disappear
         foreach (var m in prevTargetables.Except(currentTargetables))
         {
             m.TargetedArrowAnimator.Play("targetArrowDisappear");
         }
 
-        // remember for next call
         prevTargetables = currentTargetables;
     }
 }

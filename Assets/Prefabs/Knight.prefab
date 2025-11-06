@@ -55,6 +55,7 @@ MonoBehaviour:
   Targetable: 0
   TurnIndicatorAnimator: {fileID: 0}
   TargetedIndicatorAnimator: {fileID: 0}
+  TargetedArrowAnimator: {fileID: 0}
 --- !u!61 &2343081282985109948
 BoxCollider2D:
   m_ObjectHideFlags: 0
