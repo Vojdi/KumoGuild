@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: adf82a45075c1a342b23fd59f5cfa7e7
+guid: 2e33a1aa9825b6d4faef46b04fdc281d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7272063429776682924
-    second: cloud100_0
-  - first:
-      213: -3370335672187555266
-    second: cloud100_1
-  - first:
-      213: -2623608992583256985
-    second: cloud100_2
+      213: 6559151785087386348
+    second: Heart V2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -57,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 22
+  spritePixelsToUnits: 25
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -145,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cloud100_0
+      name: Heart V2_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 13
-        width: 39
-        height: 21
+        x: 21
+        y: 23
+        width: 22
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,52 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4505d04f6d0741b90800000000000000
-      internalID: -7272063429776682924
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cloud100_1
-      rect:
-        serializedVersion: 2
-        x: 45
-        y: 1
-        width: 14
-        height: 52
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e32fe6d10992a31d0800000000000000
-      internalID: -3370335672187555266
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cloud100_2
-      rect:
-        serializedVersion: 2
-        x: 9
-        y: 0
-        width: 29
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 764fd8f8581179bd0800000000000000
-      internalID: -2623608992583256985
+      spriteID: ce2c002fbc9c60b50800000000000000
+      internalID: 6559151785087386348
       vertices: []
       indices: 
       edges: []
@@ -224,9 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      cloud100_0: -7272063429776682924
-      cloud100_1: -3370335672187555266
-      cloud100_2: -2623608992583256985
+      Heart V2_0: 6559151785087386348
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
