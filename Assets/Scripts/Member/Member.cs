@@ -24,6 +24,7 @@ public class Member : MonoBehaviour
     [HideInInspector] public Animator TurnIndicatorAnimator;
     [HideInInspector] public Animator TargetedIndicatorAnimator;
     [HideInInspector] public Animator TargetedArrowAnimator;
+    protected HpBadge hpBadge;
     protected virtual void Awake()
     {
         Skills = new List<Skill>();
@@ -33,6 +34,11 @@ public class Member : MonoBehaviour
         TurnIndicatorAnimator = GetComponentInChildren<TurnIndicatorStates>().gameObject.GetComponent<Animator>();
         TargetedIndicatorAnimator = GetComponentInChildren<TargetIndicatorStates>().gameObject.GetComponent<Animator>();
         TargetedArrowAnimator = GetComponentInChildren<TargetArrowStates>().gameObject.GetComponent<Animator>();
+        hpBadge = GetComponentInChildren<HpBadge>();
+    }
+    private void Start()
+    {
+        hpBadge.Init(this);
     }
     public virtual void YourTurn()
     {
@@ -52,6 +58,7 @@ public class Member : MonoBehaviour
         {
             Debug.Log($"{this} got Damaged by DoT for {damage} damage");
             health -= damage;
+            hpBadge.UpdateHealth();
             if (health <= 0)
             {
                 Debug.Log($"{this} died");
@@ -68,6 +75,7 @@ public class Member : MonoBehaviour
             int finalDamage = damage - (int)(damage / 100f * protection);
             Debug.Log($"{this} got Damaged for {finalDamage} damage,he had {protection}% prot, base damage was {damage}");
             health -= finalDamage;
+            hpBadge.UpdateHealth(); 
             if (health <= 0)
             {
                 Debug.Log($"{this} died");
