@@ -116,12 +116,12 @@ public class VisualEffectManager : MonoBehaviour
 
         foreach (var m in currentTargetables.Except(prevTargetables))
         {
-            m.TargetedArrowAnimator.Play("targetArrowAppear");
+            m.TargetedArrowAnimator.Play("targetArrowAppear",0,0);
         }
           
         foreach (var m in prevTargetables.Except(currentTargetables))
         {
-            m.TargetedArrowAnimator.Play("targetArrowDisappear");
+            m.TargetedArrowAnimator.Play("targetArrowDisappear",0,0);
         }
 
         prevTargetables = currentTargetables;
