@@ -2,12 +2,8 @@ using UnityEngine;
 
 public class DarkenOverlayEventBridge : MonoBehaviour
 {
-    void Darkened()
+    void Action()
     {
-        VisualEffectManager.Instance.Darkened();
-    }
-    void Lightened()
-    {
-        VisualEffectManager.Instance.Lightened();
+        VisualEffectManager.Instance.ActionQueue.Dequeue()?.Invoke();
     }
 }

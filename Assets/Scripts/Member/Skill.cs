@@ -40,28 +40,6 @@ public class Skill : ScriptableObject
         targetMembers = Target(targetPosition);
     }
     
-    protected Member SingleAttack(int targetPosition)
-    {
-        foreach (var m in GameManager.Instance.Members)
-        {
-            if (m.Position == targetPosition)
-            {
-                return m;
-            }
-        }
-        return null;
-    }
-    protected List<Member> AreaAttack(int targetPosition)
-    {
-        List<Member> targets = new List<Member>();
-        foreach (var m in GameManager.Instance.Members)
-        {
-            if (ReachablePositions.Contains(m.Position)){
-                targets.Add(m);
-            } 
-        }
-        return targets;
-    }
     List<Member> Target(int targetPosition)
     {
         List<Member> targets = new List<Member>();

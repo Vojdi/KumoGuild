@@ -4,6 +4,6 @@ public class UsedSkillTextEventBridge : MonoBehaviour
 {
     void EffectEnded()
     {
-        VisualEffectManager.Instance.SkillAnncounced();
+        VisualEffectManager.Instance.ActionQueue.Dequeue()?.Invoke();
     }
 }

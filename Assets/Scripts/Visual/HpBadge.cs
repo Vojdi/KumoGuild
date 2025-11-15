@@ -43,6 +43,7 @@ public class HpBadge : MonoBehaviour
     private void UpdateHealthEffectEnd()
     {
         hpText.fontSize -= 2;
+        VisualEffectManager.Instance.ActionQueue.Dequeue()?.Invoke();
     }
 
 }

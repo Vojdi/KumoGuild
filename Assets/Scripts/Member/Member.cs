@@ -58,7 +58,7 @@ public class Member : MonoBehaviour
         {
             Debug.Log($"{this} got Damaged by DoT for {damage} damage");
             health -= damage;
-            hpBadge.UpdateHealth();
+            VisualEffectManager.Instance.ActionQueue.Enqueue(hpBadge.UpdateHealth);
             if (health <= 0)
             {
                 Debug.Log($"{this} died");
@@ -75,7 +75,7 @@ public class Member : MonoBehaviour
             int finalDamage = damage - (int)(damage / 100f * protection);
             Debug.Log($"{this} got Damaged for {finalDamage} damage,he had {protection}% prot, base damage was {damage}");
             health -= finalDamage;
-            hpBadge.UpdateHealth(); 
+            VisualEffectManager.Instance.ActionQueue.Enqueue(hpBadge.UpdateHealth); 
             if (health <= 0)
             {
                 Debug.Log($"{this} died");

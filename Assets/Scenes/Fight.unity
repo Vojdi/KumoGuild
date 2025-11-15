@@ -380,7 +380,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2408049893474397524, guid: 67e73e870e6d8164daf667a9ca76c38e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 67e73e870e6d8164daf667a9ca76c38e, type: 3}
 --- !u!1 &345965228
 GameObject:
@@ -443,7 +446,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3952367630704717548, guid: 67e73e870e6d8164daf667a9ca76c38e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 3952367630704717548, guid: 67e73e870e6d8164daf667a9ca76c38e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -488,7 +491,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2408049893474397524, guid: 67e73e870e6d8164daf667a9ca76c38e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 67e73e870e6d8164daf667a9ca76c38e, type: 3}
 --- !u!114 &439006520 stripped
 MonoBehaviour:
@@ -930,7 +936,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3952367630704717548, guid: 67e73e870e6d8164daf667a9ca76c38e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.5
+      value: 2.75
       objectReference: {fileID: 0}
     - target: {fileID: 3952367630704717548, guid: 67e73e870e6d8164daf667a9ca76c38e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -975,7 +981,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2408049893474397524, guid: 67e73e870e6d8164daf667a9ca76c38e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 67e73e870e6d8164daf667a9ca76c38e, type: 3}
 --- !u!1 &891313451
 GameObject:
@@ -1720,7 +1729,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6539634205431036939, guid: d8c648f89bf9576469376924a23a0513, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 6539634205431036939, guid: d8c648f89bf9576469376924a23a0513, type: 3}
       propertyPath: m_LocalPosition.z

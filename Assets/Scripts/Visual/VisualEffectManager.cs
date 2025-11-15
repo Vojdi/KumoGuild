@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 public class VisualEffectManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class VisualEffectManager : MonoBehaviour
     [SerializeField] GameObject skillUsedTextGameObject;
     static VisualEffectManager instance;
     public static VisualEffectManager Instance => instance;
+    public Queue<Action> ActionQueue;
     Member memberOnTurn;
     List<Member> targetMembers;
     List<Member> prevTargetables;
@@ -23,9 +25,14 @@ public class VisualEffectManager : MonoBehaviour
         animator = GetComponent<Animator>();
         targetMembers = new List<Member>();
         prevTargetables = new List<Member>();
+        ActionQueue = new Queue<Action>();
     }
     public void PlayEffectAnimation(Skill skill, int pos)
     {
+        ActionQueue.Enqueue(SkillAnncounced);
+        ActionQueue.Enqueue(Darkened);
+        ActionQueue.Enqueue(Lightened);
+
         targetMembers.Clear();
         attackingSkill = skill;
         attackingPos = pos;
@@ -73,26 +80,18 @@ public class VisualEffectManager : MonoBehaviour
         }   
         darkenOverlayAnimator.Play("darken", 0, 0);
     }
-    public void Darkened()
+    void Darkened()
     {
         animator.Play(attackingSkill.AnimName, 0, 0);
     }
-    public void Lightened()
+    void Lightened()
     {
-        if (attackingSkill.SelfOnly)
-        {
-            attackingSkill.SelfUseSkill();
-        }else if (attackingSkill.HasSelfSkill)
-        {
-            attackingSkill.UseSkill(attackingPos);
-            attackingSkill.SelfUseSkill();
-        }else
-        {
-            attackingSkill.UseSkill(attackingPos);
-        }
-        GameManager.Instance.NextTurn();
+        attackingSkill.UseSkill(attackingPos);
+        attackingSkill.SelfUseSkill();
+        ActionQueue.Enqueue(GameManager.Instance.NextTurn);
+        ActionQueue.Dequeue()?.Invoke();
     }
-    public void EffectEnded()
+    void EffectEnded()
     {
         darkenOverlayAnimator.Play("lighten", 0, 0);
     }
