@@ -75,7 +75,7 @@ public class ControlPanel : MonoBehaviour
         VisualEffectManager.Instance.TargetArrows();
     }
     void EnableControls(bool parameter)
-    {
+    {   
         foreach (Transform child in transform)
         {
             child.gameObject.SetActive(parameter);

@@ -1,7 +1,8 @@
-using UnityEngine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System;
+using Unity.VisualScripting;
+using UnityEngine;
 
 public class VisualEffectManager : MonoBehaviour
 {
@@ -97,15 +98,18 @@ public class VisualEffectManager : MonoBehaviour
     }
     public void NewTurnEffect(Member member)
     {
+        ActionQueue.Enqueue(GameManager.Instance.MemberToPlayTurn);
+
         memberOnTurn = member;
         memberOnTurn.TurnIndicatorAnimator.Play("turnIndicatorAppear", 0, 0);
 
         newTurnTextGameObject.GetComponent<TMPro.TMP_Text>().text = $"{member.MemberName}'s turn";
         newTurnTextGameObject.GetComponent<Animator>().Play("turnText", 0, 0);
     }
-    public void NewTurnEffectEnd()
+    public void NewRound(int count)
     {
-        GameManager.Instance.MemberToPlayTurn();
+        newTurnTextGameObject.GetComponent<TMPro.TMP_Text>().text = $"Round {count}";
+        newTurnTextGameObject.GetComponent<Animator>().Play("turnText", 0, 0);
     }
     public void TargetArrows()
     {

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public List<Member> Members => members;
     List<Member> membersTurnOrder;
     Member memberToPlay;
+    int roundCount;
 
     private void Awake()
     {
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
         {
             Members[i].Position = i;
         }
+        roundCount = 0;
     }
     private void Start()
     {
@@ -72,13 +74,15 @@ public class GameManager : MonoBehaviour
     {
         if (membersTurnOrder.Count == 0)
         {
+            roundCount++;
             TimeEffects();
-            Debug.Log("New Round");
+            VisualEffectManager.Instance.ActionQueue.Enqueue(() =>VisualEffectManager.Instance.NewRound(roundCount));
             DetermineTurnOrder();
         }
         memberToPlay = membersTurnOrder[0];
         membersTurnOrder.RemoveAt(0);
-        VisualEffectManager.Instance.NewTurnEffect(memberToPlay);
+        VisualEffectManager.Instance.ActionQueue.Enqueue(() => VisualEffectManager.Instance.NewTurnEffect(memberToPlay));
+        VisualEffectManager.Instance.ActionQueue.Dequeue()?.Invoke();
     }
     public void MemberToPlayTurn()
     {

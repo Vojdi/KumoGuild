@@ -4,6 +4,6 @@ public class NewTurnTextEventBridge : MonoBehaviour
 {
     void EffectEnded()
     {
-        VisualEffectManager.Instance.NewTurnEffectEnd();
+        VisualEffectManager.Instance.ActionQueue.Dequeue()?.Invoke();
     }
 }

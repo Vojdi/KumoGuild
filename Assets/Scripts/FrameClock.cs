@@ -1,17 +1,22 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FrameClock : MonoBehaviour
 {
-    TMPro.TMP_Text tmp;
-    int value;
+    static FrameClock instance;
+    public static FrameClock Instance => instance;
+    public Action AnimationAction;
     private void Awake()
     {
-        tmp = GetComponent<TMPro.TMP_Text>();
-        value = 1;
+        AnimationAction = null;
     }
     void Tick()
     {
-        tmp.text = value.ToString();
-        value++;
+        if (AnimationAction != null)
+        {
+            AnimationAction.Invoke();
+            AnimationAction = null;
+        }
     }
 }
