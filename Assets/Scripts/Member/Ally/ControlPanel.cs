@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ControlPanel : MonoBehaviour
 {
+    [SerializeField] TMPro.TMP_Text memberNameText;
     static ControlPanel instance;
     public static ControlPanel Instance => instance;
     AllyMember memberOnTurn;
@@ -14,8 +15,8 @@ public class ControlPanel : MonoBehaviour
     }
     public void AllyTurn(AllyMember member)
     {
-        EnableControls(true);
         memberOnTurn = member;
+        EnableControls(true);
     }
     public void SkillClicked(int index)
     {
@@ -75,10 +76,14 @@ public class ControlPanel : MonoBehaviour
         VisualEffectManager.Instance.TargetArrows();
     }
     void EnableControls(bool parameter)
-    {   
+    {
         foreach (Transform child in transform)
         {
             child.gameObject.SetActive(parameter);
+        }
+        if(parameter == true)
+        {
+            memberNameText.text = memberOnTurn.MemberName;
         }
     }
 }
