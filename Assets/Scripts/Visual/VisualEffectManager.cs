@@ -69,15 +69,15 @@ public class VisualEffectManager : MonoBehaviour
         }
         foreach (Member m in targetMembers)
         {
-            m.TargetedIndicatorAnimator.Play("targetIndicatorAppear",0,0);
+            m.TargetedIndicatorAnimator.Play("appear",0,0);
         }
     }
     public void SkillAnncounced()
     {
-        memberOnTurn.TurnIndicatorAnimator.Play("turnIndicatorDissappear");
+        memberOnTurn.TurnIndicatorAnimator.Play("disappear");
         foreach(Member m in targetMembers)
         {
-            m.TargetedIndicatorAnimator.Play("targetIndicatorDissapear");
+            m.TargetedIndicatorAnimator.Play("disappear");
         }   
         darkenOverlayAnimator.Play("darken", 0, 0);
     }
@@ -101,7 +101,7 @@ public class VisualEffectManager : MonoBehaviour
         ActionQueue.Enqueue(GameManager.Instance.MemberToPlayTurn);
 
         memberOnTurn = member;
-        memberOnTurn.TurnIndicatorAnimator.Play("turnIndicatorAppear", 0, 0);
+        memberOnTurn.TurnIndicatorAnimator.Play("appear", 0, 0);
 
         newTurnTextGameObject.GetComponent<TMPro.TMP_Text>().text = $"{member.MemberName}'s turn";
         newTurnTextGameObject.GetComponent<Animator>().Play("turnText", 0, 0);

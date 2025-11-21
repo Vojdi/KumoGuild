@@ -49,6 +49,7 @@ public class Member : MonoBehaviour
             stun.EffectAbsorbed();
             Debug.Log($"{this} is skipping this turn due to Stun");
             stunnedThisRound = true;
+            TurnIndicatorAnimator.Play("disappear");
             GameManager.Instance.NextTurn();
         }
     }

@@ -8,7 +8,6 @@ public class Skill : ScriptableObject
     public List<int> ReachablePositions;
     public List<int> UsableFromPositions;
 
-    
     public int Level;
 
     protected List<List<int>> skillValuesMin;
