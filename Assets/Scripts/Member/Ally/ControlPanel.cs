@@ -1,4 +1,5 @@
 
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,7 +19,7 @@ public class ControlPanel : MonoBehaviour
     public void AllyTurn(AllyMember member)
     {
         memberOnTurn = member;
-        EnableControls(true);
+        StartCoroutine(EnableControls(true));
     }
     public void SkillClicked(int index)
     {
@@ -66,7 +67,7 @@ public class ControlPanel : MonoBehaviour
     {
         Debug.Log($"{memberOnTurn} used {selectedSkill.SkillName}");//////
         VisualEffectManager.Instance.PlayEffectAnimation(selectedSkill, pos);
-        EnableControls(false);
+        StartCoroutine(EnableControls(false));
         Untarget();
     }
     void Untarget()
@@ -77,8 +78,9 @@ public class ControlPanel : MonoBehaviour
         }
         VisualEffectManager.Instance.TargetArrows();
     }
-    void EnableControls(bool parameter)
+    IEnumerator EnableControls(bool parameter)
     {
+        yield return null;
         if (parameter == true)
         {
             memberNameText.text = memberOnTurn.MemberName;
@@ -88,6 +90,8 @@ public class ControlPanel : MonoBehaviour
         {
             child.gameObject.SetActive(parameter);
         }
-        
+        LayoutRebuilder.ForceRebuildLayoutImmediate(memberNameText.rectTransform);
+
+
     }
 }
