@@ -1,10 +1,12 @@
 
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ControlPanel : MonoBehaviour
 {
     [SerializeField] TMPro.TMP_Text memberNameText;
+    [SerializeField] Image memberIcon;
     static ControlPanel instance;
     public static ControlPanel Instance => instance;
     AllyMember memberOnTurn;
@@ -77,13 +79,15 @@ public class ControlPanel : MonoBehaviour
     }
     void EnableControls(bool parameter)
     {
+        if (parameter == true)
+        {
+            memberNameText.text = memberOnTurn.MemberName;
+            memberIcon.sprite = ImageManager.Instance.GetSprite(memberOnTurn.IconId);
+        }
         foreach (Transform child in transform)
         {
             child.gameObject.SetActive(parameter);
         }
-        if(parameter == true)
-        {
-            memberNameText.text = memberOnTurn.MemberName;
-        }
+        
     }
 }

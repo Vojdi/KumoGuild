@@ -7,6 +7,7 @@ public class Skyward : AllyMember
         memberName = "Skyward";
         maxHealth = 35;
         speed = 3;
+        IconId = 0;
         base.Awake();
         Skills.Add(Skill.Create<AirSlice>(this));
         Skills.Add(Skill.Create<WindCall>(this));

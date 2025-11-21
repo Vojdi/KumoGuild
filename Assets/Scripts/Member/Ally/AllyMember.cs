@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AllyMember : Member
 {
+    [HideInInspector]public int IconId;
     public override void YourTurn()
     {
         if (health > 0)
