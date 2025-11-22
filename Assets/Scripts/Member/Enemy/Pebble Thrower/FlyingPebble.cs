@@ -10,8 +10,8 @@ public class FlyingPebble : Skill
         ReachablePositions = new List<int> {0,1,2 };
         SkillType = "single";
         SelfOnly = false;
-        skillValuesMin = new List<List<int>> { new List<int> { 3, 4, 5 } };
-        skillValuesMax = new List<List<int>> { new List<int> { 5, 6, 7 } };
+        skillValuesMin = new List<List<int>> { new List<int> { 10, 4, 5 } };
+        skillValuesMax = new List<List<int>> { new List<int> { 12, 6, 7 } };
         Level = 0;
     }
     public override void UseSkill(int targetPosition)

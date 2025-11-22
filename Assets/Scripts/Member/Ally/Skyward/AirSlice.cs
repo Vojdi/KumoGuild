@@ -17,6 +17,7 @@ public class AirSlice : Skill
         effectLenghts = new List<List<int>> { new List<int> { 0, 0, 0 } };
         effectValues = new List<List<int>> { new List<int> { 0, 0, 0 } };
         Level = 0;
+        IconId = 1;
     }
     public override void UseSkill(int targetPosition)
     {

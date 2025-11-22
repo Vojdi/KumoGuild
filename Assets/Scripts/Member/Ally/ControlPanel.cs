@@ -8,6 +8,7 @@ public class ControlPanel : MonoBehaviour
 {
     [SerializeField] TMPro.TMP_Text memberNameText;
     [SerializeField] Image memberIcon;
+    [SerializeField] Transform skillsParent;
     static ControlPanel instance;
     public static ControlPanel Instance => instance;
     AllyMember memberOnTurn;
@@ -80,17 +81,34 @@ public class ControlPanel : MonoBehaviour
     }
     IEnumerator EnableControls(bool parameter)
     {
-        yield return null;
+        
         if (parameter == true)
         {
             memberNameText.text = memberOnTurn.MemberName;
             memberIcon.sprite = ImageManager.Instance.GetSprite(memberOnTurn.IconId);
+
+            for (int i = 0; i < memberOnTurn.Skills.Count; i++) {
+                skillsParent.GetChild(i).GetComponent<Image>().sprite = ImageManager.Instance.GetSprite(memberOnTurn.Skills[i].IconId);
+                Debug.Log(skillsParent.GetChild(i).GetComponent<Image>());
+            }
         }
         foreach (Transform child in transform)
         {
+            CanvasGroup cg = child.gameObject.AddComponent<CanvasGroup>();
+            cg.alpha = 0;
             child.gameObject.SetActive(parameter);
         }
+
         LayoutRebuilder.ForceRebuildLayoutImmediate(memberNameText.rectTransform);
+        yield return null;
+        foreach (Transform child in transform)
+        {
+            var cg = child.GetComponent<CanvasGroup>();
+            if(cg!= null)
+            {
+                Destroy(cg);
+            }
+        }
 
 
     }

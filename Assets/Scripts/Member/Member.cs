@@ -73,7 +73,7 @@ public class Member : MonoBehaviour
                 if(eff is ProtEffect protEff)
                 protection += protEff.protectionValue;
             }
-            int finalDamage = damage - (int)(damage / 100f * protection);
+            int finalDamage = damage - Mathf.RoundToInt(damage / 100f * protection);
             Debug.Log($"{this} got Damaged for {finalDamage} damage,he had {protection}% prot, base damage was {damage}");
             health -= finalDamage;
             VisualEffectManager.Instance.ActionQueue.Enqueue(hpBadge.UpdateHealth); 

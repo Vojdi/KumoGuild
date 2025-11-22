@@ -3,12 +3,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class WindCall : Skill
+public class BehindMe : Skill
 {
     protected override void OnEnable()
     {
         base.OnEnable();
-        SkillName = "Wind Call";
+        SkillName = "Behind me";
         AnimName = "testEff";
         SkillType = "single";
         ReachablePositions = new List<int>();
@@ -20,6 +20,7 @@ public class WindCall : Skill
         Level = 0;
         HasSelfSkill = true;
         SelfOnly = true;
+        IconId = 3;
     }
     public override void SelfUseSkill()
     {

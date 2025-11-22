@@ -17,6 +17,7 @@ public class UnitySkill : Skill
         effectLenghts = new List<List<int>> { new List<int> { 2, 3, 4 }};
         effectValues = new List<List<int>> { new List<int> { 20, 30, 40 }};
         Level = 0;
+        IconId = 5;
     }
     public override void UseSkill(int targetPosition)
     {

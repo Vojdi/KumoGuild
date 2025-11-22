@@ -9,6 +9,7 @@ public class Skill : ScriptableObject
     public List<int> UsableFromPositions;
 
     public int Level;
+    public int IconId;
 
     protected List<List<int>> skillValuesMin;
     protected List<List<int>> skillValuesMax;

@@ -16,6 +16,7 @@ public class Airlock : Skill
         skillValuesMax = new List<List<int>> { new List<int> { 6, 10, 12 } };
         effectLenghts = new List<List<int>> { new List<int> { 1, 1, 2 } };
         Level = 0;
+        IconId = 4;
     }
     public override void UseSkill(int targetPosition)
     {

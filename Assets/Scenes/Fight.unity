@@ -679,6 +679,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprites:
   - {fileID: 21300000, guid: 7258e3ffbe2a8f841a67a2919f6a8769, type: 3}
+  - {fileID: 21300000, guid: e28eed89df1c1e348a920775f89e4979, type: 3}
+  - {fileID: 21300000, guid: 2de67d4ea74c4524890560dd4d203900, type: 3}
+  - {fileID: 21300000, guid: 2b0314d20bee4594cbbfcedfdbd1e9b9, type: 3}
+  - {fileID: 21300000, guid: c123ec496c6c05c4f93aa9506606b3c8, type: 3}
+  - {fileID: 21300000, guid: 9e296a7ff9ef9844ca9f3b560fa29f49, type: 3}
 --- !u!1001 &395812181
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -905,6 +910,7 @@ GameObject:
   - component: {fileID: 595834556}
   - component: {fileID: 595834558}
   - component: {fileID: 595834559}
+  - component: {fileID: 595834560}
   m_Layer: 5
   m_Name: ControlPanel
   m_TagString: Untagged
@@ -1011,6 +1017,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   memberNameText: {fileID: 318824214}
   memberIcon: {fileID: 145607189}
+  skillsParent: {fileID: 684097717}
+--- !u!225 &595834560
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595834554}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,8 +9,8 @@ public class Scattershot : Skill
         ReachablePositions = new List<int> {0, 1 };
         SkillType = "area";
         SelfOnly = false;
-        skillValuesMin = new List<List<int>> { new List<int> { 1, 2, 3 } };
-        skillValuesMax = new List<List<int>> { new List<int> { 3, 5, 6 } };
+        skillValuesMin = new List<List<int>> { new List<int> { 8, 2, 3 } };
+        skillValuesMax = new List<List<int>> { new List<int> { 12, 5, 6 } };
         Level = 0;
     }
     public override void UseSkill(int targetPosition)
