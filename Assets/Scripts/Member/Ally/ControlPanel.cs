@@ -9,13 +9,26 @@ public class ControlPanel : MonoBehaviour
     [SerializeField] TMPro.TMP_Text memberNameText;
     [SerializeField] Image memberIcon;
     [SerializeField] Transform skillsParent;
+    [SerializeField] Transform speedupTransform;
     static ControlPanel instance;
     public static ControlPanel Instance => instance;
     AllyMember memberOnTurn;
     Skill selectedSkill;
+
+    int selectedButtonIndex;
+
+    Color32 normalColor = new Color32(255, 255, 255, 255);
+    Color32 highlightedColor = new Color32(225, 225, 225, 255);
+    Color32 pressedColor = new Color32(200, 200, 200, 255);
+
+    bool spedUp;
+   
+
     private void Awake()
     {
         instance = this;
+        selectedButtonIndex = -1;
+        spedUp = false;
     }
     public void AllyTurn(AllyMember member)
     {
@@ -24,6 +37,17 @@ public class ControlPanel : MonoBehaviour
     }
     public void SkillClicked(int index)
     {
+        if(selectedButtonIndex != index)
+        {
+            ResetButtonColors();
+
+            selectedButtonIndex = index;
+            var btn = skillsParent.GetChild(index).GetComponent<Button>();
+            ColorBlock buttonColors = btn.colors;
+            buttonColors.normalColor = pressedColor;
+            buttonColors.highlightedColor = pressedColor;
+            btn.colors = buttonColors;
+        }
         selectedSkill = memberOnTurn.Skills[index];
         if (selectedSkill.SelfOnly)
         {
@@ -81,7 +105,7 @@ public class ControlPanel : MonoBehaviour
     }
     IEnumerator EnableControls(bool parameter)
     {
-        
+        ResetButtonColors();   
         if (parameter == true)
         {
             memberNameText.text = memberOnTurn.MemberName;
@@ -94,9 +118,11 @@ public class ControlPanel : MonoBehaviour
         }
         foreach (Transform child in transform)
         {
-            CanvasGroup cg = child.gameObject.AddComponent<CanvasGroup>();
-            cg.alpha = 0;
-            child.gameObject.SetActive(parameter);
+            if (child != speedupTransform) {
+                CanvasGroup cg = child.gameObject.AddComponent<CanvasGroup>();
+                cg.alpha = 0;
+                child.gameObject.SetActive(parameter);
+            }
         }
 
         LayoutRebuilder.ForceRebuildLayoutImmediate(memberNameText.rectTransform);
@@ -109,7 +135,49 @@ public class ControlPanel : MonoBehaviour
                 Destroy(cg);
             }
         }
+    }
+    public void SpeedupClicked(Button b)
+    {
+        if (spedUp)
+        {
+            ColorBlock c = b.colors;
+            c.normalColor = normalColor;
+            c.highlightedColor = normalColor;
+            c.pressedColor = pressedColor;
+            b.colors = c;
+            spedUp = false;
+            Time.timeScale = 1;
+            StartCoroutine(SpeedUpButtonHighlightDelay(b, 1.5f));
+        }
+        else
+        {
+            ColorBlock c = b.colors;
+            c.normalColor = pressedColor;
+            c.highlightedColor = pressedColor;
+            c.pressedColor = normalColor;
+            b.colors = c;   
+            spedUp = true;
+            Time.timeScale = 2;
+            StartCoroutine(SpeedUpButtonHighlightDelay(b, 3f));
 
-
+        }
+    }
+    void ResetButtonColors()
+    {
+        foreach (Transform child in skillsParent)
+        {
+            var b = child.GetComponent<Button>();
+            ColorBlock c = b.colors;
+            c.normalColor = normalColor;
+            c.highlightedColor = highlightedColor;
+            b.colors = c;
+        }
+    }
+    IEnumerator SpeedUpButtonHighlightDelay(Button b, float time)
+    {
+        yield return new WaitForSeconds(time);
+        ColorBlock c = b.colors;
+        c.highlightedColor = highlightedColor;
+        b.colors = c; 
     }
 }
