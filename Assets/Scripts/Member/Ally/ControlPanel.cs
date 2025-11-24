@@ -8,6 +8,7 @@ public class ControlPanel : MonoBehaviour
 {
     [SerializeField] TMPro.TMP_Text memberNameText;
     [SerializeField] Image memberIcon;
+    [SerializeField] Sprite[] timeSpeedIcons;
     [SerializeField] Transform skillsParent;
     [SerializeField] Transform speedupTransform;
     static ControlPanel instance;
@@ -109,11 +110,9 @@ public class ControlPanel : MonoBehaviour
         if (parameter == true)
         {
             memberNameText.text = memberOnTurn.MemberName;
-            memberIcon.sprite = ImageManager.Instance.GetSprite(memberOnTurn.IconId);
-
+            SetMemberIcon();
             for (int i = 0; i < memberOnTurn.Skills.Count; i++) {
                 skillsParent.GetChild(i).GetComponent<Image>().sprite = ImageManager.Instance.GetSprite(memberOnTurn.Skills[i].IconId);
-                Debug.Log(skillsParent.GetChild(i).GetComponent<Image>());
             }
         }
         foreach (Transform child in transform)
@@ -136,30 +135,19 @@ public class ControlPanel : MonoBehaviour
             }
         }
     }
-    public void SpeedupClicked(Button b)
+    public void SpeedupClicked(Image i)
     {
         if (spedUp)
         {
-            ColorBlock c = b.colors;
-            c.normalColor = normalColor;
-            c.highlightedColor = normalColor;
-            c.pressedColor = pressedColor;
-            b.colors = c;
+            i.sprite = timeSpeedIcons[0];
             spedUp = false;
             Time.timeScale = 1;
-            StartCoroutine(SpeedUpButtonHighlightDelay(b, 1.5f));
         }
         else
         {
-            ColorBlock c = b.colors;
-            c.normalColor = pressedColor;
-            c.highlightedColor = pressedColor;
-            c.pressedColor = normalColor;
-            b.colors = c;   
+            i.sprite = timeSpeedIcons[1];
             spedUp = true;
             Time.timeScale = 2;
-            StartCoroutine(SpeedUpButtonHighlightDelay(b, 3f));
-
         }
     }
     void ResetButtonColors()
@@ -173,11 +161,14 @@ public class ControlPanel : MonoBehaviour
             b.colors = c;
         }
     }
-    IEnumerator SpeedUpButtonHighlightDelay(Button b, float time)
+    void SetMemberIcon()
     {
-        yield return new WaitForSeconds(time);
-        ColorBlock c = b.colors;
-        c.highlightedColor = highlightedColor;
-        b.colors = c; 
+        var sprite = ImageManager.Instance.GetSprite(memberOnTurn.IconId);
+        var fitter = memberIcon.gameObject.GetComponent<AspectRatioFitter>();
+        float w = sprite.rect.width;
+        float h = sprite.rect.height;
+        float aspect = w / h;
+        fitter.aspectRatio = aspect;
+        memberIcon.sprite = sprite;
     }
 }

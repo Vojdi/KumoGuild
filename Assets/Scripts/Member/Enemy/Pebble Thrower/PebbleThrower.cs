@@ -4,7 +4,7 @@ public class PebbleThrower : EnemyMember
     protected override void Awake()
     {
         memberName = "Basic Enemy";
-        maxHealth = 8;
+        maxHealth = 50;
         speed = 1;
         base.Awake();
         Skills.Add(Skill.Create<FlyingPebble>(this));

@@ -336,6 +336,7 @@ GameObject:
   - component: {fileID: 145607185}
   - component: {fileID: 145607188}
   - component: {fileID: 145607189}
+  - component: {fileID: 145607190}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -359,8 +360,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 185.01001, y: -75}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 48, y: -75}
+  m_SizeDelta: {x: 96, y: 96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &145607188
 CanvasRenderer:
@@ -400,6 +401,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &145607190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145607184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 2
+  m_AspectRatio: 1
 --- !u!1001 &146967890
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -495,7 +510,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 52.505, y: -75}
+  m_AnchoredPosition: {x: 178.505, y: -75}
   m_SizeDelta: {x: 105.01, y: 43.76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &318824213
@@ -678,7 +693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprites:
-  - {fileID: 21300000, guid: 7258e3ffbe2a8f841a67a2919f6a8769, type: 3}
+  - {fileID: 21300000, guid: 62133e234a137464dbb09194011f82ab, type: 3}
   - {fileID: 21300000, guid: e28eed89df1c1e348a920775f89e4979, type: 3}
   - {fileID: 21300000, guid: 2de67d4ea74c4524890560dd4d203900, type: 3}
   - {fileID: 21300000, guid: 2b0314d20bee4594cbbfcedfdbd1e9b9, type: 3}
@@ -1018,6 +1033,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   memberNameText: {fileID: 318824214}
   memberIcon: {fileID: 145607189}
+  timeSpeedIcons:
+  - {fileID: 21300000, guid: ccc063f61336c4f49b644bd5931f5f37, type: 3}
+  - {fileID: 21300000, guid: bd6f0bc8832b9834b86b339c21d7d395, type: 3}
   skillsParent: {fileID: 684097717}
   speedupTransform: {fileID: 1657162968}
 --- !u!225 &595834560
@@ -2600,7 +2618,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 270.01, y: -75}
+  m_AnchoredPosition: {x: 266.01, y: -75}
   m_SizeDelta: {x: 10, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1617598958
@@ -2729,8 +2747,8 @@ MonoBehaviour:
         m_MethodName: SpeedupClicked
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1657162969}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_ObjectArgument: {fileID: 1657162971}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2776,7 +2794,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bd6f0bc8832b9834b86b339c21d7d395, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ccc063f61336c4f49b644bd5931f5f37, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2824,15 +2842,15 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 318824212}
   - {fileID: 145607185}
+  - {fileID: 318824212}
   - {fileID: 1617598957}
   m_Father: {fileID: 595834555}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 187.505, y: -100}
-  m_SizeDelta: {x: 275.01, y: 150}
+  m_AnchoredPosition: {x: 185.505, y: -100}
+  m_SizeDelta: {x: 271.01, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1746373419
 MonoBehaviour:
