@@ -11,6 +11,8 @@ public class ControlPanel : MonoBehaviour
     [SerializeField] Sprite[] timeSpeedIcons;
     [SerializeField] Transform skillsParent;
     [SerializeField] Transform speedupTransform;
+    [SerializeField] RectTransform infoPanelRectTransform;
+    [SerializeField] Canvas canvas;
     static ControlPanel instance;
     public static ControlPanel Instance => instance;
     AllyMember memberOnTurn;
@@ -23,7 +25,7 @@ public class ControlPanel : MonoBehaviour
     Color32 pressedColor = new Color32(200, 200, 200, 255);
 
     bool spedUp;
-   
+
 
     private void Awake()
     {
@@ -38,23 +40,27 @@ public class ControlPanel : MonoBehaviour
     }
     public void SkillClicked(int index)
     {
-        if(selectedButtonIndex != index)
+        if (selectedButtonIndex != index)
         {
             ResetButtonColors();
 
             selectedButtonIndex = index;
             var btn = skillsParent.GetChild(index).GetComponent<Button>();
+
+            infoPanelRectTransform.position = btn.transform.position + new Vector3(0, 150f * canvas.scaleFactor);
+
             ColorBlock buttonColors = btn.colors;
             buttonColors.normalColor = pressedColor;
             buttonColors.highlightedColor = pressedColor;
             btn.colors = buttonColors;
         }
+
         selectedSkill = memberOnTurn.Skills[index];
         if (selectedSkill.SelfOnly)
         {
             foreach (Member m in GameManager.Instance.Members)
             {
-                if (selectedSkill.SelfMember.Position ==  m.Position)
+                if (selectedSkill.SelfMember.Position == m.Position)
                 {
                     m.Targetable = true;
                 }
@@ -89,6 +95,7 @@ public class ControlPanel : MonoBehaviour
         }
         VisualEffectManager.Instance.TargetArrows();
     }
+
     public void SkillPositionSelected(int pos)
     {
         Debug.Log($"{memberOnTurn} used {selectedSkill.SkillName}");//////
@@ -106,18 +113,20 @@ public class ControlPanel : MonoBehaviour
     }
     IEnumerator EnableControls(bool parameter)
     {
-        ResetButtonColors();   
+        ResetButtonColors();
         if (parameter == true)
         {
             memberNameText.text = memberOnTurn.MemberName;
             SetMemberIcon();
-            for (int i = 0; i < memberOnTurn.Skills.Count; i++) {
+            for (int i = 0; i < memberOnTurn.Skills.Count; i++)
+            {
                 skillsParent.GetChild(i).GetComponent<Image>().sprite = ImageManager.Instance.GetSprite(memberOnTurn.Skills[i].IconId);
             }
         }
         foreach (Transform child in transform)
         {
-            if (child != speedupTransform) {
+            if (child != speedupTransform)
+            {
                 CanvasGroup cg = child.gameObject.AddComponent<CanvasGroup>();
                 cg.alpha = 0;
                 child.gameObject.SetActive(parameter);
@@ -129,7 +138,7 @@ public class ControlPanel : MonoBehaviour
         foreach (Transform child in transform)
         {
             var cg = child.GetComponent<CanvasGroup>();
-            if(cg!= null)
+            if (cg != null)
             {
                 Destroy(cg);
             }
