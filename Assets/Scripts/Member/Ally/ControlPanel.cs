@@ -43,11 +43,8 @@ public class ControlPanel : MonoBehaviour
         if (selectedButtonIndex != index)
         {
             ResetButtonColors();
-
             selectedButtonIndex = index;
             var btn = skillsParent.GetChild(index).GetComponent<Button>();
-
-            infoPanelRectTransform.position = btn.transform.position + new Vector3(0, 150f * canvas.scaleFactor);
 
             ColorBlock buttonColors = btn.colors;
             buttonColors.normalColor = pressedColor;
@@ -95,7 +92,16 @@ public class ControlPanel : MonoBehaviour
         }
         VisualEffectManager.Instance.TargetArrows();
     }
-
+    public void SkillHoveredOver(int index)
+    {
+        var btn = skillsParent.GetChild(index).GetComponent<Button>();
+        infoPanelRectTransform.gameObject.SetActive(true);
+        infoPanelRectTransform.position = btn.transform.position + new Vector3(0, 100f * canvas.scaleFactor);
+    }
+    public void SkillHoveredOut()
+    {
+        infoPanelRectTransform.gameObject.SetActive(false);
+    }
     public void SkillPositionSelected(int pos)
     {
         Debug.Log($"{memberOnTurn} used {selectedSkill.SkillName}");//////
