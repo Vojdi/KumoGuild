@@ -47,7 +47,7 @@ public class VisualEffectManager : MonoBehaviour
             skillUsedTextGameObject.GetComponent<Animator>().Play("allyUsedSkill", 0, 0);
         }
 
-        if (skill.SkillType == "area")
+        if (skill.SkillRangeType == "multi")
         {
             foreach (Member m in GameManager.Instance.Members)
             {
@@ -88,7 +88,6 @@ public class VisualEffectManager : MonoBehaviour
     void Lightened()
     {
         attackingSkill.UseSkill(attackingPos);
-        attackingSkill.SelfUseSkill();
         ActionQueue.Enqueue(GameManager.Instance.NextTurn);
         ActionQueue.Dequeue()?.Invoke();
     }

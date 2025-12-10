@@ -1,17 +1,11 @@
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class DoTEffect : Effect
 {
-    int damageOverTime;
-    public DoTEffect(int roundsLasts, int damageOverTime) : base(roundsLasts)
-    {
-        this.damageOverTime = damageOverTime;
-    }
-   
+    public DoTEffect(int roundsLasts, int effectValue) : base(roundsLasts, effectValue) { }
     public override void EffectAbsorbed()
     {
-        member.Damage(damageOverTime,true);
+        member.Damage(effectValue,true);
         base.EffectAbsorbed();
     }
     public override void EffectDied()
@@ -25,12 +19,16 @@ public class DoTEffect : Effect
             if(eff is DoTEffect dotEff)
             if (roundsLasts == dotEff.roundsLasts)
             {
-                dotEff.damageOverTime += damageOverTime;
+                dotEff.effectValue +=  effectValue;
                 Debug.Log($"{m}'s DoT got stacked");
                 return;
             }       
         }
         Debug.Log($"{m} got DoT");
         base.Attach(m);
+    }
+    public override string InfoBoxSyntax(int rounds, int value)
+    {
+        return $"dot - {value} / {rounds}t";
     }
 }

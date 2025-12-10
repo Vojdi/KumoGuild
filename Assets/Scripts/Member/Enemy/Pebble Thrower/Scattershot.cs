@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 public class Scattershot : Skill
 {
@@ -6,19 +7,20 @@ public class Scattershot : Skill
         base.OnEnable();
         SkillName = "Scattershot";
         AnimName = "testEff";
+        SkillRangeType = "multi";
+
         ReachablePositions = new List<int> {0, 1 };
-        SkillType = "area";
+       
         SelfOnly = false;
+        HasSelfSkill = false;
+
         skillValuesMin = new List<List<int>> { new List<int> { 8, 2, 3 } };
         skillValuesMax = new List<List<int>> { new List<int> { 12, 5, 6 } };
+        skillValuesSelf = new List<bool> { false };
+
+        effectTypes = new List<Type>();
+        effectValuesSelf = new List<bool>();
+
         Level = 0;
-    }
-    public override void UseSkill(int targetPosition)
-    {
-        base.UseSkill(targetPosition);  
-        foreach (var targetMember in targetMembers)
-        {
-            targetMember.Damage(skillValues[0], false);
-        }
     }
 }

@@ -75,7 +75,7 @@ public class EnemyMember : Member
                 return false;
             }
         }
-        if (skill.SkillType == "single")
+        if (skill.SkillRangeType == "single")
         {
             foreach (Member m in GameManager.Instance.Members)
             {
@@ -86,7 +86,7 @@ public class EnemyMember : Member
             }
             return false;
         }
-        else if (skill.SkillType == "area")
+        else if (skill.SkillRangeType == "multi")
         {
             List<int> memberPositions = new List<int>();
             foreach (Member m in GameManager.Instance.Members)

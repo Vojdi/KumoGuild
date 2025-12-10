@@ -1,6 +1,8 @@
 
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,10 +15,18 @@ public class ControlPanel : MonoBehaviour
     [SerializeField] Transform speedupTransform;
     [SerializeField] RectTransform infoPanelRectTransform;
     [SerializeField] Canvas canvas;
+
+    [SerializeField] TMPro.TMP_Text infoBoxName;
+    [SerializeField] TMPro.TMP_Text infoBoxSkillType;
+    [SerializeField] List<GameObject> infoBoxPositionPanels;
+    [SerializeField] List<TMPro.TMP_Text> infoBoxStatTexts;
+
+
     static ControlPanel instance;
     public static ControlPanel Instance => instance;
     AllyMember memberOnTurn;
     Skill selectedSkill;
+    Skill hoveredOverSkill;
 
     int selectedButtonIndex;
 
@@ -42,15 +52,15 @@ public class ControlPanel : MonoBehaviour
     {
         if (selectedButtonIndex != index)
         {
-            ResetButtonColors();
             selectedButtonIndex = index;
-            var btn = skillsParent.GetChild(index).GetComponent<Button>();
-
-            ColorBlock buttonColors = btn.colors;
-            buttonColors.normalColor = pressedColor;
-            buttonColors.highlightedColor = pressedColor;
-            btn.colors = buttonColors;
         }
+        foreach (Transform o in skillsParent)
+        {
+            Color32 c1 = o.gameObject.GetComponent<Image>().color;
+            o.gameObject.GetComponent<Image>().color = new Color32(c1.r, c1.g, c1.b, 0);
+        }
+        Color32 c = skillsParent.GetChild(index).GetComponent<Image>().color;
+        skillsParent.GetChild(index).GetComponent<Image>().color = new Color32(c.r,c.g, c.b, 255);
 
         selectedSkill = memberOnTurn.Skills[index];
         if (selectedSkill.SelfOnly)
@@ -94,9 +104,62 @@ public class ControlPanel : MonoBehaviour
     }
     public void SkillHoveredOver(int index)
     {
-        var btn = skillsParent.GetChild(index).GetComponent<Button>();
+        hoveredOverSkill = memberOnTurn.Skills[index];
+        InfoBoxSetup();
+
+        var btn = skillsParent.GetChild(index);
         infoPanelRectTransform.gameObject.SetActive(true);
         infoPanelRectTransform.position = btn.transform.position + new Vector3(0, 100f * canvas.scaleFactor);
+    }
+    void InfoBoxSetup()
+    {
+        infoBoxName.text = Skill.GetInfoForInfoBox(hoveredOverSkill, "name")[0];
+
+        List<string> arr = Skill.GetInfoForInfoBox(hoveredOverSkill, "skillType");
+        infoBoxSkillType.text = $"{arr[0]}/{arr[1]}";
+        if (arr[0] == "attack")
+        {
+            infoBoxSkillType.color = new Color32(255,9,71,255);
+        }
+        else
+        {
+            infoBoxSkillType.color = new Color32(0,255,128,255);
+        }
+
+        arr = Skill.GetInfoForInfoBox(hoveredOverSkill, "positions");
+        if (arr[0] == "self")
+        {
+            foreach (var panel in infoBoxPositionPanels)
+            {
+                panel.gameObject.SetActive(true);
+            }
+            infoBoxPositionPanels[memberOnTurn.Position].SetActive(false);
+        }
+        else
+        {
+            for (int i = 0; i < infoBoxPositionPanels.Count; i++) 
+            {
+                if (arr[i] == "true")
+                {
+                    infoBoxPositionPanels[i].gameObject.SetActive(false);
+                }
+                else
+                {
+                    infoBoxPositionPanels[i].gameObject.SetActive(true);
+                }
+            }
+        }
+
+        arr = Skill.GetInfoForInfoBox(hoveredOverSkill, "stats");
+        foreach (var statText in infoBoxStatTexts)
+        {
+            statText.gameObject.SetActive(false);
+        }
+        for(int i = 0;i < arr.Count; i++)
+        {
+            infoBoxStatTexts[i].text = arr[i];
+            infoBoxStatTexts[i].gameObject.SetActive(true);
+        }
     }
     public void SkillHoveredOut()
     {
@@ -119,14 +182,13 @@ public class ControlPanel : MonoBehaviour
     }
     IEnumerator EnableControls(bool parameter)
     {
-        ResetButtonColors();
         if (parameter == true)
         {
             memberNameText.text = memberOnTurn.MemberName;
             SetMemberIcon();
             for (int i = 0; i < memberOnTurn.Skills.Count; i++)
             {
-                skillsParent.GetChild(i).GetComponent<Image>().sprite = ImageManager.Instance.GetSprite(memberOnTurn.Skills[i].IconId);
+                skillsParent.GetChild(i).GetChild(0).GetComponent<Image>().sprite = ImageManager.Instance.GetSprite(memberOnTurn.Skills[i].IconId);
             }
         }
         foreach (Transform child in transform)

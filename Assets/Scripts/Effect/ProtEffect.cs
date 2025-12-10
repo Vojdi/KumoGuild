@@ -3,11 +3,8 @@ using UnityEngine;
 
 public class ProtEffect : Effect
 {
-    public int protectionValue;
-    public ProtEffect(int roundsLasts, int protectionValue) : base(roundsLasts)
-    {
-        this.protectionValue = protectionValue;
-    }
+    public ProtEffect(int roundsLasts, int effectValue): base(roundsLasts, effectValue) { }
+
     public override void EffectDied()
     {
         Debug.Log($"{member} is no longer Affected by this Prot");
@@ -19,7 +16,7 @@ public class ProtEffect : Effect
         {
             if (eff is ProtEffect protEff)
             {
-                if (protectionValue == protEff.protectionValue)
+                if (effectValue == protEff.EffectValue)
                 {
                     protEff.roundsLasts += roundsLasts;
                     Debug.Log($"{m}'s prot got prolonged (effect stacking)");
@@ -29,5 +26,9 @@ public class ProtEffect : Effect
         }
         Debug.Log($"{m} got prot");
         base.Attach(m);
+    }
+    public override string InfoBoxSyntax(int rounds, int value)
+    {
+        return $"prot - {value}% / {rounds}t";
     }
 }

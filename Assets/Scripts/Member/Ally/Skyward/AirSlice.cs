@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class AirSlice : Skill
 {
@@ -8,22 +9,23 @@ public class AirSlice : Skill
         base.OnEnable();
         SkillName = "Air Slice";
         AnimName = "slash";
+        SkillRangeType = "single";
+        skillType = "attack";
+
         ReachablePositions = new List<int> { 3, 4,};
         UsableFromPositions = new List<int> {1, 2 };
-        SkillType = "single";
+       
         SelfOnly = false;
+        HasSelfSkill = false;
+        
         skillValuesMin = new List<List<int>> { new List<int> { 8, 11, 14 } };
         skillValuesMax = new List<List<int>> { new List<int> { 15, 17, 20 } };
-        effectLenghts = new List<List<int>> { new List<int> { 0, 0, 0 } };
-        effectValues = new List<List<int>> { new List<int> { 0, 0, 0 } };
+        skillValuesSelf = new List<bool> { false };
+
+        effectTypes = new List<Type>();
+        effectValuesSelf = new List<bool>();
+
         Level = 0;
         IconId = 1;
-    }
-    public override void UseSkill(int targetPosition)
-    {
-        base.UseSkill(targetPosition);
-        foreach (Member targetMember in targetMembers) {
-            targetMember.Damage(skillValues[0], false);
-        }
     }
 }

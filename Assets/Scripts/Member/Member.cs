@@ -71,7 +71,7 @@ public class Member : MonoBehaviour
             int protection = 0;
             foreach (Effect eff in Effects) {
                 if(eff is ProtEffect protEff)
-                protection += protEff.protectionValue;
+                protection += protEff.EffectValue;
             }
             int finalDamage = damage - Mathf.RoundToInt(damage / 100f * protection);
             Debug.Log($"{this} got Damaged for {finalDamage} damage,he had {protection}% prot, base damage was {damage}");

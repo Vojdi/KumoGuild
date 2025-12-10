@@ -2,10 +2,13 @@ public class Effect
 {
     protected Member member;
     protected int roundsLasts;
+    protected int effectValue;
     public int RoundsLast => roundsLasts;
-    protected Effect(int roundsLasts)
+    public int EffectValue => effectValue;  
+    public Effect(int roundsLasts, int effectValue)
     {
         this.roundsLasts = roundsLasts;
+        this.effectValue = effectValue;
     }
     public virtual void EffectAbsorbed()
     {
@@ -23,5 +26,9 @@ public class Effect
     {
         member = m;
         member.Effects.Add(this);
+    }
+    public virtual string InfoBoxSyntax(int rounds, int value)
+    {
+        return null;
     }
 }

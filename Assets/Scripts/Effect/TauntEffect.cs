@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TauntEffect : Effect
 {
-    public TauntEffect(int roundsLasts) : base(roundsLasts) { }
+    public TauntEffect(int roundsLasts, int effectValue) : base(roundsLasts, effectValue) { }
     public override void Attach(Member m)
     {
         foreach (var me in GameManager.Instance.Members)
@@ -24,5 +24,9 @@ public class TauntEffect : Effect
     {
         Debug.Log($"{member} does no longer taunt the opposite team");
         base.EffectDied();
+    }
+    public override string InfoBoxSyntax(int rounds, int value)
+    {
+        return $"taunt - {rounds}t";
     }
 }

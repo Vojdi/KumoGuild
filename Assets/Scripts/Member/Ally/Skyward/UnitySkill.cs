@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,24 +9,25 @@ public class UnitySkill : Skill
         base.OnEnable();
         SkillName = "Unity";
         AnimName = "testEff";
+        SkillRangeType = "multi";
+        skillType = "support";
+
         ReachablePositions = new List<int> { 0,1,2 };
         UsableFromPositions = new List<int> { 0,1,2 };
-        SkillType = "area";
+        
         SelfOnly = false;
-        skillValuesMin = new List<List<int>> { new List<int> { 0, 0, 0 } };
-        skillValuesMax = new List<List<int>> { new List<int> { 0, 0, 0 } };
-        effectLenghts = new List<List<int>> { new List<int> { 2, 3, 4 }};
-        effectValues = new List<List<int>> { new List<int> { 20, 30, 40 }};
+        HasSelfSkill = false;
+
+        skillValuesMin = new List<List<int>>();
+        skillValuesMax = new List<List<int>>();
+        skillValuesSelf = new List<bool>();
+
+        effectLengths = new List<List<int>> { new List<int> { 2, 3, 4 }};
+        effectValues = new List<List<int>> { new List<int> { 35, 50, 65 }};
+        effectTypes = new List<Type> { typeof(ProtEffect)};
+        effectValuesSelf = new List<bool> {false };
+        
         Level = 0;
         IconId = 5;
-    }
-    public override void UseSkill(int targetPosition)
-    {
-        base.UseSkill(targetPosition);
-        foreach (var targetMember in targetMembers)
-        {
-            Effect protEff = new ProtEffect(effectLenghts[0][Level], effectValues[0][Level]);
-            protEff.Attach(targetMember);
-        }
     }
 }
