@@ -102,14 +102,18 @@ public class ControlPanel : MonoBehaviour
         }
         VisualEffectManager.Instance.TargetArrows();
     }
-    public void SkillHoveredOver(int index)
+    public IEnumerator SkillHoveredOver(int index)
     {
         hoveredOverSkill = memberOnTurn.Skills[index];
         InfoBoxSetup();
-
         var btn = skillsParent.GetChild(index);
+        var cg = infoPanelRectTransform.gameObject.AddComponent<CanvasGroup>();
+        cg.alpha = 0;
         infoPanelRectTransform.gameObject.SetActive(true);
         infoPanelRectTransform.position = btn.transform.position + new Vector3(0, 100f * canvas.scaleFactor);
+        yield return null;
+        Destroy(cg);
+        
     }
     void InfoBoxSetup()
     {

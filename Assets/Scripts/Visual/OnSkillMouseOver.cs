@@ -19,6 +19,6 @@ public class OnSkillMouseOver : MonoBehaviour, IPointerEnterHandler, IPointerExi
     IEnumerator HoldMouseOver()
     {
         yield return new WaitForSeconds(0.6f * Time.timeScale);
-        ControlPanel.Instance.SkillHoveredOver(buttonId);
+        StartCoroutine(ControlPanel.Instance.SkillHoveredOver(buttonId));
     }
 }
