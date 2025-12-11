@@ -30,9 +30,6 @@ public class ControlPanel : MonoBehaviour
 
     int selectedButtonIndex;
 
-    Color32 normalColor = new Color32(255, 255, 255, 255);
-    Color32 highlightedColor = new Color32(225, 225, 225, 255);
-    Color32 pressedColor = new Color32(200, 200, 200, 255);
 
     bool spedUp;
 
@@ -54,13 +51,9 @@ public class ControlPanel : MonoBehaviour
         {
             selectedButtonIndex = index;
         }
-        foreach (Transform o in skillsParent)
-        {
-            Color32 c1 = o.gameObject.GetComponent<Image>().color;
-            o.gameObject.GetComponent<Image>().color = new Color32(c1.r, c1.g, c1.b, 0);
-        }
+        ResetSkillBorder();
         Color32 c = skillsParent.GetChild(index).GetComponent<Image>().color;
-        skillsParent.GetChild(index).GetComponent<Image>().color = new Color32(c.r,c.g, c.b, 255);
+        skillsParent.GetChild(index).GetComponent<Image>().color = new Color32(c.r, c.g, c.b, 255);
 
         selectedSkill = memberOnTurn.Skills[index];
         if (selectedSkill.SelfOnly)
@@ -102,6 +95,16 @@ public class ControlPanel : MonoBehaviour
         }
         VisualEffectManager.Instance.TargetArrows();
     }
+
+    private void ResetSkillBorder()
+    {
+        foreach (Transform o in skillsParent)
+        {
+            Color32 c1 = o.gameObject.GetComponent<Image>().color;
+            o.gameObject.GetComponent<Image>().color = new Color32(c1.r, c1.g, c1.b, 0);
+        }
+    }
+
     public IEnumerator SkillHoveredOver(int index)
     {
         hoveredOverSkill = memberOnTurn.Skills[index];
@@ -186,6 +189,7 @@ public class ControlPanel : MonoBehaviour
     }
     IEnumerator EnableControls(bool parameter)
     {
+        ResetSkillBorder();
         if (parameter == true)
         {
             memberNameText.text = memberOnTurn.MemberName;
@@ -229,17 +233,6 @@ public class ControlPanel : MonoBehaviour
             i.sprite = timeSpeedIcons[1];
             spedUp = true;
             Time.timeScale = 2;
-        }
-    }
-    void ResetButtonColors()
-    {
-        foreach (Transform child in skillsParent)
-        {
-            var b = child.GetComponent<Button>();
-            ColorBlock c = b.colors;
-            c.normalColor = normalColor;
-            c.highlightedColor = highlightedColor;
-            b.colors = c;
         }
     }
     void SetMemberIcon()

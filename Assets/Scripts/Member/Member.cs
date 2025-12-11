@@ -25,6 +25,7 @@ public class Member : MonoBehaviour
     [HideInInspector] public Animator TargetedIndicatorAnimator;
     [HideInInspector] public Animator TargetedArrowAnimator;
     protected HpBadge hpBadge;
+    SpriteRenderer highlightPanel;
     protected virtual void Awake()
     {
         Skills = new List<Skill>();
@@ -39,6 +40,7 @@ public class Member : MonoBehaviour
     private void Start()
     {
         hpBadge.Init(this);
+        highlightPanel = transform.Find("Highlight").GetComponent<SpriteRenderer>();
     }
     public virtual void YourTurn()
     {
@@ -99,6 +101,21 @@ public class Member : MonoBehaviour
         if (Targetable)
         {
             ControlPanel.Instance.SkillPositionSelected(Position);
+            Color32 c = highlightPanel.color;
+            highlightPanel.color = new Color32(c.r, c.g, c.b, 0);
         }
+    }
+    private void OnMouseEnter()
+    {
+        if (Targetable) {
+            Color32 c = highlightPanel.color;
+            highlightPanel.color = new Color32(c.r, c.g, c.b, 15);
+        }
+       
+    }
+    private void OnMouseExit()
+    {
+        Color32 c = highlightPanel.color;
+        highlightPanel.color = new Color32(c.r, c.g, c.b, 0);
     }
 }
