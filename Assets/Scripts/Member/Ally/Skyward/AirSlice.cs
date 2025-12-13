@@ -8,7 +8,7 @@ public class AirSlice : Skill
     {
         base.OnEnable();
         SkillName = "Air Slice";
-        AnimName = "slash";
+        AnimName = "airslice";
         SkillRangeType = "single";
         skillType = "attack";
 

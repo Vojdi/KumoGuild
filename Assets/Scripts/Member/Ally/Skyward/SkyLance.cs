@@ -7,7 +7,7 @@ public class SkyLance : Skill
     {
         base.OnEnable();
         SkillName = "Sky Lance";
-        AnimName = "skyjavelin";
+        AnimName = "skylance";
         SkillRangeType = "multi";
         skillType = "attack";
 
