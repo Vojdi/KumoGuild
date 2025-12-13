@@ -9,7 +9,7 @@ public class Airlock : Skill
     {
         base.OnEnable();
         SkillName = "Airlock";
-        AnimName = "testEff";
+        AnimName = "airlock";
         SkillRangeType = "single";
         skillType = "attack";
 

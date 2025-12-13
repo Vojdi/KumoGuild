@@ -6,7 +6,7 @@ public class BehindMe : Skill
     {
         base.OnEnable();
         SkillName = "Behind Me!";
-        AnimName = "testEff";
+        AnimName = "behindme";
         SkillRangeType = "single";
         skillType = "support";
 

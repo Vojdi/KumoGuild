@@ -13,6 +13,5 @@ public class Skyward : AllyMember
         Skills.Add(Skill.Create<SkyLance>(this));
         Skills.Add(Skill.Create<BehindMe>(this));
         Skills.Add(Skill.Create<Airlock>(this));
-        Skills.Add(Skill.Create<UnitySkill>(this));
     }
 }
