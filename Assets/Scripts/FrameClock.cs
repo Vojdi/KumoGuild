@@ -6,17 +6,25 @@ public class FrameClock : MonoBehaviour
 {
     static FrameClock instance;
     public static FrameClock Instance => instance;
-    public Action AnimationAction;
+    public List<Action> AnimationActions;
+    List<Action> animationsToRemove;
     private void Awake()
     {
-        AnimationAction = null;
+        instance = this;
+        AnimationActions = new List<Action>();
+        animationsToRemove = new List<Action>();
     }
     void Tick()
     {
-        if (AnimationAction != null)
-        {
-            AnimationAction.Invoke();
-            AnimationAction = null;
+        foreach (var action in AnimationActions)
+        {   
+                action.Invoke();
+                animationsToRemove.Add(action);
         }
+        foreach (var action in animationsToRemove)
+        {
+            AnimationActions.Remove(action); 
+        }
+        animationsToRemove.Clear();
     }
 }

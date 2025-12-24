@@ -74,10 +74,10 @@ public class VisualEffectManager : MonoBehaviour
     }
     public void SkillAnncounced()
     {
-        memberOnTurn.TurnIndicatorAnimator.Play("disappear");
+        FrameClock.Instance.AnimationActions.Add(() =>memberOnTurn.TurnIndicatorAnimator.Play("disappear"));
         foreach(Member m in targetMembers)
         {
-            m.TargetedIndicatorAnimator.Play("disappear");
+            FrameClock.Instance.AnimationActions.Add(() => m.TargetedIndicatorAnimator.Play("disappear"));
         }   
         darkenOverlayAnimator.Play("darken", 0, 0);
     }
@@ -118,12 +118,12 @@ public class VisualEffectManager : MonoBehaviour
 
         foreach (var m in currentTargetables.Except(prevTargetables))
         {
-            m.TargetedArrowAnimator.Play("targetArrowAppear",0,0);
+            FrameClock.Instance.AnimationActions.Add(() => m.TargetedArrowAnimator.Play("targetArrowAppear", 0, 0));
         }
           
         foreach (var m in prevTargetables.Except(currentTargetables))
         {
-            m.TargetedArrowAnimator.Play("targetArrowDisappear",0,0);
+            FrameClock.Instance.AnimationActions.Add(() => m.TargetedArrowAnimator.Play("targetArrowDisappear", 0, 0));
         }
 
         prevTargetables = currentTargetables;

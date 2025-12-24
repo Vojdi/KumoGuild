@@ -13,7 +13,7 @@ public class TargetIndicatorStates : MonoBehaviour
         childSprite.color = new Color32(255, 255, 255, 255);
         thisSprite.color = new Color32(255, 255, 255, 0);
     }
-    void StartedToDissapear()
+    void StartedToDisappear()
     {
         thisSprite.color = new Color32(255, 255, 255, 255);
         childSprite.color = new Color32(255, 255, 255, 0);
