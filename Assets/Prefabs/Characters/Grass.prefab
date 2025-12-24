@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3952367630704717548}
-  - component: {fileID: 2472923175010304638}
   - component: {fileID: 8105134104049936171}
   - component: {fileID: 8504958914991559262}
   - component: {fileID: 4921212268286442086}
+  - component: {fileID: 7095469199169781363}
   m_Layer: 0
   m_Name: Grass
   m_TagString: Untagged
@@ -40,24 +40,6 @@ Transform:
   - {fileID: 1685320152036155189}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2472923175010304638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4129316596348512792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2adffa6f871cb534dbf92e0c003c6644, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Position: 0
-  Skills: []
-  Targetable: 0
-  TurnIndicatorAnimator: {fileID: 0}
-  TargetedIndicatorAnimator: {fileID: 0}
-  TargetedArrowAnimator: {fileID: 0}
 --- !u!61 &8105134104049936171
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -181,6 +163,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7095469199169781363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4129316596348512792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c80bae9281c696449fde18b33694480, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: 0
+  Skills: []
+  Targetable: 0
+  TurnIndicatorAnimator: {fileID: 0}
+  TargetedIndicatorAnimator: {fileID: 0}
+  TargetedArrowAnimator: {fileID: 0}
 --- !u!1001 &308671730379345976
 PrefabInstance:
   m_ObjectHideFlags: 0
