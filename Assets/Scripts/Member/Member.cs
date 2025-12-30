@@ -57,7 +57,19 @@ public class Member : MonoBehaviour
     }
     public void Damage(int damage, bool protectionBypass)
     {
-        if (protectionBypass)
+        if(damage < 0)
+        {
+            if (health - damage > maxHealth)
+            {
+                health = maxHealth;
+            }
+            else
+            {
+                health -= damage;
+            }
+            VisualEffectManager.Instance.ActionQueue.Enqueue(hpBadge.UpdateHealth);
+        }
+        else if (protectionBypass)
         {
             Debug.Log($"{this} got Damaged by DoT for {damage} damage");
             health -= damage;
@@ -71,14 +83,15 @@ public class Member : MonoBehaviour
         else
         {
             int protection = 0;
-            foreach (Effect eff in Effects) {
-                if(eff is ProtEffect protEff)
-                protection += protEff.EffectValue;
+            foreach (Effect eff in Effects)
+            {
+                if (eff is ProtEffect protEff)
+                    protection += protEff.EffectValue;
             }
             int finalDamage = damage - Mathf.RoundToInt(damage / 100f * protection);
             Debug.Log($"{this} got Damaged for {finalDamage} damage,he had {protection}% prot, base damage was {damage}");
             health -= finalDamage;
-            VisualEffectManager.Instance.ActionQueue.Enqueue(hpBadge.UpdateHealth); 
+            VisualEffectManager.Instance.ActionQueue.Enqueue(hpBadge.UpdateHealth);
             if (health <= 0)
             {
                 Debug.Log($"{this} died");
