@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
         {
             membersTurnOrder.Remove(member);
         }
-        member.GetComponent<SpriteRenderer>().color = Color.black;
+        member.Die();
         CheckForBattleEnd();
     }
     void CheckForBattleEnd()

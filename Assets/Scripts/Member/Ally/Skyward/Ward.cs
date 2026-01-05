@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class Skyward : AllyMember
+public class Ward : AllyMember
 {
     protected override void Awake()
     {
-        memberName = "Skyward";
+        memberName = "Ward";
         maxHealth = 35;
         speed = 3;
         IconId = 0;

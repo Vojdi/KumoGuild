@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3114811332149822748}
   - component: {fileID: 5854819355907412210}
   m_Layer: 0
-  m_Name: Skyward
+  m_Name: Ward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

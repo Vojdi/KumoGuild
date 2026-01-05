@@ -1,6 +1,7 @@
-using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
+using UnityEngine;
 
 public class Member : MonoBehaviour
 {
@@ -73,7 +74,10 @@ public class Member : MonoBehaviour
         {
             Debug.Log($"{this} got Damaged by DoT for {damage} damage");
             health -= damage;
-            VisualEffectManager.Instance.ActionQueue.Enqueue(hpBadge.UpdateHealth);
+            if(health > 0)
+            {
+                VisualEffectManager.Instance.ActionQueue.Enqueue(hpBadge.UpdateHealth);
+            }
             if (health <= 0)
             {
                 Debug.Log($"{this} died");
@@ -91,7 +95,11 @@ public class Member : MonoBehaviour
             int finalDamage = damage - Mathf.RoundToInt(damage / 100f * protection);
             Debug.Log($"{this} got Damaged for {finalDamage} damage,he had {protection}% prot, base damage was {damage}");
             health -= finalDamage;
-            VisualEffectManager.Instance.ActionQueue.Enqueue(hpBadge.UpdateHealth);
+            if(health > 0)
+            {
+                VisualEffectManager.Instance.ActionQueue.Enqueue(hpBadge.UpdateHealth);
+            }
+            
             if (health <= 0)
             {
                 Debug.Log($"{this} died");
@@ -130,5 +138,11 @@ public class Member : MonoBehaviour
     {
         Color32 c = highlightPanel.color;
         highlightPanel.color = new Color32(c.r, c.g, c.b, 0);
+    }
+    public void Die()
+    {
+        Destroy(hpBadge.transform.parent.gameObject);
+        Destroy(GetComponent<Animator>()); 
+        GetComponent<SpriteRenderer>().sprite = ImageManager.Instance.GetSprite(10);
     }
 }
