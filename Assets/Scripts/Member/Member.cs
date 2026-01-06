@@ -92,6 +92,10 @@ public class Member : MonoBehaviour
                 if (eff is ProtEffect protEff)
                     protection += protEff.EffectValue;
             }
+            if(protection > 100)
+            {
+                protection = 100;
+            }
             int finalDamage = damage - Mathf.RoundToInt(damage / 100f * protection);
             Debug.Log($"{this} got Damaged for {finalDamage} damage,he had {protection}% prot, base damage was {damage}");
             health -= finalDamage;
@@ -109,12 +113,21 @@ public class Member : MonoBehaviour
     }
     public void EffectsTime()
     {
+        int dotVal = 0;
         foreach (var effect in Effects.ToList())
         {
+            if(effect is DoTEffect)
+            {
+                dotVal += effect.EffectValue;
+            }
             if(!(effect is StunEffect))
             {
                 effect.EffectAbsorbed();
             }
+        }
+        if(dotVal > 0)
+        {
+            Damage(dotVal, true);
         }
     }
     private void OnMouseDown()

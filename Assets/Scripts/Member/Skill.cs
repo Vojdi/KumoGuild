@@ -5,6 +5,9 @@ using System.Linq;
 
 public class Skill : ScriptableObject
 {
+    public int InstanceId;
+    public static int LastInstanceId;
+
     public List<int> ReachablePositions;
     public List<int> UsableFromPositions;
 
@@ -118,6 +121,8 @@ public class Skill : ScriptableObject
     {
         T skill = ScriptableObject.CreateInstance<T>();
         skill.SelfMember = sMember;
+        skill.InstanceId = LastInstanceId++;
+        Debug.Log("skill created, instance id: " +  skill.InstanceId);
         return skill;
     }
 

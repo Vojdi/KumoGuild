@@ -3,11 +3,6 @@ using UnityEngine;
 public class DoTEffect : Effect
 {
     public DoTEffect(int roundsLasts, int effectValue) : base(roundsLasts, effectValue) { }
-    public override void EffectAbsorbed()
-    {
-        member.Damage(effectValue,true);
-        base.EffectAbsorbed();
-    }
     public override void EffectDied()
     {
         Debug.Log($"{member} is no longer affected by this DoT");
