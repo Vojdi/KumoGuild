@@ -4,7 +4,7 @@ using UnityEngine;
 public class TauntEffect : Effect
 {
     public TauntEffect(int roundsLasts, int effectValue) : base(roundsLasts, effectValue) { }
-    public override void Attach(Member m)
+    public override void Attach(Member m, int instanceId)
     {
         foreach (var me in GameManager.Instance.Members)
         {
@@ -18,7 +18,7 @@ public class TauntEffect : Effect
             }
         }
         Debug.Log($"{m} taunted the opposite team");
-        base.Attach(m);    
+        base.Attach(m, InstanceId);    
     }
     public override void EffectDied()
     {

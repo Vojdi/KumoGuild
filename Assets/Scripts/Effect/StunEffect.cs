@@ -14,9 +14,9 @@ public class StunEffect : Effect
         base.EffectDied();
         Effect stunResEffect = new StunResistEffect(startRoundLasts * 2 + 1, 0);
         Debug.Log($"{member} now has stun resistance for {startRoundLasts} turns");
-        stunResEffect.Attach(member);
+        stunResEffect.Attach(member, InstanceId);
     }
-    public override void Attach(Member m)
+    public override void Attach(Member m,int instanceId)
     {
 
         if (m.Effects.OfType<StunEffect>().Any() || m.Effects.OfType<StunResistEffect>().Any()) 
@@ -25,7 +25,7 @@ public class StunEffect : Effect
         }
         else
         {
-            base.Attach(m);
+            base.Attach(m, InstanceId);
             Debug.Log($"{m} was stunned");
         }
     }

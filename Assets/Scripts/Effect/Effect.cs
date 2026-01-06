@@ -1,5 +1,6 @@
 public class Effect
 {
+    public int InstanceId;
     protected Member member;
     protected int roundsLasts;
     protected int effectValue;
@@ -22,9 +23,10 @@ public class Effect
     {
         member.Effects.Remove(this);
     }
-    public virtual void Attach(Member m) 
+    public virtual void Attach(Member m, int instanceId) 
     {
         member = m;
+        InstanceId = instanceId;
         member.Effects.Add(this);
     }
     public virtual string InfoBoxSyntax(int rounds, int value)

@@ -8,7 +8,7 @@ public class DoTEffect : Effect
         Debug.Log($"{member} is no longer affected by this DoT");
         base.EffectDied();
     }
-    public override void Attach(Member m)
+    public override void Attach(Member m, int instanceId)
     {
         foreach (Effect eff in m.Effects) {
             if(eff is DoTEffect dotEff)
@@ -20,7 +20,7 @@ public class DoTEffect : Effect
             }       
         }
         Debug.Log($"{m} got DoT");
-        base.Attach(m);
+        base.Attach(m, instanceId);
     }
     public override string InfoBoxSyntax(int rounds, int value)
     {

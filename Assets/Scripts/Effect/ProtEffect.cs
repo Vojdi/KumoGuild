@@ -10,13 +10,14 @@ public class ProtEffect : Effect
         Debug.Log($"{member} is no longer Affected by this Prot");
         base.EffectDied();
     }
-    public override void Attach(Member m)
+    public override void Attach(Member m, int instanceId)
     {
+        InstanceId = instanceId;
         foreach (Effect eff in m.Effects)
         {
             if (eff is ProtEffect protEff)
             {
-                if (effectValue == protEff.EffectValue)
+                if (InstanceId == protEff.InstanceId)
                 {
                     protEff.roundsLasts += roundsLasts;
                     Debug.Log($"{m}'s prot got prolonged (effect stacking)");
@@ -25,7 +26,7 @@ public class ProtEffect : Effect
             }
         }
         Debug.Log($"{m} got prot");
-        base.Attach(m);
+        base.Attach(m, instanceId);
     }
     public override string InfoBoxSyntax(int rounds, int value)
     {

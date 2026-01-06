@@ -61,7 +61,7 @@ public class Skill : ScriptableObject
                 if (!effectValuesSelf[i])
                 {
                     Effect eff = (Effect)Activator.CreateInstance(effectTypes[i], effectLengths[i][Level], effectValues[i][Level]);
-                    eff.Attach(targetMember);
+                    eff.Attach(targetMember,InstanceId);
                 }
             }
         }
@@ -80,7 +80,7 @@ public class Skill : ScriptableObject
             if (effectValuesSelf[i])
             {
                 Effect eff = (Effect)Activator.CreateInstance(effectTypes[i], effectLengths[i][Level], effectValues[i][Level]);
-                eff.Attach(SelfMember);
+                eff.Attach(SelfMember, InstanceId);
             }
         }
     }
