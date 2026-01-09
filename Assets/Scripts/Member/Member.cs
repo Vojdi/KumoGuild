@@ -25,6 +25,7 @@ public class Member : MonoBehaviour
     [HideInInspector] public Animator TurnIndicatorAnimator;
     [HideInInspector] public Animator TargetedIndicatorAnimator;
     [HideInInspector] public Animator TargetedArrowAnimator;
+    [HideInInspector] public EffectBadgeManager EffectBadgeManager;
     protected HpBadge hpBadge;
     SpriteRenderer highlightPanel;
     protected virtual void Awake()
@@ -37,6 +38,7 @@ public class Member : MonoBehaviour
         TargetedIndicatorAnimator = GetComponentInChildren<TargetIndicatorStates>().gameObject.GetComponent<Animator>();
         TargetedArrowAnimator = GetComponentInChildren<TargetArrowStates>().gameObject.GetComponent<Animator>();
         hpBadge = GetComponentInChildren<HpBadge>();
+        EffectBadgeManager = GetComponentInChildren<EffectBadgeManager>();
     }
     private void Start()
     {

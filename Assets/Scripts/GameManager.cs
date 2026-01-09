@@ -8,13 +8,17 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance => instance;
 
     [SerializeField] List<Member> members;
+    [SerializeField] Texture2D cursorTexture;
     public List<Member> Members => members;
     List<Member> membersTurnOrder;
     Member memberToPlay;
     int roundCount;
 
+
+
     private void Awake()
     {
+        Cursor.SetCursor(cursorTexture, new Vector2(cursorTexture.width / 2, cursorTexture.width / 2), CursorMode.Auto);
         instance = this;
         Debug.Log("The game begins!");
         membersTurnOrder = new List<Member>();

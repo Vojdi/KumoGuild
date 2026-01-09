@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 6138088584996143446}
   - component: {fileID: 5259664787611808337}
   - component: {fileID: 7683801597688083705}
+  - component: {fileID: 1647861217976974966}
   m_Layer: 0
   m_Name: line
   m_TagString: Untagged
@@ -143,6 +144,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1647861217976974966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2681539170304526387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1602f6b1248a55647a0f5f6f62f70537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  badgeTypes:
+  - {fileID: 7164716867446821719, guid: acd2ae43562ca344ab3db2eae344e12d, type: 3}
+  - {fileID: 7164716867446821719, guid: 23baf94714ea57b409ba43359ac8343b, type: 3}
+  - {fileID: 7164716867446821719, guid: 36b5f49ca1f9f974fa03195f918e71cd, type: 3}
+  - {fileID: 7164716867446821719, guid: 36a26f2bd2d405644b9e78123a5902dd, type: 3}
+  - {fileID: 7164716867446821719, guid: adce8332260908f47880a5bcd32e5e0c, type: 3}
 --- !u!1 &7471183181717042702
 GameObject:
   m_ObjectHideFlags: 0

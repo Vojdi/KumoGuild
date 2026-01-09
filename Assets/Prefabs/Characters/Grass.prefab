@@ -181,6 +181,7 @@ MonoBehaviour:
   TurnIndicatorAnimator: {fileID: 0}
   TargetedIndicatorAnimator: {fileID: 0}
   TargetedArrowAnimator: {fileID: 0}
+  EffectBadgeManager: {fileID: 0}
 --- !u!1001 &308671730379345976
 PrefabInstance:
   m_ObjectHideFlags: 0

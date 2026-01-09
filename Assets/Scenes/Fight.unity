@@ -1421,6 +1421,7 @@ MonoBehaviour:
   - {fileID: 1268096920}
   - {fileID: 1470177334}
   - {fileID: 1325703549}
+  cursorTexture: {fileID: 2800000, guid: d866b5e0d6863c242a2015727f84d76b, type: 3}
 --- !u!4 &345965230
 Transform:
   m_ObjectHideFlags: 0

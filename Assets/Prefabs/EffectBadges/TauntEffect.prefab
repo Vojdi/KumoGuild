@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3716983715943295096}
   - component: {fileID: 1894554611267950356}
   - component: {fileID: 7226263249927989400}
+  - component: {fileID: 4145473938482434400}
   m_Layer: 0
   m_Name: TauntEffect
   m_TagString: Untagged
@@ -77,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b631e8b71de61d84b97a5200ed2ad33a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a3f6c8fa9ec69694cb6250eab0a4195b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -110,3 +111,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4145473938482434400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7164716867446821719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60758745b5553f64f983b1fe04e42cdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
