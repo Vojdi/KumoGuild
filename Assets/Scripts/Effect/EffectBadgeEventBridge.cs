@@ -13,4 +13,8 @@ public class EffectBadgeEventBridge : MonoBehaviour
     {
         member.EffectBadgeManager.DisappearEffectEnded(badge);
     }
+    void EffectEnded()
+    {
+        member.EffectBadgeManager.EffectEnded();
+    }
 }

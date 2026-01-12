@@ -10,12 +10,15 @@ public class EffectBadgeManager : MonoBehaviour
     List<GameObject> instantiatedBadgeTypes;
     List<Type> effectTypes = new List<Type> {typeof(DoTEffect), typeof(ProtEffect), typeof(StunEffect), typeof(StunResistEffect), typeof(TauntEffect)};
     Vector3[] localBadgePositions = new Vector3[] {new Vector3(-0.12f,0,0), new Vector3(0.26f, 0, 0), new Vector3(0.64f, 0, 0), new Vector3(1.02f, 0, 0) };
-  
+    public Queue<Action> EffectBadgeQueue;
+    public bool MidAnimation;
     Member member;
 
     private void Awake()
     {
         instantiatedBadgeTypes = new List<GameObject>();
+        EffectBadgeQueue = new Queue<Action>();
+        MidAnimation = false;
     }
     private void Start()
     {
@@ -23,7 +26,8 @@ public class EffectBadgeManager : MonoBehaviour
         PreInstantiateEffects();
     }
     public void UpdateEffects(Type type, bool remove)
-    {
+    {   
+        MidAnimation = true;
         if (remove)
         {
             if(CheckForTypeCount(type) > 0)
@@ -77,30 +81,43 @@ public class EffectBadgeManager : MonoBehaviour
         var anim = instantiatedBadgeTypes[effectTypes.IndexOf(type)].GetComponent<Animator>();
         anim.transform.localPosition = localBadgePositions[CheckForEnabledCount()];
         anim.gameObject.SetActive(true);
-        anim.Play("app");
+        anim.Play("app",0,0);
     }
     void DisappearEffect(Type type)
     {
         var anim = instantiatedBadgeTypes[effectTypes.IndexOf(type)].GetComponent<Animator>();
-        anim.Play("dapp");
+        anim.Play("dapp",0,0);
     }
     public void DisappearEffectEnded(GameObject badge)
     {
         badge.SetActive(false);
         FixPlacement();
+        MidAnimation = false;
+        Debug.Log(EffectBadgeQueue.Count + "Count");
+        EffectBadgeQueue.Dequeue().Invoke();
+        Debug.Log("done");
+    }
+    public void EffectEnded()
+    {
+        MidAnimation = false;
+        Debug.Log(EffectBadgeQueue.Count + "Count");
+        
+        EffectBadgeQueue.Dequeue().Invoke();
+        
+        Debug.Log("done");
     }
     void FixPlacement()
     {
         var activeBadges = instantiatedBadgeTypes.Where(b => b.activeSelf).ToList();
         for (int i = 0; i < activeBadges.Count; i++)
         {
-            activeBadges[i].transform.localPosition = localBadgePositions[i];
+             activeBadges[i].transform.localPosition = localBadgePositions[i];
         }
     } 
    
     public void FlashEffect(Type type)
     {
-        instantiatedBadgeTypes[effectTypes.IndexOf(type)].GetComponent<Animator>().Play("flash");
+        instantiatedBadgeTypes[effectTypes.IndexOf(type)].GetComponent<Animator>().Play("flash",0,0);
     }
     void PreInstantiateEffects()
     {
