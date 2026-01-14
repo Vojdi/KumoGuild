@@ -11,7 +11,7 @@ public class EffectBadge : MonoBehaviour
     }
     private void OnMouseEnter()
     {
-        if (ControlPanel.Instance.ableToCheckEffects)
+        if (ControlPanel.Instance.AbleToCheckEffects)
         {
             manager.MoveToPosition(gameObject);
             StartCoroutine(manager.Activate(gameObject));

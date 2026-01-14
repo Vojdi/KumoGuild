@@ -33,7 +33,7 @@ public class ControlPanel : MonoBehaviour
 
     int selectedButtonIndex;
     bool spedUp;
-    public bool ableToCheckEffects;
+    public bool AbleToCheckEffects;
 
     private void Awake()
     {
@@ -45,7 +45,6 @@ public class ControlPanel : MonoBehaviour
     {
         memberOnTurn = member;
         StartCoroutine(EnableControls(true));
-        ableToCheckEffects = true;
     }
     public void SkillClicked(int index)
     {
@@ -179,11 +178,6 @@ public class ControlPanel : MonoBehaviour
         Debug.Log($"{memberOnTurn} used {selectedSkill.SkillName}");//////
         VisualEffectManager.Instance.PlayEffectAnimation(selectedSkill, pos);
         StartCoroutine(EnableControls(false));
-        ableToCheckEffects = false;
-        if (effectPanel.activeSelf)
-        {
-            effectPanel.SetActive(false);   
-        }
         Untarget();
     }
     void Untarget()

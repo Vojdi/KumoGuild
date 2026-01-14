@@ -83,6 +83,7 @@ public class GameManager : MonoBehaviour
             VisualEffectManager.Instance.ActionQueue.Enqueue(() =>VisualEffectManager.Instance.NewRound(roundCount));
             DetermineTurnOrder();
         }
+        ControlPanel.Instance.AbleToCheckEffects = true;
         memberToPlay = membersTurnOrder[0];
         membersTurnOrder.RemoveAt(0);
         VisualEffectManager.Instance.ActionQueue.Enqueue(() => VisualEffectManager.Instance.NewTurnEffect(memberToPlay));

@@ -78,7 +78,12 @@ public class VisualEffectManager : MonoBehaviour
         foreach(Member m in targetMembers)
         {
             FrameClock.Instance.AnimationActions.Add(() => m.TargetedIndicatorAnimator.Play("disappear"));
-        }   
+        }
+        ControlPanel.Instance.AbleToCheckEffects = false;
+        if (ControlPanel.Instance.EffectPanel.activeSelf)
+        {
+            ControlPanel.Instance.EffectPanel.SetActive(false);
+        }
         darkenOverlayAnimator.Play("darken", 0, 0);
     }
     void Darkened()
