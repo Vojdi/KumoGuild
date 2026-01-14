@@ -5,6 +5,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class ControlPanel : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class ControlPanel : MonoBehaviour
     [SerializeField] TMPro.TMP_Text infoBoxSkillType;
     [SerializeField] List<GameObject> infoBoxPositionPanels;
     [SerializeField] List<TMPro.TMP_Text> infoBoxStatTexts;
+    [SerializeField] GameObject effectPanel;
+    public GameObject EffectPanel => effectPanel;
 
 
     static ControlPanel instance;
@@ -29,10 +32,8 @@ public class ControlPanel : MonoBehaviour
     Skill hoveredOverSkill;
 
     int selectedButtonIndex;
-
-
     bool spedUp;
-
+    public bool ableToCheckEffects;
 
     private void Awake()
     {
@@ -44,6 +45,7 @@ public class ControlPanel : MonoBehaviour
     {
         memberOnTurn = member;
         StartCoroutine(EnableControls(true));
+        ableToCheckEffects = true;
     }
     public void SkillClicked(int index)
     {
@@ -177,6 +179,11 @@ public class ControlPanel : MonoBehaviour
         Debug.Log($"{memberOnTurn} used {selectedSkill.SkillName}");//////
         VisualEffectManager.Instance.PlayEffectAnimation(selectedSkill, pos);
         StartCoroutine(EnableControls(false));
+        ableToCheckEffects = false;
+        if (effectPanel.activeSelf)
+        {
+            effectPanel.SetActive(false);   
+        }
         Untarget();
     }
     void Untarget()

@@ -1,5 +1,7 @@
 
+using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections;
 
 public class Effect
 {
@@ -36,36 +38,29 @@ public class Effect
     }
     public virtual void EffectDied()
     {
-        Debug.Log($"{this} + dies");
         member.Effects.Remove(this);
         if (!member.EffectBadgeManager.MidAnimation)
         {
-            Debug.Log($"{this} + dissapears");
             member.EffectBadgeManager.UpdateEffects(this.GetType(), true);
         }
         else
         {
-            Debug.Log($"{this} + enqueue dissapears");
             member.EffectBadgeManager.EffectBadgeQueue.Enqueue(() => member.EffectBadgeManager.UpdateEffects(this.GetType(), true));
         }
     }
     public virtual void Attach(Member m, int instanceId) 
     {
-        Debug.Log($"{this} + appears");
         member = m;
         InstanceId = instanceId;
         member.Effects.Add(this);
         if(member.EffectBadgeManager.EffectBadgeQueue.Count == 0 && !member.EffectBadgeManager.MidAnimation)
         {
             member.EffectBadgeManager.UpdateEffects(this.GetType(), false);
-            Debug.Log($"{this} + appear");
         }
         else
         {
-            Debug.Log($"{this} + enqueue appear");
             member.EffectBadgeManager.EffectBadgeQueue.Enqueue(() => member.EffectBadgeManager.UpdateEffects(this.GetType(), false));
         }
-       
     }
     public virtual string InfoBoxSyntax(int rounds, int value)
     {

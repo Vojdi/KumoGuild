@@ -9,6 +9,6 @@ public class MaliciousGrass : EnemyMember
         speed = 6;
         base.Awake();
         Skills.Add(Skill.Create<GrassPoke>(this));
-     //   Skills.Add(Skill.Create<GrassPrison>(this));
+        Skills.Add(Skill.Create<GrassPrison>(this));
     }
 }

@@ -122,7 +122,6 @@ public class Skill : ScriptableObject
         T skill = ScriptableObject.CreateInstance<T>();
         skill.SelfMember = sMember;
         skill.InstanceId = LastInstanceId++;
-        Debug.Log("skill created, instance id: " +  skill.InstanceId);
         return skill;
     }
 
