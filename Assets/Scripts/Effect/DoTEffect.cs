@@ -22,8 +22,16 @@ public class DoTEffect : Effect
         Debug.Log($"{m} got DoT");
         base.Attach(m, instanceId);
     }
-    public override string InfoBoxSyntax(int rounds, int value)
+    public override string InfoBoxSyntax(int rounds, int value, bool effectBox)
     {
-        return $"dot - {value} / {rounds}t";
+        if (effectBox)
+        {
+            return $"{value} dmg / {rounds} rounds";
+        }
+        else
+        {
+            return $"dot - {value} / {rounds}r";
+        }
+            
     }
 }

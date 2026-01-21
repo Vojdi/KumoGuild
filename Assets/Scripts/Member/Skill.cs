@@ -190,7 +190,7 @@ public class Skill : ScriptableObject
                 if (!skill.effectValuesSelf[i])
                 {
                     Effect temp = (Effect)Activator.CreateInstance(skill.effectTypes[i], 0, 0);
-                    list.Add(temp.InfoBoxSyntax(skill.effectLengths[i][skill.Level], skill.effectValues[i][skill.Level])); 
+                    list.Add(temp.InfoBoxSyntax(skill.effectLengths[i][skill.Level], skill.effectValues[i][skill.Level],false)); 
                 }
             }
 
@@ -217,7 +217,7 @@ public class Skill : ScriptableObject
                 if (skill.effectValuesSelf[i])
                 {
                     Effect temp = (Effect)Activator.CreateInstance(skill.effectTypes[i], 0, 0);
-                    list.Add(temp.InfoBoxSyntax(skill.effectLengths[i][skill.Level], skill.effectValues[i][skill.Level]));
+                    list.Add(temp.InfoBoxSyntax(skill.effectLengths[i][skill.Level], skill.effectValues[i][skill.Level], false));
                 }
             }
 

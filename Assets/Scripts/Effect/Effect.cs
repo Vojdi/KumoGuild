@@ -62,7 +62,7 @@ public class Effect
             member.EffectBadgeManager.EffectBadgeQueue.Enqueue(() => member.EffectBadgeManager.UpdateEffects(this.GetType(), false));
         }
     }
-    public virtual string InfoBoxSyntax(int rounds, int value)
+    public virtual string InfoBoxSyntax(int rounds, int value, bool effectBox)
     {
         return null;
     }

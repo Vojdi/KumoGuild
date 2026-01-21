@@ -5,7 +5,7 @@ public class Ward : AllyMember
     protected override void Awake()
     {
         memberName = "Ward";
-        maxHealth = 35;
+        maxHealth = 40;
         speed = 3;
         IconId = 0;
         base.Awake();

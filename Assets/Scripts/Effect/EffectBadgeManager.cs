@@ -162,7 +162,7 @@ public class EffectBadgeManager : MonoBehaviour
             var child = transformm.GetChild(i + 1);
             child.gameObject.SetActive(true);
             var childtmp = child.GetComponent<TMPro.TMP_Text>();
-            childtmp.text = effects[i].InfoBoxSyntax(effects[i].RoundsLast, effects[i].EffectValue);
+            childtmp.text = effects[i].InfoBoxSyntax(effects[i].RoundsLast, effects[i].EffectValue, true);
         }
     }
     public IEnumerator Activate(GameObject badgeGameObject)

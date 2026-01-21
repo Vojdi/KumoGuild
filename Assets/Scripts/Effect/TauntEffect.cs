@@ -25,8 +25,16 @@ public class TauntEffect : Effect
         Debug.Log($"{member} does no longer taunt the opposite team");
         base.EffectDied();
     }
-    public override string InfoBoxSyntax(int rounds, int value)
+    public override string InfoBoxSyntax(int rounds, int value, bool effectBox)
     {
-        return $"taunt - {rounds}t";
+        if (effectBox)
+        {
+            return $"{rounds} rounds";
+        }
+        else
+        {
+            return $"taunt - {rounds}r";
+        }
+            
     }
 }

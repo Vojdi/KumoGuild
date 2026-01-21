@@ -8,8 +8,16 @@ public class StunResistEffect : Effect
         Debug.Log($"{member} is no longer immune to stun");
         base.EffectDied();
     }
-    public override string InfoBoxSyntax(int rounds, int value)
+    public override string InfoBoxSyntax(int rounds, int value, bool effectBox)
     {
-        return $"stunRes - {rounds}t";
+        if (effectBox)
+        {
+            return $"{rounds} rounds";
+        }
+        else
+        {
+            return $"stunRes - {rounds}r";
+        }
+            
     }
 }

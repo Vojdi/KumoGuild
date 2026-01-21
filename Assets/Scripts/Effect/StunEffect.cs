@@ -29,8 +29,16 @@ public class StunEffect : Effect
             Debug.Log($"{m} was stunned");
         }
     }
-    public override string InfoBoxSyntax(int rounds, int value)
+    public override string InfoBoxSyntax(int rounds, int value, bool effectBox)
     {
-        return $"stun - {rounds}t";
+        if (effectBox)
+        {
+            return $"{rounds} turns";
+        }
+        else
+        {
+            return $"stun - {rounds}t";
+        }
+            
     }
 }

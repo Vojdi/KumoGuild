@@ -28,8 +28,15 @@ public class ProtEffect : Effect
         Debug.Log($"{m} got prot");
         base.Attach(m, instanceId);
     }
-    public override string InfoBoxSyntax(int rounds, int value)
+    public override string InfoBoxSyntax(int rounds, int value, bool effectBox)
     {
-        return $"prot - {value}% / {rounds}t";
+        if (effectBox)
+        {
+            return $"{value}% / {rounds} rounds";
+        }
+        else
+        {
+            return $"prot - {value}% / {rounds}r";
+        }
     }
 }

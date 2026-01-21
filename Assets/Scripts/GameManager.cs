@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,12 +10,13 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] List<Member> members;
     [SerializeField] Texture2D cursorTexture;
+    [SerializeField] List<GameObject> enemyPrefabs;
+    [SerializeField] GameObject enemiesGJ;
+    Vector3[] enemyVector3 = new Vector3[] {new Vector3(0,0,0), new Vector3(2.75f, 2.5f, 0), new Vector3(5.5f,0, 0)};
     public List<Member> Members => members;
     List<Member> membersTurnOrder;
     Member memberToPlay;
     int roundCount;
-
-
 
     private void Awake()
     {
@@ -27,6 +29,12 @@ public class GameManager : MonoBehaviour
             Members[i].Position = i;
         }
         roundCount = 0;
+    }
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.R)) { 
+            Restart();
+        }
     }
     private void Start()
     {
@@ -105,9 +113,41 @@ public class GameManager : MonoBehaviour
     }
     void CheckForBattleEnd()
     {
-        if (!Members.OfType<EnemyMember>().Any() || !Members.OfType<AllyMember>().Any())
+        if (!Members.OfType<EnemyMember>().Any())
         {
-            Debug.Log("The Battle Ended");
+            Debug.Log("win");
+            /*foreach(Transform child in enemiesGJ.transform)
+            {
+                Destroy (child.gameObject);
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                List<EnemyMember> listPossibleEnemies = new List<EnemyMember>();
+                foreach (GameObject gj in enemyPrefabs) {
+                    Debug.Log(gj.GetComponent<EnemyMember>().DesiredPositions.Count + "dpc");
+                    if (gj.GetComponent<EnemyMember>().DesiredPositions.Contains(i + 3)){
+                        listPossibleEnemies.Add(gj.GetComponent<EnemyMember>());
+                    }
+                }
+                Debug.Log(listPossibleEnemies.Count + " List Pos Enemies");
+                int chosenEnemy = Random.Range(0, listPossibleEnemies.Count);
+                Debug.Log(chosenEnemy + " Chosen Enemy");
+                var enemy = Instantiate(listPossibleEnemies[chosenEnemy], enemyVector3[i], Quaternion.identity, enemiesGJ.transform);
+                enemy.transform.localPosition = enemyVector3[i];    
+                Debug.Log(enemy + " Enemy");
+                while (members.Count <= i + 3)
+                {
+                    members.Add(null);
+                }
+                members[i + 3] = enemy.GetComponent<Member>();
+            }
+            membersTurnOrder.Clear();
+            NextTurn();*/
+            Time.timeScale = 0;
+        }
+        if (!Members.OfType<AllyMember>().Any())
+        {
+            Debug.Log("noob");
             Time.timeScale = 0;
         }
     } 
@@ -117,5 +157,9 @@ public class GameManager : MonoBehaviour
         {
             member.EffectsTime();
         }
+    }
+    void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

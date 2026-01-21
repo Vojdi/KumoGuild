@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.UIElements;
 public class EnemyMember : Member
 {
+    [SerializeField] List<int> desiredPositions;
+    public List<int> DesiredPositions => desiredPositions;
     public override void YourTurn()
     {
         base.YourTurn();
