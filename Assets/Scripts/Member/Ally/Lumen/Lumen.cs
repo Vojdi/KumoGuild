@@ -6,7 +6,7 @@ public class Lumen : AllyMember
     {
         memberName = "Lumen";
         maxHealth = 25;
-        speed = 6;
+        speed = 7;
         IconId = 5;
         base.Awake();
         Skills.Add(Skill.Create<LightningSpear>(this));
