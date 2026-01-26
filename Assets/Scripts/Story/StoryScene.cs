@@ -23,7 +23,7 @@ public class StoryScene : MonoBehaviour
         {
             if (Input.anyKeyDown || Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
             {
-                SceneManager.LoadScene("Fight");
+                SceneManager.LoadScene("MainMenu");
             }
         }
     }
