@@ -175,6 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c80bae9281c696449fde18b33694480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  memberName: Malicious Grass
   Position: 0
   Skills: []
   Targetable: 0

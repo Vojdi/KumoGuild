@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948644a25a3690348a47924a6934f1bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  memberName: Ward
   Position: 0
   Skills: []
   Targetable: 0

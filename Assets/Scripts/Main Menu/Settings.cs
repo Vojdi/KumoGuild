@@ -17,7 +17,6 @@ public class Settings : MonoBehaviour
 
     public void ToReturnButtonClick()
     {
-       returnButton.SetToStartSize();
        settingsGj.SetActive(false);
        mainMenuGj.SetActive(true);
     }
@@ -44,7 +43,5 @@ public class Settings : MonoBehaviour
         {
             Screen.SetResolution(width, height, FullScreenMode.Windowed);
         }
-        
-
     }
 }

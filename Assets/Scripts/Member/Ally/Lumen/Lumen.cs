@@ -4,7 +4,6 @@ public class Lumen : AllyMember
 {
     protected override void Awake()
     {
-        memberName = "Lumen";
         maxHealth = 25;
         speed = 7;
         IconId = 5;

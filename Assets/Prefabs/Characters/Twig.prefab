@@ -175,6 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a6e2163cf2a5d4b8851af2fd74f134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  memberName: Possessed Twig
   Position: 0
   Skills: []
   Targetable: 0

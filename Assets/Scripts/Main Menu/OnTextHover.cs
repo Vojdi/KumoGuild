@@ -19,9 +19,13 @@ public class OnTextHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     }
     public void OnPointerExit(PointerEventData eventData) 
     {
-        text.fontSize = startSize;
+        Exit();
     }
-    public void SetToStartSize()
+    private void OnDisable()
+    {
+        Exit();
+    }
+    void Exit()
     {
         text.fontSize = startSize;
     }

@@ -4,7 +4,6 @@ public class PossessedTwig : EnemyMember
 {
     protected override void Awake()
     {
-        memberName = "Possessed Twig";
         maxHealth = 25;
         speed = 3;
         base.Awake();

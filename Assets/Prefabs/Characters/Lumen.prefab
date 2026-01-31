@@ -175,6 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af85767990daa0a49891acfa364c5539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  memberName: Lumen
   Position: 0
   Skills: []
   Targetable: 0

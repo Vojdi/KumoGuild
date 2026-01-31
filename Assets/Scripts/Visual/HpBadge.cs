@@ -10,7 +10,6 @@ public class HpBadge : MonoBehaviour
     public void Init(Member m)
     {
         member = m;
-        Debug.Log(member);
         hpAnimator = GetComponent<Animator>();
         damagePopUpAnimator = damagePopUpText.gameObject.GetComponent<Animator>();
         if (member.Health > 99)

@@ -4,7 +4,6 @@ public class Ward : AllyMember
 {
     protected override void Awake()
     {
-        memberName = "Ward";
         maxHealth = 40;
         speed = 3;
         IconId = 0;

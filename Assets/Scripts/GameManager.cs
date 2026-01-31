@@ -13,10 +13,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<GameObject> enemyPrefabs;
     [SerializeField] GameObject enemiesGJ;
     Vector3[] enemyVector3 = new Vector3[] {new Vector3(0,0,0), new Vector3(2.75f, 2.5f, 0), new Vector3(5.5f,0, 0)};
+    Vector3[] allyVector3 = new Vector3[] { new Vector3(-5.5f, 0, 0), new Vector3(-2.75f, 2.5f, 0), new Vector3(0, 0, 0) };
     public List<Member> Members => members;
     List<Member> membersTurnOrder;
     Member memberToPlay;
     int roundCount;
+
+    [SerializeField] AllyMember[] allyMemberTypes;
+    [SerializeField] GameObject allyMembersParent;
+
+
+
 
     private void Awake()
     {
@@ -24,10 +31,6 @@ public class GameManager : MonoBehaviour
         instance = this;
         Debug.Log("The game begins!");
         membersTurnOrder = new List<Member>();
-        for(int i  = 0; i < members.Count; i++)
-        {
-            Members[i].Position = i;
-        }
         roundCount = 0;
     }
     private void Update()
@@ -38,7 +41,68 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        members[0].Position = 3;
+        members[1].Position = 4;
+        members[2].Position = 5;
+        LoadBuild();
         NextTurn();
+    }
+
+    private void LoadBuild()
+    {
+        Dictionary<string, AllyMember> allyPrefabDict = new();
+        foreach (var prefab in allyMemberTypes)
+        {
+            allyPrefabDict[prefab.MemberName] = prefab;
+        }
+
+        string build = PlayerPrefs.GetString("build");
+        string[] memberEntries = build.Split('|');
+
+        foreach (string entry in memberEntries)
+        {
+            if (string.IsNullOrEmpty(entry))
+                continue;
+
+            string[] parts = entry.Split(':');
+
+            string memberName = parts[0];
+            int position = int.Parse(parts[1]);
+            string[] skillNames = parts.Length > 2 && !string.IsNullOrEmpty(parts[2])
+                ? parts[2].Split(',')
+                : new string[0];
+
+            if (!allyPrefabDict.TryGetValue(memberName, out AllyMember prefab))
+                continue;
+
+            AllyMember instance = Instantiate(prefab, Vector3.zero, Quaternion.identity, allyMembersParent.transform);
+            instance.Position = position;
+            instance.transform.localPosition = allyVector3[instance.Position];
+            members.Add(instance);
+
+            SetupSkills(instance, skillNames);
+        }
+    }
+    private void SetupSkills(AllyMember member, string[] allowedSkillNames)
+    {
+        for (int i = member.Skills.Count - 1; i >= 0; i--)
+        {
+            string skillName = member.Skills[i].SkillName;
+            bool keep = false;
+
+            foreach (string allowed in allowedSkillNames)
+            {
+                if (skillName == allowed)
+                {
+                    keep = true;
+                    break;
+                }
+            }
+
+            if (!keep)
+                member.Skills.RemoveAt(i);
+        }
+        Debug.Log(member.Skills.Count);
     }
     private void DetermineTurnOrder()
     {

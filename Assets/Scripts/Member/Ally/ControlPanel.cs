@@ -195,9 +195,21 @@ public class ControlPanel : MonoBehaviour
         {
             memberNameText.text = memberOnTurn.MemberName;
             SetMemberIcon();
-            for (int i = 0; i < memberOnTurn.Skills.Count; i++)
+
+            int skillCount = memberOnTurn.Skills.Count;
+            for (int i = 0; i < skillsParent.childCount; i++)
             {
-                skillsParent.GetChild(i).GetChild(0).GetComponent<Image>().sprite = ImageManager.Instance.GetSprite(memberOnTurn.Skills[i].IconId);
+                Transform skillChild = skillsParent.GetChild(i);
+
+                if (i < skillCount)
+                {
+                    skillChild.GetChild(0).GetComponent<Image>().sprite = ImageManager.Instance.GetSprite(memberOnTurn.Skills[i].IconId);
+                    skillChild.gameObject.SetActive(true);
+                }
+                else
+                {
+                    skillChild.gameObject.SetActive(false);
+                }
             }
         }
         foreach (Transform child in transform)

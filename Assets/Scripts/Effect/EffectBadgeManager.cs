@@ -111,8 +111,11 @@ public class EffectBadgeManager : MonoBehaviour
     {
         MidAnimation = false;
         Debug.Log(EffectBadgeQueue.Count + "Count");
-        
-        EffectBadgeQueue.Dequeue().Invoke();
+        if (EffectBadgeQueue.Count != 0)
+        {
+            EffectBadgeQueue.Dequeue().Invoke();
+        }
+       
         
         Debug.Log("done");
     }

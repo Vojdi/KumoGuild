@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Member : MonoBehaviour
 {
-    protected string memberName;
+    [SerializeField] protected string memberName;
     public string MemberName => memberName;
     
     protected int maxHealth;
