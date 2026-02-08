@@ -4,7 +4,7 @@ public class PossessedTwig : EnemyMember
 {
     protected override void Awake()
     {
-        maxHealth = 25;
+        maxHealth = 2;
         speed = 3;
         base.Awake();
         Skills.Add(Skill.Create<Splintersnipe>(this));

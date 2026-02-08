@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<GameObject> enemyPrefabs;
     [SerializeField] GameObject enemiesGJ;
     Vector3[] enemyVector3 = new Vector3[] {new Vector3(0,0,0), new Vector3(2.75f, 2.5f, 0), new Vector3(5.5f,0, 0)};
-    Vector3[] allyVector3 = new Vector3[] { new Vector3(-5.5f, 0, 0), new Vector3(-2.75f, 2.5f, 0), new Vector3(0, 0, 0) };
+    Vector3[] allyVector3 = new Vector3[] { new Vector3(-5.0f, 0, 0), new Vector3(-2.5f, 2.5f, 0), new Vector3(0, 0, 0) };
     public List<Member> Members => members;
     List<Member> membersTurnOrder;
     Member memberToPlay;
@@ -148,10 +148,18 @@ public class GameManager : MonoBehaviour
 
     public void NextTurn()
     {
+        if(CheckForBattleEnd())
+        {
+            return;
+        }
         if (membersTurnOrder.Count == 0)
         {
             roundCount++;
             TimeEffects();
+            if (CheckForBattleEnd())
+            {
+                return;
+            }
             VisualEffectManager.Instance.ActionQueue.Enqueue(() =>VisualEffectManager.Instance.NewRound(roundCount));
             DetermineTurnOrder();
         }
@@ -173,23 +181,30 @@ public class GameManager : MonoBehaviour
             membersTurnOrder.Remove(member);
         }
         member.Die();
-        CheckForBattleEnd();
     }
-    void CheckForBattleEnd()
+    bool CheckForBattleEnd()
     {
         if (!Members.OfType<EnemyMember>().Any())
         {
             Debug.Log("win");
-            /*foreach(Transform child in enemiesGJ.transform)
+            foreach (Transform child in enemiesGJ.transform)
             {
-                Destroy (child.gameObject);
+                EnemyMember em = child.GetComponent<EnemyMember>();
+                if(em != null)
+                {
+                    members.Remove(em);
+                }
+                Destroy(child.gameObject);
             }
+            int allyCount = members.OfType<AllyMember>().Count();
             for (int i = 0; i < 3; i++)
             {
                 List<EnemyMember> listPossibleEnemies = new List<EnemyMember>();
-                foreach (GameObject gj in enemyPrefabs) {
+                foreach (GameObject gj in enemyPrefabs)
+                {
                     Debug.Log(gj.GetComponent<EnemyMember>().DesiredPositions.Count + "dpc");
-                    if (gj.GetComponent<EnemyMember>().DesiredPositions.Contains(i + 3)){
+                    if (gj.GetComponent<EnemyMember>().DesiredPositions.Contains(i + 3))
+                    {
                         listPossibleEnemies.Add(gj.GetComponent<EnemyMember>());
                     }
                 }
@@ -197,28 +212,39 @@ public class GameManager : MonoBehaviour
                 int chosenEnemy = Random.Range(0, listPossibleEnemies.Count);
                 Debug.Log(chosenEnemy + " Chosen Enemy");
                 var enemy = Instantiate(listPossibleEnemies[chosenEnemy], enemyVector3[i], Quaternion.identity, enemiesGJ.transform);
-                enemy.transform.localPosition = enemyVector3[i];    
+                enemy.transform.localPosition = enemyVector3[i];
+                enemy.Position = i + 3;
                 Debug.Log(enemy + " Enemy");
-                while (members.Count <= i + 3)
+                while (members.Count <= i + allyCount)
                 {
                     members.Add(null);
                 }
-                members[i + 3] = enemy.GetComponent<Member>();
+                members[i + allyCount] = enemy.GetComponent<Member>();
             }
             membersTurnOrder.Clear();
-            NextTurn();*/
-            Time.timeScale = 0;
+            NextTurn();
+            return true;
         }
-        if (!Members.OfType<AllyMember>().Any())
+        else if (!Members.OfType<AllyMember>().Any())
         {
             Debug.Log("noob");
             Time.timeScale = 0;
+            return true;
+        }
+        else
+        {
+            return false;
         }
     } 
     void TimeEffects()
     {
         foreach (Member member in members.ToList())
         {
+            Debug.Log(member);
+        }
+        foreach (Member member in members.ToList())
+        {
+            Debug.Log(member);
             member.EffectsTime();
         }
     }
