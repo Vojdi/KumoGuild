@@ -258,4 +258,8 @@ public class ControlPanel : MonoBehaviour
         fitter.aspectRatio = aspect;
         memberIcon.sprite = sprite;
     }
+    public void SetActiveSpeedtup(bool active)
+    {
+        speedupTransform.gameObject.SetActive(active);
+    }
 }
