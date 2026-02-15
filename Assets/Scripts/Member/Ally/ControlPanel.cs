@@ -53,8 +53,8 @@ public class ControlPanel : MonoBehaviour
             selectedButtonIndex = index;
         }
         ResetSkillBorder();
-        Color32 c = skillsParent.GetChild(index).GetComponent<Image>().color;
-        skillsParent.GetChild(index).GetComponent<Image>().color = new Color32(c.r, c.g, c.b, 255);
+        Color32 c = skillsParent.GetChild(index).GetChild(0).GetComponent<Image>().color;
+        skillsParent.GetChild(index).GetChild(0).GetComponent<Image>().color = new Color32(c.r, c.g, c.b, 255);
 
         selectedSkill = memberOnTurn.Skills[index];
         if (selectedSkill.SelfOnly)
@@ -101,8 +101,8 @@ public class ControlPanel : MonoBehaviour
     {
         foreach (Transform o in skillsParent)
         {
-            Color32 c1 = o.gameObject.GetComponent<Image>().color;
-            o.gameObject.GetComponent<Image>().color = new Color32(c1.r, c1.g, c1.b, 0);
+            Color32 c1 = o.GetChild(0).gameObject.GetComponent<Image>().color;
+            o.GetChild(0).gameObject.GetComponent<Image>().color = new Color32(c1.r, c1.g, c1.b, 0);
         }
     }
 
@@ -203,7 +203,7 @@ public class ControlPanel : MonoBehaviour
 
                 if (i < skillCount)
                 {
-                    skillChild.GetChild(0).GetComponent<Image>().sprite = ImageManager.Instance.GetSprite(memberOnTurn.Skills[i].IconId);
+                    skillChild.GetChild(1).GetComponent<Image>().sprite = ImageManager.Instance.GetSprite(memberOnTurn.Skills[i].IconId);
                     skillChild.gameObject.SetActive(true);
                 }
                 else
@@ -248,6 +248,7 @@ public class ControlPanel : MonoBehaviour
             Time.timeScale = 2;
         }
     }
+
     void SetMemberIcon()
     {
         var sprite = ImageManager.Instance.GetSprite(memberOnTurn.IconId);
@@ -261,5 +262,20 @@ public class ControlPanel : MonoBehaviour
     public void SetActiveSpeedtup(bool active)
     {
         speedupTransform.gameObject.SetActive(active);
+        if (!active)
+        {
+            Time.timeScale = 1;
+        }
+        else
+        {
+            if (spedUp)
+            {
+                Time.timeScale = 2;
+            }
+            else
+            {
+                Time.timeScale = 1;
+            }
+        }
     }
 }

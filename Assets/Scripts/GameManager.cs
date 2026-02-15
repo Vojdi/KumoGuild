@@ -244,12 +244,13 @@ public class GameManager : MonoBehaviour
         roundCount = 0;
 
         levelUpPanel.gameObject.SetActive(true);
+        levelUpPanel.SetUp();
         levelUpPanel.GetComponent<Animator>().Play("app",0,0);
 
-       // nextWaveAnimator.Play("afterLvlUpBg", 0, 0);
     }
     public void NextWaveReady()
     {
+        levelUpPanel.gameObject.SetActive(false);
         NextTurn();
         ControlPanel.Instance.SetActiveSpeedtup(true);
     }
