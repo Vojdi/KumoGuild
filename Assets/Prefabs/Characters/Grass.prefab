@@ -84,7 +84,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.3, y: 4.2}
+  m_Size: {x: 2.4, y: 4}
   m_EdgeRadius: 0
 --- !u!95 &8504958914991559262
 Animator:
@@ -192,6 +192,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3952367630704717548}
     m_Modifications:
+    - target: {fileID: 1381456037627514637, guid: 345f1221e2d12fe4396e217d1c2e878d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1381456037627514637, guid: 345f1221e2d12fe4396e217d1c2e878d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1381456037627514637, guid: 345f1221e2d12fe4396e217d1c2e878d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
