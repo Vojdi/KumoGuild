@@ -7,7 +7,7 @@ public class WaterchargedShot : Skill
     override protected void OnEnable()
     {
         base.OnEnable();
-        SkillName = "Watercharged arrow";
+        SkillName = "Watercharged Arrow";
         AnimName = "watershot";
         SkillRangeType = "single";
 
