@@ -51,6 +51,10 @@ public class EnemyMember : Member
                         validTargetPositions.Add(member.Position);
                     }
                 }
+                if (SelectedSkill.SelfOnly)
+                {
+                    validTargetPositions.Add(this.Position);
+                }
                 position = validTargetPositions[Random.Range(0, validTargetPositions.Count)];
             }
             else

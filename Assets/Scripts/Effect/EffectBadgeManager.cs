@@ -170,6 +170,10 @@ public class EffectBadgeManager : MonoBehaviour
     }
     public IEnumerator Activate(GameObject badgeGameObject)
     {
+        if (ControlPanel.Instance.EffectPanel.gameObject.GetComponent<CanvasGroup>() != null)
+        {
+            Destroy(ControlPanel.Instance.EffectPanel.gameObject.GetComponent<CanvasGroup>());
+        }
         var cg = ControlPanel.Instance.EffectPanel.gameObject.AddComponent<CanvasGroup>();
         cg.alpha = 0;
         AssingValuesToEffectPanel(badgeGameObject);

@@ -4,7 +4,7 @@ public class Archer : EnemyMember
 {
     protected override void Awake()
     {
-        maxHealth = 3;
+        maxHealth = 30;
         speed = 2;
         base.Awake();
         Skills.Add(Skill.Create<Waterbolt>(this));

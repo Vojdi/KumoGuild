@@ -11,7 +11,7 @@ public class Reinforce : Skill
         AnimName = "reinforce";
         SkillRangeType = "single";
 
-        ReachablePositions = new List<int> {4,5 };
+        ReachablePositions = new List<int> {};
 
         HasSelfSkill = true;
         SelfOnly = true;

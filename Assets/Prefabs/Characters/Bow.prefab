@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8105134104049936171}
   - component: {fileID: 8504958914991559262}
   - component: {fileID: 4921212268286442086}
-  - component: {fileID: 7095469199169781363}
+  - component: {fileID: 3131991811917540025}
   m_Layer: 0
   m_Name: Bow
   m_TagString: Untagged
@@ -163,7 +163,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7095469199169781363
+--- !u!114 &3131991811917540025
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,10 +172,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4129316596348512792}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c80bae9281c696449fde18b33694480, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b88227870e2c2f4394013d5c6236443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  memberName: Malicious Grass
+  memberName: Mighty Bow
   Position: 0
   Skills: []
   Targetable: 0
@@ -183,7 +183,7 @@ MonoBehaviour:
   TargetedIndicatorAnimator: {fileID: 0}
   TargetedArrowAnimator: {fileID: 0}
   EffectBadgeManager: {fileID: 0}
-  desiredPositions: 030000000400000005000000
+  desiredPositions: 05000000
 --- !u!1001 &308671730379345976
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -70,7 +70,7 @@ public class Member : MonoBehaviour
             {
                 health -= damage;
             }
-            VisualEffectManager.Instance.ActionQueue.Enqueue(hpBadge.UpdateHealth);
+            VisualEffectManager.Instance.ActionQueue.Enqueue(() => hpBadge.UpdateHealth(false));
         }
         else if (protectionBypass)
         {
@@ -78,7 +78,7 @@ public class Member : MonoBehaviour
             health -= damage;
             if(health > 0)
             {
-                VisualEffectManager.Instance.ActionQueue.Enqueue(hpBadge.UpdateHealth);
+                VisualEffectManager.Instance.ActionQueue.Enqueue(() => hpBadge.UpdateHealth(true));
             }
             if (health <= 0)
             {
@@ -103,7 +103,7 @@ public class Member : MonoBehaviour
             health -= finalDamage;
             if(health > 0)
             {
-                VisualEffectManager.Instance.ActionQueue.Enqueue(hpBadge.UpdateHealth);
+                VisualEffectManager.Instance.ActionQueue.Enqueue(() => hpBadge.UpdateHealth(false));
             }
             
             if (health <= 0)

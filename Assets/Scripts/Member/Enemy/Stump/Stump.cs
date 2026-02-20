@@ -4,8 +4,9 @@ public class Stump : EnemyMember
 {
     protected override void Awake()
     {
-        maxHealth = 3;
+        maxHealth = 30;
         speed = 10;
+        base.Awake();
         Skills.Add(Skill.Create<Reinforce>(this));
     }
 }

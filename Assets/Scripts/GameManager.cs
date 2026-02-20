@@ -9,17 +9,19 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
     public static GameManager Instance => instance;
 
-    [SerializeField] List<Member> members;
+    List<Member> members;
     [SerializeField] Texture2D cursorTexture;
     [SerializeField] List<GameObject> enemyPrefabs;
     [SerializeField] GameObject enemiesGJ;
     [SerializeField] Animator nextWaveAnimator;
+    [SerializeField] List<GameObject> bossPrefabs; 
     Vector3[] enemyVector3 = new Vector3[] {new Vector3(0,0,0), new Vector3(2.75f, 2.5f, 0), new Vector3(5.5f,0, 0)};
     Vector3[] allyVector3 = new Vector3[] { new Vector3(-5.0f, 0, 0), new Vector3(-2.5f, 2.5f, 0), new Vector3(0, 0, 0) };
     public List<Member> Members => members;
     List<Member> membersTurnOrder;
     Member memberToPlay;
     int roundCount;
+    int waveCount;
 
     [SerializeField] AllyMember[] allyMemberTypes;
     [SerializeField] GameObject allyMembersParent;
@@ -34,7 +36,9 @@ public class GameManager : MonoBehaviour
         instance = this;
         Debug.Log("The game begins!");
         membersTurnOrder = new List<Member>();
+        members = new List<Member>();
         roundCount = 0;
+        waveCount = 0;
     }
     private void Update()
     {
@@ -44,10 +48,8 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        members[0].Position = 3;
-        members[1].Position = 4;
-        members[2].Position = 5;
         LoadBuild();
+        SpawnEnemies();
         NextTurn();
     }
 
@@ -215,39 +217,70 @@ public class GameManager : MonoBehaviour
             }
             Destroy(child.gameObject);
         }
-        int allyCount = members.OfType<AllyMember>().Count();
-        for (int i = 0; i < 3; i++)
-        {
-            List<EnemyMember> listPossibleEnemies = new List<EnemyMember>();
-            foreach (GameObject gj in enemyPrefabs)
-            {
-                Debug.Log(gj.GetComponent<EnemyMember>().DesiredPositions.Count + "dpc");
-                if (gj.GetComponent<EnemyMember>().DesiredPositions.Contains(i + 3))
-                {
-                    listPossibleEnemies.Add(gj.GetComponent<EnemyMember>());
-                }
-            }
-            Debug.Log(listPossibleEnemies.Count + " List Pos Enemies");
-            int chosenEnemy = Random.Range(0, listPossibleEnemies.Count);
-            Debug.Log(chosenEnemy + " Chosen Enemy");
-            var enemy = Instantiate(listPossibleEnemies[chosenEnemy], enemyVector3[i], Quaternion.identity, enemiesGJ.transform);
-            enemy.transform.localPosition = enemyVector3[i];
-            enemy.Position = i + 3;
-            Debug.Log(enemy + " Enemy");
-            while (members.Count <= i + allyCount)
-            {
-                members.Add(null);
-            }
-            members[i + allyCount] = enemy.GetComponent<Member>();
-        }
-        membersTurnOrder.Clear();
-        roundCount = 0;
+        SpawnEnemies();
 
         levelUpPanel.gameObject.SetActive(true);
         levelUpPanel.SetUp();
-        levelUpPanel.GetComponent<Animator>().Play("app",0,0);
+        levelUpPanel.GetComponent<Animator>().Play("app", 0, 0);
 
     }
+
+    private void SpawnEnemies()
+    {
+        waveCount++;
+        int allyCount = members.OfType<AllyMember>().Count();
+        if (waveCount == 1)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                List<EnemyMember> listPossibleEnemies = new List<EnemyMember>();
+                foreach (GameObject gj in bossPrefabs)
+                {
+                    listPossibleEnemies.Add(gj.GetComponent<EnemyMember>());
+                }
+
+                var enemy = Instantiate(listPossibleEnemies[i], enemyVector3[i], Quaternion.identity, enemiesGJ.transform);
+
+                enemy.transform.localPosition = enemyVector3[i];
+                enemy.Position = i + 3;
+
+                while (members.Count <= i + allyCount)
+                {
+                    members.Add(null);
+                }
+
+                members[i + allyCount] = enemy.GetComponent<Member>();
+            }
+        }
+        else
+        {
+            
+            for (int i = 0; i < 3; i++)
+            {
+                List<EnemyMember> listPossibleEnemies = new List<EnemyMember>();
+                foreach (GameObject gj in enemyPrefabs)
+                {
+                    Debug.Log(gj.GetComponent<EnemyMember>().DesiredPositions.Count + "dpc");
+                    if (gj.GetComponent<EnemyMember>().DesiredPositions.Contains(i + 3))
+                    {
+                        listPossibleEnemies.Add(gj.GetComponent<EnemyMember>());
+                    }
+                }
+                int chosenEnemy = Random.Range(0, listPossibleEnemies.Count);
+                var enemy = Instantiate(listPossibleEnemies[chosenEnemy], enemyVector3[i], Quaternion.identity, enemiesGJ.transform);
+                enemy.transform.localPosition = enemyVector3[i];
+                enemy.Position = i + 3;
+                while (members.Count <= i + allyCount)
+                {
+                    members.Add(null);
+                }
+                members[i + allyCount] = enemy.GetComponent<Member>();
+            }
+        }
+        membersTurnOrder.Clear();
+        roundCount = 0;
+    }
+
     public void NextWaveReady()
     {
         levelUpPanel.gameObject.SetActive(false);
@@ -258,11 +291,6 @@ public class GameManager : MonoBehaviour
     {
         foreach (Member member in members.ToList())
         {
-            Debug.Log(member);
-        }
-        foreach (Member member in members.ToList())
-        {
-            Debug.Log(member);
             member.EffectsTime();
         }
     }

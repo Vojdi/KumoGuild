@@ -20,7 +20,6 @@ public class EffectBadge : MonoBehaviour
    
     private void OnMouseExit()
     {
-        Debug.Log("Exited");
         ControlPanel.Instance.EffectPanel.gameObject.SetActive(false);
     }
 }
