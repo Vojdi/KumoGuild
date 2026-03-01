@@ -14,7 +14,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<GameObject> enemyPrefabs;
     [SerializeField] GameObject enemiesGJ;
     [SerializeField] Animator nextWaveAnimator;
-    [SerializeField] List<GameObject> bossPrefabs; 
+    [SerializeField] List<GameObject> bossPrefabs;
+    [SerializeField] SpriteRenderer bgSpriteRenderer;
+    [SerializeField] Sprite bgSprite2;
     Vector3[] enemyVector3 = new Vector3[] {new Vector3(0,0,0), new Vector3(2.75f, 2.5f, 0), new Vector3(5.5f,0, 0)};
     Vector3[] allyVector3 = new Vector3[] { new Vector3(-5.0f, 0, 0), new Vector3(-2.5f, 2.5f, 0), new Vector3(0, 0, 0) };
     public List<Member> Members => members;
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour
     Member memberToPlay;
     int roundCount;
     int waveCount;
+    int requiredWaveToBoss = 3;
 
     [SerializeField] AllyMember[] allyMemberTypes;
     [SerializeField] GameObject allyMembersParent;
@@ -229,8 +232,9 @@ public class GameManager : MonoBehaviour
     {
         waveCount++;
         int allyCount = members.OfType<AllyMember>().Count();
-        if (waveCount == 1)
+        if (waveCount == requiredWaveToBoss)
         {
+            bgSpriteRenderer.sprite = bgSprite2;
             for (int i = 0; i < 3; i++)
             {
                 List<EnemyMember> listPossibleEnemies = new List<EnemyMember>();
@@ -283,6 +287,10 @@ public class GameManager : MonoBehaviour
 
     public void NextWaveReady()
     {
+        if (waveCount == requiredWaveToBoss)
+        {
+            AudioManager.Instance.SetBossMusic();
+        }
         levelUpPanel.gameObject.SetActive(false);
         NextTurn();
         ControlPanel.Instance.SetActiveSpeedtup(true);

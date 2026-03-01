@@ -17,10 +17,7 @@ public class EffectBadgeManager : MonoBehaviour
     public Queue<Action> EffectBadgeQueue;
     public bool MidAnimation;
 
-
     public Member Member;
-
-    
 
     List<Color32> effectTextColors = new List<Color32> {new Color32(135,3,220,255), new Color32(0, 133, 255, 255), new Color32(255, 25, 0, 255), new Color32(255, 136, 0, 255), new Color32(193, 21, 0, 255) };
     List<string> effectTextNames = new List<string> { "DoT", "Protection", "Stun", "Stun Resistance", "Taunt" };
@@ -91,6 +88,7 @@ public class EffectBadgeManager : MonoBehaviour
         var anim = instantiatedBadgeTypes[effectTypes.IndexOf(type)].GetComponent<Animator>();
         anim.transform.localPosition = localBadgePositions[CheckForEnabledCount()];
         anim.gameObject.SetActive(true);
+        ResetColliders();
         anim.Play("app",0,0);
     }
     void DisappearEffect(Type type)
@@ -104,7 +102,11 @@ public class EffectBadgeManager : MonoBehaviour
         FixPlacement();
         MidAnimation = false;
         Debug.Log(EffectBadgeQueue.Count + "Count");
-        EffectBadgeQueue.Dequeue().Invoke();
+        if(EffectBadgeQueue.Count != 0)
+        {
+            EffectBadgeQueue.Dequeue().Invoke();
+        }
+        ResetColliders();
         Debug.Log("done");
     }
     public void EffectEnded()
@@ -170,11 +172,7 @@ public class EffectBadgeManager : MonoBehaviour
     }
     public IEnumerator Activate(GameObject badgeGameObject)
     {
-        if (ControlPanel.Instance.EffectPanel.gameObject.GetComponent<CanvasGroup>() != null)
-        {
-            Destroy(ControlPanel.Instance.EffectPanel.gameObject.GetComponent<CanvasGroup>());
-        }
-        var cg = ControlPanel.Instance.EffectPanel.gameObject.AddComponent<CanvasGroup>();
+        var cg = ControlPanel.Instance.EffectPanel.gameObject.GetComponent<CanvasGroup>();
         cg.alpha = 0;
         AssingValuesToEffectPanel(badgeGameObject);
         ControlPanel.Instance.EffectPanel.gameObject.SetActive(true);
@@ -182,7 +180,7 @@ public class EffectBadgeManager : MonoBehaviour
         LayoutRebuilder.ForceRebuildLayoutImmediate(
             ControlPanel.Instance.EffectPanel.GetComponent<RectTransform>()
         );
-        Destroy(cg);
+        cg.alpha = 1;
     }
     public void MoveToPosition(GameObject badgeGameObject)
     {
@@ -190,5 +188,16 @@ public class EffectBadgeManager : MonoBehaviour
         Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
         RectTransform rect = ControlPanel.Instance.EffectPanel.GetComponent<RectTransform>();
         rect.position = screenPos;
+    }
+
+    public void ResetColliders()
+    {
+        foreach(var badge in instantiatedBadgeTypes)
+        {
+            if (badge.activeSelf)
+            {
+                badge.GetComponent<EffectBadge>().ResetCollider();
+            }
+        }
     }
 }

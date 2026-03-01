@@ -22,4 +22,15 @@ public class EffectBadge : MonoBehaviour
     {
         ControlPanel.Instance.EffectPanel.gameObject.SetActive(false);
     }
+    private void OnEnable()
+    {
+       //manager.ResetColliders();
+       //ResetCollider();
+    }
+    public void ResetCollider()
+    {
+        var col = GetComponent<BoxCollider2D>();
+        col.enabled = false;
+        col.enabled = true;
+    }
 }

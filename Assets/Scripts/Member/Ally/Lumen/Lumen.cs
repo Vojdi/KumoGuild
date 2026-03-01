@@ -4,7 +4,7 @@ public class Lumen : AllyMember
 {
     protected override void Awake()
     {
-        maxHealth = 50;
+        maxHealth = 150;
         speed = 7;
         IconId = 5;
         base.Awake();
