@@ -1,16 +1,14 @@
 using UnityEngine;
 
-public class Assassin : MonoBehaviour
+public class Assassin : AllyMember
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void Awake()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        IconId = 20;
+        base.Awake();
+        Skills.Add(Skill.Create<Stab>(this));
+        Skills.Add(Skill.Create<KnifeThrow>(this));
+        Skills.Add(Skill.Create<KnifeThrowArea>(this));
+        Skills.Add(Skill.Create<Gutspiller>(this));
     }
 }

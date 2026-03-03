@@ -1,16 +1,14 @@
 using UnityEngine;
 
-public class Car : MonoBehaviour
+public class Car : AllyMember
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void Awake()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        IconId = 19;
+        base.Awake();
+        Skills.Add(Skill.Create<Claw>(this));
+        Skills.Add(Skill.Create<YarnBall>(this));
+        Skills.Add(Skill.Create<Lick>(this));
+        Skills.Add(Skill.Create<Purr>(this));
     }
 }

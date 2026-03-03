@@ -176,6 +176,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   memberName: Caring Stump
+  maxHealth: 1
+  speed: 10
   Position: 0
   Skills: []
   Targetable: 0

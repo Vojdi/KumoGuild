@@ -53,6 +53,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   memberName: Knight
+  maxHealth: 1
+  speed: 3
   Position: 0
   Skills: []
   Targetable: 0

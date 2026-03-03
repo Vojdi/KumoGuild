@@ -176,6 +176,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   memberName: Mighty Bow
+  maxHealth: 1
+  speed: 3
   Position: 0
   Skills: []
   Targetable: 0

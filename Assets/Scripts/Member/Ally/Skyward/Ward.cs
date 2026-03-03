@@ -4,8 +4,6 @@ public class Ward : AllyMember
 {
     protected override void Awake()
     {
-        maxHealth = 150;
-        speed = 3;
         IconId = 0;
         base.Awake();
         Skills.Add(Skill.Create<AirSlice>(this));

@@ -8,13 +8,13 @@ public class Member : MonoBehaviour
     [SerializeField] protected string memberName;
     public string MemberName => memberName;
     
-    protected int maxHealth;
+    [SerializeField]protected int maxHealth;
     public int MaxHealth => maxHealth;
 
     protected int health;
     public int Health => health;
 
-    protected int speed;
+    [SerializeField] protected int speed;
     public int Speed => speed;
     [HideInInspector] public int Position;
 

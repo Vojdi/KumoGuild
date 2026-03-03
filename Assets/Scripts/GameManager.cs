@@ -14,9 +14,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<GameObject> enemyPrefabs;
     [SerializeField] GameObject enemiesGJ;
     [SerializeField] Animator nextWaveAnimator;
+    [SerializeField] Animator WinAnimator;
+    [SerializeField] Animator loseAnimator;
     [SerializeField] List<GameObject> bossPrefabs;
     [SerializeField] SpriteRenderer bgSpriteRenderer;
     [SerializeField] Sprite bgSprite2;
+   
     Vector3[] enemyVector3 = new Vector3[] {new Vector3(0,0,0), new Vector3(2.75f, 2.5f, 0), new Vector3(5.5f,0, 0)};
     Vector3[] allyVector3 = new Vector3[] { new Vector3(-5.0f, 0, 0), new Vector3(-2.5f, 2.5f, 0), new Vector3(0, 0, 0) };
     public List<Member> Members => members;
@@ -200,8 +203,9 @@ public class GameManager : MonoBehaviour
         }
         else if (!Members.OfType<AllyMember>().Any())
         {
-            Debug.Log("noob");
-            Time.timeScale = 0;
+            loseAnimator.gameObject.SetActive(true);   
+            loseAnimator.Play("app");
+            ControlPanel.Instance.SetActiveSpeedtup(false);
             return true;
         }
         else

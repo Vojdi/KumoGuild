@@ -4,8 +4,6 @@ public class Lumen : AllyMember
 {
     protected override void Awake()
     {
-        maxHealth = 150;
-        speed = 7;
         IconId = 5;
         base.Awake();
         Skills.Add(Skill.Create<LightningSpear>(this));

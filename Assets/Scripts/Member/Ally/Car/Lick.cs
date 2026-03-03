@@ -1,16 +1,30 @@
+using System.Collections.Generic;
 using UnityEngine;
-
-public class Lick : MonoBehaviour
+using System;
+public class Lick : Skill
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    override protected void OnEnable()
     {
-        
-    }
+        base.OnEnable();
+        SkillName = "Lick";
+        AnimName = "lick";
+        SkillRangeType = "single";
+        skillType = "support";
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        ReachablePositions = new List<int> { 0, 1, 2 };
+        UsableFromPositions = new List<int> { 0, 1,2 };
+
+        SelfOnly = false;
+        HasSelfSkill = false;
+
+        skillValuesMin = new List<List<int>> { new List<int> { -8, -11, -14 } };
+        skillValuesMax = new List<List<int>> { new List<int> { -15, -17, -20 } };
+        skillValuesSelf = new List<bool> { false };
+
+        effectTypes = new List<Type>();
+        effectValuesSelf = new List<bool>();
+
+        Level = 0;
+        IconId = 15;
     }
 }
