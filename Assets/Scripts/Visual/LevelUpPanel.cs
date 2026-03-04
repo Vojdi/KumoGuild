@@ -29,6 +29,21 @@ public class LevelUpPanel : MonoBehaviour
         LoadMemberIcons();
         LoadSkillIcons();
     }
+    public bool CheckIfPossibleToUpgrades()
+    {
+        foreach(Member member in GameManager.Instance.Members.Where(m => m is AllyMember))
+        {
+            foreach (Skill skill in member.Skills)
+            {
+                if(skill.Level == 0)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     private void LoadMemberIcons()
     {
         foreach (GameObject gj in memberGjs)
@@ -130,7 +145,7 @@ public class LevelUpPanel : MonoBehaviour
         selectedSkill.Level = 1;
         lvlUpAnimator.Play("dapp", 0, 0);   
     }
-    void CallNextWave()
+    public void CallNextWave()
     {
         nextWaveAnimator.Play("afterLvlUpBg", 0, 0);
     }

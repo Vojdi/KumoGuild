@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   memberName: Assassin
-  maxHealth: 1
+  maxHealth: 100
   speed: 7
   Position: 0
   Skills: []

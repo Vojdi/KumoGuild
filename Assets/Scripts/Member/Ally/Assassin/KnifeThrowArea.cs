@@ -9,7 +9,7 @@ public class KnifeThrowArea : Skill
         base.OnEnable();
         SkillName = "Knife Throw Area";
         AnimName = "KnifeThrowArea";
-        SkillRangeType = "area";
+        SkillRangeType = "multi";
         skillType = "attack";
 
         ReachablePositions = new List<int> {  3,4,5 };

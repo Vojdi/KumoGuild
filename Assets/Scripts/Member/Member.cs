@@ -159,5 +159,8 @@ public class Member : MonoBehaviour
         Destroy(hpBadge.transform.parent.gameObject);
         Destroy(GetComponent<Animator>()); 
         GetComponent<SpriteRenderer>().sprite = ImageManager.Instance.GetSprite(10);
+        if (this is Archer) {
+            GameManager.Instance.Victory();     
+        }
     }
 }

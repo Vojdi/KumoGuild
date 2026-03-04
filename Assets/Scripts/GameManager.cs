@@ -14,24 +14,25 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<GameObject> enemyPrefabs;
     [SerializeField] GameObject enemiesGJ;
     [SerializeField] Animator nextWaveAnimator;
-    [SerializeField] Animator WinAnimator;
+    [SerializeField] Animator winAnimator;
     [SerializeField] Animator loseAnimator;
     [SerializeField] List<GameObject> bossPrefabs;
     [SerializeField] SpriteRenderer bgSpriteRenderer;
     [SerializeField] Sprite bgSprite2;
-   
-    Vector3[] enemyVector3 = new Vector3[] {new Vector3(0,0,0), new Vector3(2.75f, 2.5f, 0), new Vector3(5.5f,0, 0)};
+
+    Vector3[] enemyVector3 = new Vector3[] { new Vector3(0, 0, 0), new Vector3(2.75f, 2.5f, 0), new Vector3(5.5f, 0, 0) };
     Vector3[] allyVector3 = new Vector3[] { new Vector3(-5.0f, 0, 0), new Vector3(-2.5f, 2.5f, 0), new Vector3(0, 0, 0) };
     public List<Member> Members => members;
     List<Member> membersTurnOrder;
     Member memberToPlay;
     int roundCount;
     int waveCount;
-    int requiredWaveToBoss = 3;
+    int requiredWaveToBoss = 4;
 
     [SerializeField] AllyMember[] allyMemberTypes;
     [SerializeField] GameObject allyMembersParent;
     [SerializeField] LevelUpPanel levelUpPanel;
+    bool bossDead;
 
 
 
@@ -45,10 +46,12 @@ public class GameManager : MonoBehaviour
         members = new List<Member>();
         roundCount = 0;
         waveCount = 0;
+        bossDead = false;
     }
     private void Update()
     {
-        if (Input.GetKey(KeyCode.R)) { 
+        if (Input.GetKey(KeyCode.R))
+        {
             Restart();
         }
     }
@@ -159,7 +162,7 @@ public class GameManager : MonoBehaviour
 
     public void NextTurn()
     {
-        if(CheckForBattleEnd())
+        if (CheckForBattleEnd())
         {
             return;
         }
@@ -171,7 +174,7 @@ public class GameManager : MonoBehaviour
             {
                 return;
             }
-            VisualEffectManager.Instance.ActionQueue.Enqueue(() =>VisualEffectManager.Instance.NewRound(roundCount));
+            VisualEffectManager.Instance.ActionQueue.Enqueue(() => VisualEffectManager.Instance.NewRound(roundCount));
             DetermineTurnOrder();
         }
         ControlPanel.Instance.AbleToCheckEffects = true;
@@ -195,6 +198,20 @@ public class GameManager : MonoBehaviour
     }
     bool CheckForBattleEnd()
     {
+        if (bossDead)
+        {
+            winAnimator.gameObject.SetActive(true);
+            winAnimator.Play("app");
+            ControlPanel.Instance.SetActiveSpeedtup(false);
+            foreach (Member member in Members.ToList())
+            {
+                if (member is EnemyMember)
+                {
+                    MemberDied(member);
+                }
+            }
+            return true;
+        }
         if (!Members.OfType<EnemyMember>().Any())
         {
             nextWaveAnimator.Play("nextWaveBg", 0, 0);
@@ -203,7 +220,7 @@ public class GameManager : MonoBehaviour
         }
         else if (!Members.OfType<AllyMember>().Any())
         {
-            loseAnimator.gameObject.SetActive(true);   
+            loseAnimator.gameObject.SetActive(true);
             loseAnimator.Play("app");
             ControlPanel.Instance.SetActiveSpeedtup(false);
             return true;
@@ -212,7 +229,7 @@ public class GameManager : MonoBehaviour
         {
             return false;
         }
-    } 
+    }
     public void NextWaveSpawn()
     {
         foreach (Transform child in enemiesGJ.transform)
@@ -227,11 +244,14 @@ public class GameManager : MonoBehaviour
         SpawnEnemies();
 
         levelUpPanel.gameObject.SetActive(true);
+        if (!levelUpPanel.CheckIfPossibleToUpgrades())
+        {
+            levelUpPanel.CallNextWave();
+            return;
+        }
         levelUpPanel.SetUp();
         levelUpPanel.GetComponent<Animator>().Play("app", 0, 0);
-
     }
-
     private void SpawnEnemies()
     {
         waveCount++;
@@ -262,7 +282,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            
+
             for (int i = 0; i < 3; i++)
             {
                 List<EnemyMember> listPossibleEnemies = new List<EnemyMember>();
@@ -309,5 +329,10 @@ public class GameManager : MonoBehaviour
     void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void Victory()
+    {
+        bossDead = true;
     }
 }

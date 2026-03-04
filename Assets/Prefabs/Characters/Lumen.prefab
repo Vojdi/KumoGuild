@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   memberName: Sorceress
-  maxHealth: 1
+  maxHealth: 100
   speed: 4
   Position: 0
   Skills: []

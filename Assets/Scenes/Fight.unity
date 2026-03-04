@@ -2345,7 +2345,7 @@ MonoBehaviour:
   - {fileID: 4129316596348512792, guid: d2d6053c106c90a4d8200be122f3bea7, type: 3}
   enemiesGJ: {fileID: 116614697}
   nextWaveAnimator: {fileID: 1642702437}
-  WinAnimator: {fileID: 498085902}
+  winAnimator: {fileID: 498085902}
   loseAnimator: {fileID: 1710086091}
   bossPrefabs:
   - {fileID: 4129316596348512792, guid: 960123531f3c3aa49829552c33f54707, type: 3}
@@ -7066,7 +7066,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You have successfully defeated the source of evil in the forest!
+  m_text: You have successfully defeated the evil of the forest!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ea3febd2a652e944cbc6ba9ae7d35fed, type: 2}
   m_sharedMaterial: {fileID: 2390640544149086462, guid: ea3febd2a652e944cbc6ba9ae7d35fed, type: 2}
