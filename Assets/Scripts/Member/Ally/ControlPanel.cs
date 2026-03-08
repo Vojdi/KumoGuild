@@ -13,9 +13,12 @@ public class ControlPanel : MonoBehaviour
     [SerializeField] Image memberIcon;
     [SerializeField] Sprite[] timeSpeedIcons;
     [SerializeField] Transform skillsParent;
+    [SerializeField] Transform[] notTurnedoff;
     [SerializeField] Transform speedupTransform;
+    [SerializeField] Transform pauseTransform;
     [SerializeField] RectTransform infoPanelRectTransform;
     [SerializeField] Canvas canvas;
+    [SerializeField] Sprite[] timeStopIcons;
 
     [SerializeField] TMPro.TMP_Text infoBoxName;
     [SerializeField] TMPro.TMP_Text infoBoxSkillType;
@@ -33,13 +36,17 @@ public class ControlPanel : MonoBehaviour
 
     int selectedButtonIndex;
     bool spedUp;
+    bool stopped;
+    float lastTimeSpeed;
     public bool AbleToCheckEffects;
 
     private void Awake()
     {
+        lastTimeSpeed = 1f;
         instance = this;
         selectedButtonIndex = -1;
         spedUp = false;
+        stopped = false;
     }
     public void AllyTurn(AllyMember member)
     {
@@ -214,7 +221,7 @@ public class ControlPanel : MonoBehaviour
         }
         foreach (Transform child in transform)
         {
-            if (child != speedupTransform)
+            if (!notTurnedoff.Contains(child))
             {
                 CanvasGroup cg = child.gameObject.AddComponent<CanvasGroup>();
                 cg.alpha = 0;
@@ -248,6 +255,10 @@ public class ControlPanel : MonoBehaviour
             Time.timeScale = 2;
         }
     }
+    public void SettingsClicked()
+    {
+        GameManager.Instance.OptionsDecide();
+    }
 
     void SetMemberIcon()
     {
@@ -261,6 +272,7 @@ public class ControlPanel : MonoBehaviour
     }
     public void SetActiveSpeedtup(bool active)
     {
+        pauseTransform.gameObject.SetActive(active);
         speedupTransform.gameObject.SetActive(active);
         if (!active)
         {
@@ -277,5 +289,29 @@ public class ControlPanel : MonoBehaviour
                 Time.timeScale = 1;
             }
         }
+    }
+    public void PausePlay()
+    {
+        if (stopped)
+        {
+            stopped = false;
+            pauseTransform.gameObject.GetComponent<Image>().sprite = timeStopIcons[0];
+            speedupTransform.gameObject.GetComponent<Button>().interactable = true;
+            Time.timeScale = lastTimeSpeed;
+        }
+        else
+        {
+            stopped = true;
+            lastTimeSpeed = Time.timeScale;
+            Time.timeScale = 0;
+            pauseTransform.gameObject.GetComponent<Image>().sprite = timeStopIcons[1];
+            speedupTransform.gameObject.GetComponent<Button>().interactable = false;
+        }
+    }
+    public void PassTurn()
+    {
+        StartCoroutine(EnableControls(false));
+        memberOnTurn.PassTurn();
+
     }
 }

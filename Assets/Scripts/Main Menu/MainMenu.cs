@@ -8,9 +8,23 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] OnTextHover settingsButton;
     [SerializeField] OnTextHover teamSelectButton;
+    [SerializeField] AudioSource source;
+    [SerializeField] TMPro.TMP_Text winCounter;
+    [SerializeField] TMPro.TMP_Text lossCounter;
 
 
-
+    private void Start()
+    {
+        float ppa = PlayerPrefs.GetFloat("audio");
+        if(ppa != 0)
+        {
+            source.volume = ppa;
+        }
+        Settings.Instance.PrepSound();
+        
+        winCounter.text = $"Wins: {PlayerPrefs.GetInt("wins").ToString()}";
+        lossCounter.text = $"Losses: {PlayerPrefs.GetInt("losses").ToString()}";
+    }
     public void ToSettingButtonClick()
     {
         mainMenuGj.SetActive(false);

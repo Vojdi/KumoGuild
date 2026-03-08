@@ -15,6 +15,16 @@ public class Settings : MonoBehaviour
     [SerializeField] TMPro.TMP_Dropdown resolutionDropdown;
     [SerializeField] Toggle fullscreenToggle;
 
+    static Settings instance;
+    public static Settings Instance => instance;
+    private void Awake()
+    {
+        instance = this;
+    }
+    public void PrepSound()
+    {
+        musicSlider.value = musicSource.volume;
+    }
     public void ToReturnButtonClick()
     {
        settingsGj.SetActive(false);

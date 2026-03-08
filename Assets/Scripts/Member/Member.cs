@@ -58,6 +58,11 @@ public class Member : MonoBehaviour
             GameManager.Instance.NextTurn();
         }
     }
+    public void PassTurn()
+    {
+        TurnIndicatorAnimator.Play("disappear");
+        GameManager.Instance.NextTurn();
+    }
     public void Damage(int damage, bool protectionBypass)
     {
         if(damage < 0)

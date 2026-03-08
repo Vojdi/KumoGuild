@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<GameObject> bossPrefabs;
     [SerializeField] SpriteRenderer bgSpriteRenderer;
     [SerializeField] Sprite bgSprite2;
+    [SerializeField] OptionsPanel options;
+    [SerializeField] AudioSource source;
 
     Vector3[] enemyVector3 = new Vector3[] { new Vector3(0, 0, 0), new Vector3(2.75f, 2.5f, 0), new Vector3(5.5f, 0, 0) };
     Vector3[] allyVector3 = new Vector3[] { new Vector3(-5.0f, 0, 0), new Vector3(-2.5f, 2.5f, 0), new Vector3(0, 0, 0) };
@@ -50,16 +52,25 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKey(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Restart();
+            OptionsDecide();
         }
     }
     private void Start()
     {
+        source.volume = PlayerPrefs.GetFloat("audio");
         LoadBuild();
         SpawnEnemies();
         NextTurn();
+    }
+    public void OptionsDecide()
+    {
+        if (!options.gameObject.activeSelf)
+        {
+            options.gameObject.SetActive(true);
+        }
+        options.Decide();
     }
 
     private void LoadBuild()
@@ -326,11 +337,6 @@ public class GameManager : MonoBehaviour
             member.EffectsTime();
         }
     }
-    void Restart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
     public void Victory()
     {
         bossDead = true;

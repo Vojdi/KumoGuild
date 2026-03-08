@@ -33,6 +33,7 @@ public class TeamSelection : MonoBehaviour
     List<Skill> availableSkills;
     List<List<Skill>> skillTypes;
     Skill[] selectedSkills;
+    [SerializeField] AudioSource source;
 
     private void Awake()
     {
@@ -221,6 +222,7 @@ public class TeamSelection : MonoBehaviour
                 prefString += selectedSkills[j].SkillName;
             }
         }
+        PlayerPrefs.SetFloat("audio", source.volume);
         PlayerPrefs.SetString("build", prefString);
         SceneManager.LoadScene("Fight");
     }
