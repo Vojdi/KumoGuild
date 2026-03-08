@@ -128,8 +128,8 @@ public class ControlPanel : MonoBehaviour
     }
     void InfoBoxSetup()
     {
+        infoBoxSkillType.gameObject.SetActive(true);
         infoBoxName.text = Skill.GetInfoForInfoBox(hoveredOverSkill, "name")[0];
-
         List<string> arr = Skill.GetInfoForInfoBox(hoveredOverSkill, "skillType");
         infoBoxSkillType.text = $"{arr[0]}/{arr[1]}";
         if (arr[0] == "attack")
@@ -175,6 +175,24 @@ public class ControlPanel : MonoBehaviour
             infoBoxStatTexts[i].text = arr[i];
             infoBoxStatTexts[i].gameObject.SetActive(true);
         }
+    }
+    public IEnumerator ControlHoveredOver(GameObject btn, string title)
+    {
+        ControlInfoSetup(title);
+        var cg = infoPanelRectTransform.gameObject.AddComponent<CanvasGroup>();
+        cg.alpha = 0;
+        infoPanelRectTransform.gameObject.SetActive(true);
+        infoPanelRectTransform.position = btn.transform.position + new Vector3(0, 100f * canvas.scaleFactor);
+        yield return null;
+        Destroy(cg);
+    }
+    void ControlInfoSetup(string title)
+    {
+        infoBoxName.text = title;
+        foreach (Transform obj in infoPanelRectTransform.transform) { 
+            obj.gameObject.SetActive(false);
+        }
+        infoPanelRectTransform.transform.GetChild(0).gameObject.SetActive(true);
     }
     public void SkillHoveredOut()
     {
