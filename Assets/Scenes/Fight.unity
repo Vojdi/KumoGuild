@@ -4784,6 +4784,9 @@ MonoBehaviour:
   pauseTransform: {fileID: 913237844}
   infoPanelRectTransform: {fileID: 1738289572}
   canvas: {fileID: 1489223635}
+  timeStopIcons:
+  - {fileID: 21300000, guid: 306abf392b4608b42b8470c44afef166, type: 3}
+  - {fileID: 21300000, guid: 1a8b70a691a8b6f4abd8cca38640ca82, type: 3}
   infoBoxName: {fileID: 1872885976}
   infoBoxSkillType: {fileID: 1999225911}
   infoBoxPositionPanels:
@@ -7425,11 +7428,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 595834559}
         m_TargetAssemblyTypeName: ControlPanel, Assembly-CSharp
-        m_MethodName: SpeedupClicked
-        m_Mode: 2
+        m_MethodName: PausePlay
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 913237848}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -14238,7 +14241,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1924197917
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14317,11 +14320,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 595834559}
         m_TargetAssemblyTypeName: ControlPanel, Assembly-CSharp
-        m_MethodName: SpeedupClicked
-        m_Mode: 2
+        m_MethodName: PassTurn
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1924197921}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
