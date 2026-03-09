@@ -214,6 +214,7 @@ public class GameManager : MonoBehaviour
             winAnimator.gameObject.SetActive(true);
             winAnimator.Play("app");
             ControlPanel.Instance.SetActiveSpeedtup(false);
+            ControlPanel.Instance.TurnOffSettinsButton();
             foreach (Member member in Members.ToList())
             {
                 if (member is EnemyMember)

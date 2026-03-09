@@ -2997,6 +2997,7 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 4129316596348512792, guid: c93804edcd383de449f0c5bc2386801d, type: 3}
   - {fileID: 4129316596348512792, guid: d2d6053c106c90a4d8200be122f3bea7, type: 3}
+  - {fileID: 4129316596348512792, guid: 138f6d69775622740a23b7610a060f1d, type: 3}
   enemiesGJ: {fileID: 116614697}
   nextWaveAnimator: {fileID: 1642702437}
   winAnimator: {fileID: 498085902}
@@ -4801,6 +4802,7 @@ MonoBehaviour:
   timeStopIcons:
   - {fileID: 21300000, guid: 306abf392b4608b42b8470c44afef166, type: 3}
   - {fileID: 21300000, guid: 1a8b70a691a8b6f4abd8cca38640ca82, type: 3}
+  optionsTransform: {fileID: 0}
   infoBoxName: {fileID: 1872885976}
   infoBoxSkillType: {fileID: 1999225911}
   infoBoxPositionPanels:

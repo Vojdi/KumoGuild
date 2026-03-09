@@ -19,6 +19,7 @@ public class ControlPanel : MonoBehaviour
     [SerializeField] RectTransform infoPanelRectTransform;
     [SerializeField] Canvas canvas;
     [SerializeField] Sprite[] timeStopIcons;
+    [SerializeField] Transform optionsTransform;
 
     [SerializeField] TMPro.TMP_Text infoBoxName;
     [SerializeField] TMPro.TMP_Text infoBoxSkillType;
@@ -332,4 +333,9 @@ public class ControlPanel : MonoBehaviour
         memberOnTurn.PassTurn();
 
     }
+    public void TurnOffSettinsButton()
+    {
+        optionsTransform.gameObject.SetActive(false);
+    }
 }
+
