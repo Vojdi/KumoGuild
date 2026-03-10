@@ -222,6 +222,70 @@ public class Skill : ScriptableObject
             }
 
         }
+        if (stringType == "stats2")
+        {
+            if (skill.skillValuesSelf.Count(b => b == false) > 0 || skill.effectValuesSelf.Count(b => b == false) > 0)
+            {
+                if (skill.SkillRangeType == "single")
+                {
+                    list.Add("Target:");
+                }
+                else
+                {
+                    list.Add("Targets:");
+                }
+            }
+            for (int i = 0; i < skill.skillValuesSelf.Count; i++)
+            {
+                if (!skill.skillValuesSelf[i])
+                {
+                    if (skill.skillValuesMin[i][skill.Level] > 0)
+                    {
+                        list.Add($"{skill.skillValuesMin[i][0]} - {skill.skillValuesMax[i][0]} -) {skill.skillValuesMin[i][1]} - {skill.skillValuesMax[i][1]} dmg");
+                    }
+                    else
+                    {
+                        list.Add($"{Math.Abs(skill.skillValuesMin[i][0])} - {Math.Abs(skill.skillValuesMax[i][0])} -) {Math.Abs(skill.skillValuesMin[i][1])} - {Math.Abs(skill.skillValuesMax[i][1])} heal");   
+                    }
+                }
+            }
+            for (int i = 0; i < skill.effectValuesSelf.Count; i++)
+            {
+                if (!skill.effectValuesSelf[i])
+                {
+                    Effect temp = (Effect)Activator.CreateInstance(skill.effectTypes[i], 0, 0);
+                    list.Add($"{temp.InfoBoxSyntax(skill.effectLengths[i][0], skill.effectValues[i][0], false)} -) {temp.InfoBoxSyntax(skill.effectLengths[i][1], skill.effectValues[i][1], false)}");
+                }
+            }
+
+            if (skill.skillValuesSelf.Count(b => b == true) > 0 || skill.effectValuesSelf.Count(b => b == true) > 0)
+            {
+                list.Add("Self:");
+            }
+            for (int i = 0; i < skill.skillValuesSelf.Count; i++)
+            {
+                if (skill.skillValuesSelf[i])
+                {
+                    if (skill.skillValuesMin[i][skill.Level] > 0)
+                    {
+                        list.Add($"{skill.skillValuesMin[i][0]} - {skill.skillValuesMax[i][0]} -) {skill.skillValuesMin[i][1]} - {skill.skillValuesMax[i][1]} dmg");
+                    }
+                    else
+                    {
+                        list.Add($"{Math.Abs(skill.skillValuesMin[i][0])} - {Math.Abs(skill.skillValuesMax[i][0])} -) {Math.Abs(skill.skillValuesMin[i][1])} - {Math.Abs(skill.skillValuesMax[i][1])} heal");
+                    }
+                }
+            }
+            for (int i = 0; i < skill.effectValuesSelf.Count; i++)
+            {
+                if (skill.effectValuesSelf[i])
+                {
+                    Effect temp = (Effect)Activator.CreateInstance(skill.effectTypes[i], 0, 0);
+                    list.Add($"{temp.InfoBoxSyntax(skill.effectLengths[i][0], skill.effectValues[i][0], false)} -) {temp.InfoBoxSyntax(skill.effectLengths[i][1], skill.effectValues[i][1], false)}");
+                }
+            }
+
+        }
         return list;
     }
 }

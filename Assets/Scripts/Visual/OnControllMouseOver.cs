@@ -20,4 +20,12 @@ public class OnControllMouseOver : MonoBehaviour,IPointerEnterHandler,IPointerEx
         yield return new WaitForSeconds(0.6f * Time.timeScale);
         StartCoroutine(ControlPanel.Instance.ControlHoveredOver(this.gameObject, title));
     }
+    private void OnDisable()
+    {
+        if(holdCoroutine != null)
+        {
+            StopCoroutine(holdCoroutine);
+            ControlPanel.Instance.SkillHoveredOut();
+        }
+    }
 }

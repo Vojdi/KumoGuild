@@ -1,12 +1,16 @@
 using NUnit.Framework.Internal.Filters;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class LevelUpPanel : MonoBehaviour
 {
+    static LevelUpPanel instance;
+    public static LevelUpPanel Instance => instance;
     [SerializeField] GameObject [] memberGjs;
     [SerializeField] GameObject [] skillsGjs;
     [SerializeField] Sprite missingMemberIconSprite;
@@ -19,9 +23,19 @@ public class LevelUpPanel : MonoBehaviour
 
     GameObject selectedGj;
     Skill selectedSkill;
+
+    Skill hoveredOverSkill;
+    [SerializeField] Canvas canvas;
+    [SerializeField] TMPro.TMP_Text infoBoxName;
+    [SerializeField] TMPro.TMP_Text infoBoxSkillType;
+    [SerializeField] List<GameObject> infoBoxPositionPanels;
+    [SerializeField] List<TMPro.TMP_Text> infoBoxStatTexts;
+    [SerializeField] RectTransform infoPanelRectTransform;
+    Member memberHoveredOver;
     private void Start()
     {
-        lvlUpAnimator = GetComponent<Animator>();   
+        lvlUpAnimator = GetComponent<Animator>();
+        instance = this;
     }
     public void SetUp()
     {
@@ -148,5 +162,87 @@ public class LevelUpPanel : MonoBehaviour
     public void CallNextWave()
     {
         nextWaveAnimator.Play("afterLvlUpBg", 0, 0);
+    }
+    public IEnumerator SkillHoveredOver(int index)
+    {
+        GameObject gj = skillsGjs[index];
+        int positionIndex = Array.IndexOf(skillsGjs, gj) / 2;
+        int memberSkillIndex;
+        if (Array.IndexOf(skillsGjs, selectedGj) % 2 == 0)
+        {
+            memberSkillIndex = 0;
+        }
+        else
+        {
+            memberSkillIndex = 1;
+        }
+        memberHoveredOver = GameManager.Instance.Members.FirstOrDefault(m => m.Position == positionIndex);
+        hoveredOverSkill = GameManager.Instance.Members.FirstOrDefault(m => m.Position == positionIndex).Skills[memberSkillIndex];
+
+
+
+        InfoBoxSetup();
+        var btn = skillsGjs[index];
+        var cg = infoPanelRectTransform.gameObject.AddComponent<CanvasGroup>();
+        cg.alpha = 0;
+        infoPanelRectTransform.gameObject.SetActive(true);
+        infoPanelRectTransform.position = btn.transform.position + new Vector3(0, 50 * canvas.scaleFactor);
+        yield return null;
+        Destroy(cg);
+
+    }
+    public void SkillHoveredOut()
+    {
+        infoPanelRectTransform.gameObject.SetActive(false);
+    }
+    void InfoBoxSetup()
+    {
+        infoBoxSkillType.gameObject.SetActive(true);
+        infoBoxName.text = Skill.GetInfoForInfoBox(hoveredOverSkill, "name")[0];
+        List<string> arr = Skill.GetInfoForInfoBox(hoveredOverSkill, "skillType");
+        infoBoxSkillType.text = $"{arr[0]}/{arr[1]}";
+        if (arr[0] == "attack")
+        {
+            infoBoxSkillType.color = new Color32(255, 9, 71, 255);
+        }
+        else
+        {
+            infoBoxSkillType.color = new Color32(0, 255, 128, 255);
+        }
+
+        arr = Skill.GetInfoForInfoBox(hoveredOverSkill, "positions");
+        if (arr[0] == "self")
+        {
+            foreach (var panel in infoBoxPositionPanels)
+            {
+                panel.gameObject.SetActive(true);
+            }
+            infoBoxPositionPanels[memberHoveredOver.Position].SetActive(false);
+        }
+        else
+        {
+            for (int i = 0; i < infoBoxPositionPanels.Count; i++)
+            {
+                if (arr[i] == "true")
+                {
+                    infoBoxPositionPanels[i].gameObject.SetActive(false);
+                }
+                else
+                {
+                    infoBoxPositionPanels[i].gameObject.SetActive(true);
+                }
+            }
+        }
+
+        arr = Skill.GetInfoForInfoBox(hoveredOverSkill, "stats2");
+        foreach (var statText in infoBoxStatTexts)
+        {
+            statText.gameObject.SetActive(false);
+        }
+        for (int i = 0; i < arr.Count; i++)
+        {
+            infoBoxStatTexts[i].text = arr[i];
+            infoBoxStatTexts[i].gameObject.SetActive(true);
+        }
     }
 }

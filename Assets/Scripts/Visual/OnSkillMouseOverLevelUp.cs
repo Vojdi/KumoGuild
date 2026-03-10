@@ -1,9 +1,8 @@
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Collections;
 
-public class OnSkillMouseOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class OnSkillMouseOverLevelUp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] int buttonId;
     Coroutine holdCoroutine;
@@ -12,14 +11,14 @@ public class OnSkillMouseOver : MonoBehaviour, IPointerEnterHandler, IPointerExi
         holdCoroutine = StartCoroutine(HoldMouseOver());
     }
     public void OnPointerExit(PointerEventData pointerEventData)
-    { 
+    {
         StopCoroutine(holdCoroutine);
-        ControlPanel.Instance.SkillHoveredOut();
+        LevelUpPanel.Instance.SkillHoveredOut();
     }
     IEnumerator HoldMouseOver()
     {
         yield return new WaitForSeconds(0.6f * Time.timeScale);
-        StartCoroutine(ControlPanel.Instance.SkillHoveredOver(buttonId));
+        StartCoroutine(LevelUpPanel.Instance.SkillHoveredOver(buttonId));
     }
     private void OnDisable()
     {

@@ -23,6 +23,7 @@ public class ControlPanel : MonoBehaviour
 
     [SerializeField] TMPro.TMP_Text infoBoxName;
     [SerializeField] TMPro.TMP_Text infoBoxSkillType;
+    [SerializeField] GameObject squaresParent;
     [SerializeField] List<GameObject> infoBoxPositionPanels;
     [SerializeField] List<TMPro.TMP_Text> infoBoxStatTexts;
     [SerializeField] GameObject effectPanel;
@@ -129,6 +130,7 @@ public class ControlPanel : MonoBehaviour
     }
     void InfoBoxSetup()
     {
+        squaresParent.SetActive(true);
         infoBoxSkillType.gameObject.SetActive(true);
         infoBoxName.text = Skill.GetInfoForInfoBox(hoveredOverSkill, "name")[0];
         List<string> arr = Skill.GetInfoForInfoBox(hoveredOverSkill, "skillType");
@@ -189,6 +191,7 @@ public class ControlPanel : MonoBehaviour
     }
     void ControlInfoSetup(string title)
     {
+        squaresParent.SetActive(false);
         infoBoxName.text = title;
         foreach (Transform obj in infoPanelRectTransform.transform) { 
             obj.gameObject.SetActive(false);
