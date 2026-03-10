@@ -33,6 +33,7 @@ public class Settings : MonoBehaviour
     public void OnMusicSliderValueChanged()
     {
         musicSource.volume = musicSlider.value;
+        PlayerPrefs.SetFloat("audio", musicSource.volume);
     }
     public void OnResolutionDropdownChanged()
     {

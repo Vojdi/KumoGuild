@@ -10,6 +10,5 @@ public class PressAnyKeyTextEventBridge : MonoBehaviour
     void Appeared()
     {
         StoryScene.Instance.EnableSkip();
-        animator.Play("pressAnyKeyIdle");
     }
 }

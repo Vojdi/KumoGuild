@@ -4,6 +4,7 @@ public class MainCameraEventBridge : MonoBehaviour
 {
     void Ended()
     {
-        StoryScene.Instance.AppearText();
+        StoryScene.Instance.NextText();
+        StoryScene.Instance.AppearPressAnyKeyText();
     }
 }

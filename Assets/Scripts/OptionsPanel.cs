@@ -41,6 +41,7 @@ public class OptionsPanel : MonoBehaviour
     public void SliderChanged()
     {
         audioSource.volume = slider.value;
+        PlayerPrefs.SetFloat("audio",   audioSource.volume);
     }
     public void Quit()
     {
