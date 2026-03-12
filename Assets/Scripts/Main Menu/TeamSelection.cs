@@ -1,13 +1,16 @@
-using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine.UI;
-using Unity.Android.Types;
 using System.Linq;
+using Unity.Android.Types;
+using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TeamSelection : MonoBehaviour
 {
+    static TeamSelection instance;
+    public static TeamSelection Instance => instance;
     [SerializeField] GameObject mainMenuGj;
     [SerializeField] GameObject teamSelectionGj;
 
@@ -16,6 +19,7 @@ public class TeamSelection : MonoBehaviour
 
     [SerializeField] Sprite[] plusIcons;
     [SerializeField] Sprite[] crossIcons;
+    [SerializeField] Sprite[] returnIcons;
 
     [SerializeField] Sprite[] charIcons;
     [SerializeField] List<AllyMember> allyMemberTypes;
@@ -35,15 +39,28 @@ public class TeamSelection : MonoBehaviour
     Skill[] selectedSkills;
     [SerializeField] AudioSource source;
 
+    [SerializeField] TMPro.TMP_Text infoBoxName;
+    [SerializeField] TMPro.TMP_Text infoBoxSkillType;
+    [SerializeField] GameObject squaresParent;
+    [SerializeField] List<GameObject> infoBoxPositionPanels;
+    [SerializeField] List<TMPro.TMP_Text> infoBoxStatTexts;
+    [SerializeField] RectTransform infoPanelRectTransform;
+    Skill hoveredOverSkill;
+    Member hoveredOverSkillMember;
+    [SerializeField] Canvas canvas;
+
+
+
     private void Awake()
     {
+        instance = this;
         availableAllyMembers = new List<AllyMember>();
         selectedAllyMembers = new AllyMember[3];
         availableSkills = new List<Skill>();
         selectedSkills = new Skill[6];
         skillTypes = new List<List<Skill>>();
     }
-    
+
     private void Start()
     {
         foreach (AllyMember member in allyMemberTypes)
@@ -63,6 +80,75 @@ public class TeamSelection : MonoBehaviour
             skillTypes.Add(skillsForAlly);
         }
     }
+    public IEnumerator SkillHoveredOver(int index)
+    {
+        hoveredOverSkill = availableSkills[index];
+        hoveredOverSkillMember = hoveredOverSkill.SelfMember;
+        hoveredOverSkillMember.Position = currentCharSlot;
+        InfoBoxSetup();
+        var btn = skillSlots[index + 1];
+        var cg = infoPanelRectTransform.gameObject.AddComponent<CanvasGroup>();
+        cg.alpha = 0;
+        infoPanelRectTransform.gameObject.SetActive(true);
+        infoPanelRectTransform.position = btn.transform.position + new Vector3(0, 100f * canvas.scaleFactor);
+        yield return null;
+        Destroy(cg);
+    }
+    void InfoBoxSetup()
+    {
+        squaresParent.SetActive(true);
+        infoBoxSkillType.gameObject.SetActive(true);
+        infoBoxName.text = Skill.GetInfoForInfoBox(hoveredOverSkill, "name")[0];
+        List<string> arr = Skill.GetInfoForInfoBox(hoveredOverSkill, "skillType");
+        infoBoxSkillType.text = $"{arr[0]}/{arr[1]}";
+        if (arr[0] == "attack")
+        {
+            infoBoxSkillType.color = new Color32(255, 9, 71, 255);
+        }
+        else
+        {
+            infoBoxSkillType.color = new Color32(0, 255, 128, 255);
+        }
+
+        arr = Skill.GetInfoForInfoBox(hoveredOverSkill, "positions");
+        if (arr[0] == "self")
+        {
+            foreach (var panel in infoBoxPositionPanels)
+            {
+                panel.gameObject.SetActive(true);
+            }
+            infoBoxPositionPanels[hoveredOverSkillMember.Position].SetActive(false);
+        }
+        else
+        {
+            for (int i = 0; i < infoBoxPositionPanels.Count; i++)
+            {
+                if (arr[i] == "true")
+                {
+                    infoBoxPositionPanels[i].gameObject.SetActive(false);
+                }
+                else
+                {
+                    infoBoxPositionPanels[i].gameObject.SetActive(true);
+                }
+            }
+        }
+
+        arr = Skill.GetInfoForInfoBox(hoveredOverSkill, "stats");
+        foreach (var statText in infoBoxStatTexts)
+        {
+            statText.gameObject.SetActive(false);
+        }
+        for (int i = 0; i < arr.Count; i++)
+        {
+            infoBoxStatTexts[i].text = arr[i];
+            infoBoxStatTexts[i].gameObject.SetActive(true);
+        }
+    }
+    public void SkillHoveredOut()
+    {
+        infoPanelRectTransform.gameObject.SetActive(false);
+    }
     public void BackToMainMenu()
     {
         teamSelectionGj.SetActive(false);
@@ -71,13 +157,7 @@ public class TeamSelection : MonoBehaviour
     public void AddMemberButtonClicked(int id)
     {
         currentCharSlot = id;
-        ResetSlots(); 
-        if (selectedAllyMembers[currentCharSlot] != null)
-        {
-            AllyMember ally = selectedAllyMembers[currentCharSlot];
-            selectedAllyMembers[currentCharSlot] = null;
-            availableAllyMembers.Add(ally);
-        }
+
         teamSelectionGj.SetActive(false);
         charSelect.SetActive(true);
         ShowCharacterSelectPanel(id);
@@ -87,28 +167,40 @@ public class TeamSelection : MonoBehaviour
         foreach (GameObject slot in charSlots) {
             slot.SetActive(false);
         }
-        charSlots[0].transform.GetComponentInChildren<Image>().sprite = crossIcons[0];
+        charSlots[0].transform.GetComponentInChildren<Image>().sprite = returnIcons[0];
         charSlots[0].SetActive(true);
-        for (int i = 0; i < availableAllyMembers.Count; i++) 
+        charSlots[1].transform.GetComponentInChildren<Image>().sprite = crossIcons[0];
+        charSlots[1].SetActive(true);
+
+        for (int i = 0; i < availableAllyMembers.Count; i++)
         {
-            charSlots[i + 1].transform.GetComponentInChildren<Image>().sprite = charIcons[allyMemberTypes.IndexOf(availableAllyMembers[i])];
-            charSlots[i + 1].SetActive(true);   
+            charSlots[i + 2].transform.GetComponentInChildren<Image>().sprite = charIcons[allyMemberTypes.IndexOf(availableAllyMembers[i])];
+            charSlots[i + 2].SetActive(true);
         }
     }
-    public void ExitedFromCharSel() {
+    public void RemovedFromCharSel() {
 
+        ResetSlots();
+        ResetSelMember();
         addMemberGameObjects[currentCharSlot].GetComponent<Image>().sprite = plusIcons[0];
         charSelect.SetActive(false);
         teamSelectionGj.SetActive(true);
 
         for (int i = 0; i < 2; i++)
         {
-            addSkillGameObjects[i + currentCharSlot * 2].SetActive(false);   
+            addSkillGameObjects[i + currentCharSlot * 2].SetActive(false);
         }
+    }
+    public void ReturnFromCharSel()
+    {
+        charSelect.SetActive(false);
+        teamSelectionGj.SetActive(true);
     }
     public void SelectedChar(int id)
     {
-        addMemberGameObjects[currentCharSlot].GetComponent<Image>().sprite = charIcons[allyMemberTypes.IndexOf(availableAllyMembers[id])]; 
+        ResetSelMember();
+        ResetSlots();
+        addMemberGameObjects[currentCharSlot].GetComponent<Image>().sprite = charIcons[allyMemberTypes.IndexOf(availableAllyMembers[id])];
         AllyMember ally = availableAllyMembers[id];
         availableAllyMembers.RemoveAt(id);
         selectedAllyMembers[currentCharSlot] = ally;
@@ -118,6 +210,15 @@ public class TeamSelection : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             addSkillGameObjects[i + currentCharSlot * 2].SetActive(true);
+        }
+    }
+    void ResetSelMember()
+    {
+        if (selectedAllyMembers[currentCharSlot] != null)
+        {
+            AllyMember allyy = selectedAllyMembers[currentCharSlot];
+            selectedAllyMembers[currentCharSlot] = null;
+            availableAllyMembers.Add(allyy);
         }
     }
     public void AddSkillButtonClicked(int id)

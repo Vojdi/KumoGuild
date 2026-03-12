@@ -108,13 +108,14 @@ public class GameManager : MonoBehaviour
 
             SetupSkills(instance, skillNames);
 
-            for (int i = 0; i < 3; i++)
+            
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            if (!members.Any(m => m.Position == i))
             {
-                if (!members.Any(m => m.Position == i))
-                {
-                    var gj = Instantiate(signGj, allyVector3[i], Quaternion.identity, allyMembersParent.transform);
-                    gj.transform.localPosition = allyVector3[i];
-                }
+                var gj = Instantiate(signGj, allyVector3[i], Quaternion.identity, allyMembersParent.transform);
+                gj.transform.localPosition = allyVector3[i];
             }
         }
     }
