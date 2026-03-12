@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Sprite bgSprite2;
     [SerializeField] OptionsPanel options;
     [SerializeField] AudioSource source;
+    [SerializeField] GameObject signGj;
 
     Vector3[] enemyVector3 = new Vector3[] { new Vector3(0, 0, 0), new Vector3(2.75f, 2.5f, 0), new Vector3(5.5f, 0, 0) };
     Vector3[] allyVector3 = new Vector3[] { new Vector3(-5.0f, 0, 0), new Vector3(-2.5f, 2.5f, 0), new Vector3(0, 0, 0) };
@@ -106,6 +107,15 @@ public class GameManager : MonoBehaviour
             members.Add(instance);
 
             SetupSkills(instance, skillNames);
+
+            for (int i = 0; i < 3; i++)
+            {
+                if (!members.Any(m => m.Position == i))
+                {
+                    var gj = Instantiate(signGj, allyVector3[i], Quaternion.identity, allyMembersParent.transform);
+                    gj.transform.localPosition = allyVector3[i];
+                }
+            }
         }
     }
     private void SetupSkills(AllyMember member, string[] allowedSkillNames)

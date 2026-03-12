@@ -3070,6 +3070,7 @@ MonoBehaviour:
   bgSprite2: {fileID: 21300000, guid: 2174edcfed541ee4296dcc89e375dda1, type: 3}
   options: {fileID: 802470698}
   source: {fileID: 1339508830}
+  signGj: {fileID: 329444256217019828, guid: bddc5ef460bfdc240a7c6a6443d85661, type: 3}
   allyMemberTypes:
   - {fileID: 2893678297101708464, guid: d8c648f89bf9576469376924a23a0513, type: 3}
   - {fileID: 1792485254580439923, guid: e5d066a39997fcf4f86a311b03add9c2, type: 3}
@@ -4879,6 +4880,7 @@ MonoBehaviour:
   optionsTransform: {fileID: 0}
   infoBoxName: {fileID: 1872885976}
   infoBoxSkillType: {fileID: 1999225911}
+  squaresParent: {fileID: 1459841696}
   infoBoxPositionPanels:
   - {fileID: 1453752369}
   - {fileID: 1110128746}
