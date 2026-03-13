@@ -246,6 +246,7 @@ public class TeamSelection : MonoBehaviour
     {
         teamSelectionGj.SetActive(false);
         mainMenuGj.SetActive(true);
+        CheckIfWarnTextNecessary();
     }
     public void AddMemberButtonClicked(int id)
     {
@@ -284,6 +285,7 @@ public class TeamSelection : MonoBehaviour
         {
             addSkillGameObjects[i + currentCharSlot * 2].SetActive(false);
         }
+        CheckIfWarnTextNecessary();
     }
     void ResetSelSkill(int id)
     {
@@ -298,6 +300,7 @@ public class TeamSelection : MonoBehaviour
     {
         charSelect.SetActive(false);
         teamSelectionGj.SetActive(true);
+        CheckIfWarnTextNecessary();
     }
     public void SelectedChar(int id)
     {
@@ -316,6 +319,7 @@ public class TeamSelection : MonoBehaviour
         {
             addSkillGameObjects[i + currentCharSlot * 2].SetActive(true);
         }
+        CheckIfWarnTextNecessary();
     }
     void ResetSelMember()
     {
@@ -373,12 +377,14 @@ public class TeamSelection : MonoBehaviour
         selectedSkills[currentSkillSlot] = skill;
         skillSelect.SetActive(false);
         teamSelectionGj.SetActive(true);
+        CheckIfWarnTextNecessary();
     }
     public void ExitedFromSkillSel()
     {
         addSkillGameObjects[currentSkillSlot].GetComponent<Image>().sprite = plusIcons[1];
         skillSelect.SetActive(false);
         teamSelectionGj.SetActive(true);
+        CheckIfWarnTextNecessary();
     }
     public void ResetSlots()
     {
@@ -390,6 +396,25 @@ public class TeamSelection : MonoBehaviour
 
         selectedSkills[index1] = null;
         selectedSkills[index2] = null;
+    }
+    void CheckIfWarnTextNecessary()
+    {
+        if (warningText.gameObject.activeSelf)
+        {
+            warningText.gameObject.SetActive(false);
+            if (!CheckForValidLoadout())
+            {
+                if (warnTextId == 0)
+                {
+                    warningText.text = "At least one member has to be selected";
+                }
+                else
+                {
+                    warningText.text = "At least one skill for each selected member has to be chosen";
+                }
+                warningText.gameObject.SetActive(true);
+            }
+        }
     }
     public void Begin()
     {
