@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,9 +46,13 @@ public class TeamSelection : MonoBehaviour
     [SerializeField] List<GameObject> infoBoxPositionPanels;
     [SerializeField] List<TMPro.TMP_Text> infoBoxStatTexts;
     [SerializeField] RectTransform infoPanelRectTransform;
+    [SerializeField] TMPro.TMP_Text infoBoxDesc;
     Skill hoveredOverSkill;
     Member hoveredOverSkillMember;
+    AllyMember hoveredOverMember;
     [SerializeField] Canvas canvas;
+    [SerializeField] TMPro.TMP_Text warningText;
+    int warnTextId;
 
 
 
@@ -96,6 +101,7 @@ public class TeamSelection : MonoBehaviour
     }
     void InfoBoxSetup()
     {
+        infoBoxDesc.gameObject.SetActive(false);
         squaresParent.SetActive(true);
         infoBoxSkillType.gameObject.SetActive(true);
         infoBoxName.text = Skill.GetInfoForInfoBox(hoveredOverSkill, "name")[0];
@@ -145,6 +151,93 @@ public class TeamSelection : MonoBehaviour
             infoBoxStatTexts[i].gameObject.SetActive(true);
         }
     }
+    public IEnumerator MemberHoverOver(int index)
+    {
+        hoveredOverMember = availableAllyMembers[index];
+        InfoBoxSetupMember(hoveredOverMember.MemberDesc, hoveredOverMember.MemberName);
+        var btn = charSlots[index + 2];
+        var cg = infoPanelRectTransform.gameObject.AddComponent<CanvasGroup>();
+        cg.alpha = 0;
+        infoPanelRectTransform.gameObject.SetActive(true);
+        infoPanelRectTransform.position = btn.transform.position + new Vector3(0, 100f * canvas.scaleFactor);
+        yield return null;
+        Destroy(cg);
+    }
+    public IEnumerator PlusMemberHoverOverPlus(int index)
+    {
+        InfoBoxSetupMember(null,"Add Member");
+        var btn = addMemberGameObjects[index];
+        var cg = infoPanelRectTransform.gameObject.AddComponent<CanvasGroup>();
+        cg.alpha = 0;
+        infoPanelRectTransform.gameObject.SetActive(true);
+        infoPanelRectTransform.position = btn.transform.position + new Vector3(0, 100f * canvas.scaleFactor);
+        yield return null;
+        Destroy(cg);
+    }
+    public IEnumerator PlusMemberHoverOverMember(int index)
+    {
+        hoveredOverMember = selectedAllyMembers[index];
+        InfoBoxSetupMember(hoveredOverMember.MemberDesc,hoveredOverMember.MemberName);
+        var btn = addMemberGameObjects[index];
+        var cg = infoPanelRectTransform.gameObject.AddComponent<CanvasGroup>();
+        cg.alpha = 0;
+        infoPanelRectTransform.gameObject.SetActive(true);
+        infoPanelRectTransform.position = btn.transform.position + new Vector3(0, 100f * canvas.scaleFactor);
+        yield return null;
+        Destroy(cg);
+    }
+    public IEnumerator PlusSkillHoverOverPlus(int index)
+    {
+        InfoBoxSetupMember(null, "Add Skill");
+        var btn = addSkillGameObjects[index];
+        var cg = infoPanelRectTransform.gameObject.AddComponent<CanvasGroup>();
+        cg.alpha = 0;
+        infoPanelRectTransform.gameObject.SetActive(true);
+        infoPanelRectTransform.position = btn.transform.position + new Vector3(0, 100f * canvas.scaleFactor);
+        yield return null;
+        Destroy(cg);
+    }
+    public IEnumerator OtherIconHoverOver(GameObject btn, string label)
+    {
+        InfoBoxSetupMember(null, label);
+        var cg = infoPanelRectTransform.gameObject.AddComponent<CanvasGroup>();
+        cg.alpha = 0;
+        infoPanelRectTransform.gameObject.SetActive(true);
+        infoPanelRectTransform.position = btn.transform.position + new Vector3(0, 100f * canvas.scaleFactor);
+        yield return null;
+        Destroy(cg);
+    }
+    public IEnumerator PlusSkillHoverOverSkill(int index)
+    {
+        hoveredOverSkill = selectedSkills[index];
+        hoveredOverSkillMember = hoveredOverSkill.SelfMember;
+        hoveredOverSkillMember.Position = index;
+        InfoBoxSetup();
+        var btn = addSkillGameObjects[index];
+        var cg = infoPanelRectTransform.gameObject.AddComponent<CanvasGroup>();
+        cg.alpha = 0;
+        infoPanelRectTransform.gameObject.SetActive(true);
+        infoPanelRectTransform.position = btn.transform.position + new Vector3(0, 100f * canvas.scaleFactor);
+        yield return null;
+        Destroy(cg);
+    }
+    void InfoBoxSetupMember(string desc, string name)
+    {
+        infoBoxDesc.gameObject.SetActive(false);
+        squaresParent.SetActive(false);
+        infoBoxSkillType.gameObject.SetActive(false);
+        if(desc != null)
+        {
+            infoBoxDesc.gameObject.SetActive(true);
+        }
+           
+        infoBoxDesc.text = desc;
+        infoBoxName.text = name;
+        foreach (var statText in infoBoxStatTexts)
+        {
+            statText.gameObject.SetActive(false);
+        }
+    }
     public void SkillHoveredOut()
     {
         infoPanelRectTransform.gameObject.SetActive(false);
@@ -179,7 +272,8 @@ public class TeamSelection : MonoBehaviour
         }
     }
     public void RemovedFromCharSel() {
-
+        ResetSelSkill(currentCharSlot * 2);
+        ResetSelSkill(currentCharSlot * 2 + 1);
         ResetSlots();
         ResetSelMember();
         addMemberGameObjects[currentCharSlot].GetComponent<Image>().sprite = plusIcons[0];
@@ -191,6 +285,15 @@ public class TeamSelection : MonoBehaviour
             addSkillGameObjects[i + currentCharSlot * 2].SetActive(false);
         }
     }
+    void ResetSelSkill(int id)
+    {
+        if (selectedSkills[id] != null) {
+            Skill skill = selectedSkills[id];
+            availableSkills.Add(skill);
+            selectedSkills[id] = null;
+        }
+        
+    }
     public void ReturnFromCharSel()
     {
         charSelect.SetActive(false);
@@ -198,6 +301,8 @@ public class TeamSelection : MonoBehaviour
     }
     public void SelectedChar(int id)
     {
+        ResetSelSkill(currentCharSlot * 2);
+        ResetSelSkill(currentCharSlot * 2 + 1);
         ResetSelMember();
         ResetSlots();
         addMemberGameObjects[currentCharSlot].GetComponent<Image>().sprite = charIcons[allyMemberTypes.IndexOf(availableAllyMembers[id])];
@@ -288,43 +393,100 @@ public class TeamSelection : MonoBehaviour
     }
     public void Begin()
     {
-        string prefString = "";
-        bool firstMemberAdded = false;
+        if (!CheckForValidLoadout())
+        {
+            if(warnTextId == 0)
+            {
+                warningText.text = "At least one member has to be selected";
+            }
+            else
+            {
+                warningText.text = "At least one skill for each selected member has chosen";
+            }
+            warningText.gameObject.SetActive(true);
+        }
+        else
+        {
+            string prefString = "";
+            bool firstMemberAdded = false;
 
+            for (int i = 0; i < selectedAllyMembers.Length; i++)
+            {
+                if (selectedAllyMembers[i] == null)
+                    continue;
+
+                if (firstMemberAdded)
+                    prefString += "|";
+
+                firstMemberAdded = true;
+
+                prefString += selectedAllyMembers[i].MemberName;
+                prefString += ":" + i;
+                prefString += ":";
+
+                int skillStartIndex = i * 2;
+                bool firstSkillAdded = false;
+
+                for (int j = skillStartIndex; j < skillStartIndex + 2; j++)
+                {
+                    if (j < 0 || j >= selectedSkills.Length)
+                        continue;
+
+                    if (selectedSkills[j] == null)
+                        continue;
+
+                    if (firstSkillAdded)
+                        prefString += ",";
+
+                    firstSkillAdded = true;
+                    prefString += selectedSkills[j].SkillName;
+                }
+            }
+            PlayerPrefs.SetFloat("audio", source.volume);
+            PlayerPrefs.SetString("build", prefString);
+            SceneManager.LoadScene("Fight");
+        }
+    }
+    bool CheckForValidLoadout()
+    {
+        bool hasMember = false;
         for (int i = 0; i < selectedAllyMembers.Length; i++)
         {
-            if (selectedAllyMembers[i] == null)
-                continue;
-
-            if (firstMemberAdded)
-                prefString += "|";
-
-            firstMemberAdded = true;
-
-            prefString += selectedAllyMembers[i].MemberName;
-            prefString += ":" + i;
-            prefString += ":";
-
-            int skillStartIndex = i * 2;
-            bool firstSkillAdded = false;
-
-            for (int j = skillStartIndex; j < skillStartIndex + 2; j++)
+            if (selectedAllyMembers[i] != null)
             {
-                if (j < 0 || j >= selectedSkills.Length)
-                    continue;
-
-                if (selectedSkills[j] == null)
-                    continue;
-
-                if (firstSkillAdded)
-                    prefString += ",";
-
-                firstSkillAdded = true;
-                prefString += selectedSkills[j].SkillName;
+                hasMember = true;
+                break;
             }
         }
-        PlayerPrefs.SetFloat("audio", source.volume);
-        PlayerPrefs.SetString("build", prefString);
-        SceneManager.LoadScene("Fight");
+        if (!hasMember)
+        {
+            warnTextId = 0;
+            return false;
+        }
+        for (int i = 0; i < selectedAllyMembers.Length; i++)
+        {
+            if (selectedAllyMembers[i] != null)
+            {
+                bool bothNull = true;
+
+                for (int j = i * 2; j < i * 2 + 2; j++)
+                {
+                    if (selectedSkills[j] != null)
+                    {
+                        bothNull = false;
+                        break;
+                    }
+                }
+
+                if (bothNull)
+                {
+                    warnTextId = 1;
+                    return false;
+                    
+                }
+            }
+        }
+
+        return true;
     }
 }

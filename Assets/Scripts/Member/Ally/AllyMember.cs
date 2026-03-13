@@ -5,6 +5,8 @@ using UnityEngine;
 public class AllyMember : Member
 {
     [HideInInspector]public int IconId;
+    [SerializeField] protected string memberDesc;
+    public string MemberDesc => memberDesc;
     public override void YourTurn()
     {
         if (health > 0)

@@ -186,6 +186,7 @@ MonoBehaviour:
   TargetedArrowAnimator: {fileID: 0}
   EffectBadgeManager: {fileID: 0}
   IconId: 0
+  memberDesc: lightning before the thunder, thunder thunder, thdueasdsadadasdadasdasd
 --- !u!1001 &1226926640632072850
 PrefabInstance:
   m_ObjectHideFlags: 0

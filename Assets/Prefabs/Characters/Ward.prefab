@@ -63,6 +63,7 @@ MonoBehaviour:
   TargetedArrowAnimator: {fileID: 0}
   EffectBadgeManager: {fileID: 0}
   IconId: 0
+  memberDesc: 'Frontliner with high HP and close ranged attacks with occasional support '
 --- !u!61 &2343081282985109948
 BoxCollider2D:
   m_ObjectHideFlags: 0

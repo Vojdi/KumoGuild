@@ -186,6 +186,7 @@ MonoBehaviour:
   TargetedArrowAnimator: {fileID: 0}
   EffectBadgeManager: {fileID: 0}
   IconId: 0
+  memberDesc: Car Car Car Car Car Car Car Car Car Car Car Car
 --- !u!1001 &1226926640632072850
 PrefabInstance:
   m_ObjectHideFlags: 0

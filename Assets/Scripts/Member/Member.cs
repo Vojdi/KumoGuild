@@ -7,7 +7,6 @@ public class Member : MonoBehaviour
 {
     [SerializeField] protected string memberName;
     public string MemberName => memberName;
-    
     [SerializeField]protected int maxHealth;
     public int MaxHealth => maxHealth;
 
