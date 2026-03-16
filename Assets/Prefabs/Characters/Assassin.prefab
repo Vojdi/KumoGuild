@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   memberName: Assassin
-  maxHealth: 100
+  maxHealth: 45
   speed: 7
   Position: 0
   Skills: []
@@ -186,7 +186,7 @@ MonoBehaviour:
   TargetedArrowAnimator: {fileID: 0}
   EffectBadgeManager: {fileID: 0}
   IconId: 0
-  memberDesc: Assasinlan Passalan adasdasdddddddddddddddddddddddddddddd
+  memberDesc: Versatile fighter that makes enemies bleed while staying useful everywhere
 --- !u!1001 &1226926640632072850
 PrefabInstance:
   m_ObjectHideFlags: 0

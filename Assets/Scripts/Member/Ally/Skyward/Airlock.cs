@@ -19,12 +19,12 @@ public class Airlock : Skill
         SelfOnly = false;
         HasSelfSkill = false;
 
-        skillValuesMin = new List<List<int>> { new List<int> { 4, 7, 8 } };
-        skillValuesMax = new List<List<int>> { new List<int> { 6, 10, 12 } };
+        skillValuesMin = new List<List<int>> { new List<int> { 4, 7} };
+        skillValuesMax = new List<List<int>> { new List<int> { 7, 10 } };
         skillValuesSelf = new List<bool> { false };
 
-        effectLengths = new List<List<int>> { new List<int> { 1, 1, 2 } };
-        effectValues = new List<List<int>> { new List<int> { 0, 0, 0 } };
+        effectLengths = new List<List<int>> { new List<int> { 1, 2 } };
+        effectValues = new List<List<int>> { new List<int> { 0, 0 } };
         effectTypes = new List<Type> { typeof(StunEffect) };
         effectValuesSelf = new List<bool> { false };
 

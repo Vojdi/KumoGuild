@@ -16,12 +16,12 @@ public class SplinterRain : Skill
         SelfOnly = false;
         HasSelfSkill = false;
 
-        skillValuesMin = new List<List<int>> { new List<int> { 3, 5, 7 } };
-        skillValuesMax = new List<List<int>> { new List<int> { 5, 7, 9 } };
+        skillValuesMin = new List<List<int>> { new List<int> { 2} };
+        skillValuesMax = new List<List<int>> { new List<int> { 4} };
         skillValuesSelf = new List<bool> { false };
 
-        effectLengths = new List<List<int>> { new List<int> { 3, 3, 3 } };
-        effectValues = new List<List<int>> { new List<int> { 3, 4, 5 } };
+        effectLengths = new List<List<int>> { new List<int> { 3} };
+        effectValues = new List<List<int>> { new List<int> { 2} };
         effectTypes = new List<Type> { typeof(DoTEffect) };
         effectValuesSelf = new List<bool> { false };
 

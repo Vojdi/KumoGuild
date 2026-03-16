@@ -12,13 +12,13 @@ public class SkyLance : Skill
         skillType = "attack";
 
         ReachablePositions = new List<int> { 3,4 };
-        UsableFromPositions = new List<int> { 0,1,2};
+        UsableFromPositions = new List<int> { 0,1};
         
         SelfOnly = false;
         HasSelfSkill = false;
 
-        skillValuesMin = new List<List<int>> { new List<int> {6, 9, 11} };
-        skillValuesMax = new List<List<int>> { new List<int> {11, 13, 16} };
+        skillValuesMin = new List<List<int>> { new List<int> {5, 8} };
+        skillValuesMax = new List<List<int>> { new List<int> {10, 13} };
         skillValuesSelf = new List<bool> { false };
 
         effectTypes = new List<Type>();

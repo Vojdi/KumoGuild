@@ -16,8 +16,8 @@ public class BoulderThrow : Skill
         SelfOnly = false;
         HasSelfSkill = false;
 
-        skillValuesMin = new List<List<int>> { new List<int> { 10, 12, 14 } };
-        skillValuesMax = new List<List<int>> { new List<int> { 20, 24, 28 } };
+        skillValuesMin = new List<List<int>> { new List<int> { 11} };
+        skillValuesMax = new List<List<int>> { new List<int> { 14} };
         skillValuesSelf = new List<bool> { false };
 
         effectTypes = new List<Type>();

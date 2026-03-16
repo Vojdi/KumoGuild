@@ -16,8 +16,8 @@ public class Splintersnipe : Skill
         SelfOnly = false;
         HasSelfSkill = false;
 
-        skillValuesMin = new List<List<int>> { new List<int> { 10, 12,14 } };
-        skillValuesMax = new List<List<int>> { new List<int> { 20, 24, 28 } };
+        skillValuesMin = new List<List<int>> { new List<int> { 12} };
+        skillValuesMax = new List<List<int>> { new List<int> { 15} };
         skillValuesSelf = new List<bool> { false };
 
         effectTypes = new List<Type>();

@@ -16,8 +16,8 @@ public class Waterbolt : Skill
         SelfOnly = false;
         HasSelfSkill = false;
 
-        skillValuesMin = new List<List<int>> { new List<int> { 7  } };
-        skillValuesMax = new List<List<int>> { new List<int> { 12 } };
+        skillValuesMin = new List<List<int>> { new List<int> { 8  } };
+        skillValuesMax = new List<List<int>> { new List<int> { 14 } };
         skillValuesSelf = new List<bool> { false };
 
         effectTypes = new List<Type>();

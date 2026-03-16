@@ -12,14 +12,14 @@ public class SunMending : Skill
         SkillRangeType = "single";
         skillType = "support";
 
-        ReachablePositions = new List<int> { 0, 1,2 };
-        UsableFromPositions = new List<int> { 0, 1 };
+        ReachablePositions = new List<int> { 0, 1};
+        UsableFromPositions = new List<int> { 0, 1};
 
         SelfOnly = false;
         HasSelfSkill = false;
 
-        skillValuesMin = new List<List<int>> { new List<int> { -8, -11, -14 } };
-        skillValuesMax = new List<List<int>> { new List<int> { -15, -17, -20 } };
+        skillValuesMin = new List<List<int>> { new List<int> { -16, -13, } };
+        skillValuesMax = new List<List<int>> { new List<int> { -21, -18, } };
         skillValuesSelf = new List<bool> { false };
 
         effectTypes = new List<Type>();

@@ -12,13 +12,13 @@ public class Lick : Skill
         skillType = "support";
 
         ReachablePositions = new List<int> { 0, 1, 2 };
-        UsableFromPositions = new List<int> { 0, 1,2 };
+        UsableFromPositions = new List<int> { 0, 1, 2};
 
         SelfOnly = false;
         HasSelfSkill = false;
 
-        skillValuesMin = new List<List<int>> { new List<int> { -8, -11, -14 } };
-        skillValuesMax = new List<List<int>> { new List<int> { -15, -17, -20 } };
+        skillValuesMin = new List<List<int>> { new List<int> { -14, -11 } };
+        skillValuesMax = new List<List<int>> { new List<int> { -22, -20} };
         skillValuesSelf = new List<bool> { false };
 
         effectTypes = new List<Type>();

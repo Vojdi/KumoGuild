@@ -57,6 +57,29 @@ public class LevelUpPanel : MonoBehaviour
         }
         return false;
     }
+    public bool CheckIfUpgraded(int index) {
+
+        GameObject gj = skillsGjs[index];
+        int positionIndex = Array.IndexOf(skillsGjs, gj) / 2;
+        int memberSkillIndex;
+        if (Array.IndexOf(skillsGjs, gj) % 2 == 0)
+        {
+            memberSkillIndex = 0;
+        }
+        else
+        {
+            memberSkillIndex = 1;
+        }
+        hoveredOverSkill = GameManager.Instance.Members.FirstOrDefault(m => m.Position == positionIndex).Skills[memberSkillIndex];
+        if(hoveredOverSkill.Level == 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     private void LoadMemberIcons()
     {
@@ -168,7 +191,7 @@ public class LevelUpPanel : MonoBehaviour
         GameObject gj = skillsGjs[index];
         int positionIndex = Array.IndexOf(skillsGjs, gj) / 2;
         int memberSkillIndex;
-        if (Array.IndexOf(skillsGjs, selectedGj) % 2 == 0)
+        if (Array.IndexOf(skillsGjs, gj) % 2 == 0)
         {
             memberSkillIndex = 0;
         }

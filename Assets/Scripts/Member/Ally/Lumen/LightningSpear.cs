@@ -13,13 +13,13 @@ public class LightningSpear : Skill
         skillType = "attack";
 
         ReachablePositions = new List<int> { 3, 4, 5 };
-        UsableFromPositions = new List<int> { 0, 1 };
+        UsableFromPositions = new List<int> { 0, 1,2 };
 
         SelfOnly = false;
         HasSelfSkill = true;
 
-        skillValuesMin = new List<List<int>> { new List<int> { 8, 11, 14 }, new List<int> { -8, -11, -14 } };
-        skillValuesMax = new List<List<int>> { new List<int> { 15, 17, 20 }, new List<int> { -15, -17, -20 } };
+        skillValuesMin = new List<List<int>> { new List<int> { 9, 12}, new List<int> { -9, -12 }};
+        skillValuesMax = new List<List<int>> { new List<int> { 14, 17}, new List<int> { -14, -17 }};
         skillValuesSelf = new List<bool> { false, true };
 
         effectTypes = new List<Type>();

@@ -18,8 +18,8 @@ public class RayOfSunlight : Skill
         SelfOnly = false;
         HasSelfSkill = false;
 
-        skillValuesMin = new List<List<int>> { new List<int> { -4, -6, -8 } };
-        skillValuesMax = new List<List<int>> { new List<int> { -6, -8, -10 } };
+        skillValuesMin = new List<List<int>> { new List<int> { -4, -7} };
+        skillValuesMax = new List<List<int>> { new List<int> { -9, -12 }};
         skillValuesSelf = new List<bool> { false };
 
         effectTypes = new List<Type>();

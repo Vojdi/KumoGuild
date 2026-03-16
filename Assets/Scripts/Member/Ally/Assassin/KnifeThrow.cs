@@ -18,12 +18,12 @@ public class KnifeThrow : Skill
         SelfOnly = false;
         HasSelfSkill = false;
 
-        skillValuesMin = new List<List<int>> { new List<int> { 8, 11, 14 } };
-        skillValuesMax = new List<List<int>> { new List<int> { 15, 17, 20 } };
+        skillValuesMin = new List<List<int>> { new List<int> { 4,7 } };
+        skillValuesMax = new List<List<int>> { new List<int> { 8, 11} };
         skillValuesSelf = new List<bool> { false };
 
-        effectLengths = new List<List<int>> { new List<int> { 3, 3, 3 } };
-        effectValues = new List<List<int>> { new List<int> { 3, 4, 5 } };
+        effectLengths = new List<List<int>> { new List<int> { 3, 3} };
+        effectValues = new List<List<int>> { new List<int> { 3,4 } };
         effectTypes = new List<Type> { typeof(DoTEffect) };
         effectValuesSelf = new List<bool> { false };
 

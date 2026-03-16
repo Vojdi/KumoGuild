@@ -13,7 +13,7 @@ public class Purr : Skill
         skillType = "support";
 
         ReachablePositions = new List<int>();
-        UsableFromPositions = new List<int>() { 0, 1, 2 };
+        UsableFromPositions = new List<int>() { 0, 1 };
 
         HasSelfSkill = false;
         SelfOnly = false;
@@ -22,8 +22,8 @@ public class Purr : Skill
         skillValuesMax = new List<List<int>>();
         skillValuesSelf = new List<bool>();
 
-        effectLengths = new List<List<int>> { new List<int> { 2, 3, 4 }, new List<int> { 2, 2, 2 } };
-        effectValues = new List<List<int>> { new List<int> { 35, 50, 65 }, new List<int> { 0, 0, 0 } };
+        effectLengths = new List<List<int>> { new List<int> { 2, 2  }, new List<int> { 2, 2 } };
+        effectValues = new List<List<int>> { new List<int> { 25,45}, new List<int> { 0, 0 } };
         effectTypes = new List<Type> { typeof(ProtEffect), typeof(TauntEffect) };
         effectValuesSelf = new List<bool> { false, false };
 

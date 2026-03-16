@@ -13,6 +13,7 @@ public class OptionsPanel : MonoBehaviour
     [SerializeField] TMPro.TMP_Text quitText;
     [SerializeField] AudioSource audioSource;
     [SerializeField] Slider slider;
+    [SerializeField] GameObject guideGj;
     private void Awake()
     {
         sure = false;
@@ -55,5 +56,10 @@ public class OptionsPanel : MonoBehaviour
             PlayerPrefs.SetFloat("audio", audioSource.volume);
             SceneManager.LoadScene("MainMenu");
         }
+    }
+    public void ToGuide()
+    {
+        gameObject.SetActive(false);
+        guideGj.SetActive(true);
     }
 }

@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   memberName: Possessed Twig
-  maxHealth: 1
+  maxHealth: 25
   speed: 6
   Position: 0
   Skills: []

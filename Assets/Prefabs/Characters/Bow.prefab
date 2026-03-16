@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   memberName: Mighty Bow
-  maxHealth: 30
+  maxHealth: 25
   speed: 3
   Position: 0
   Skills: []

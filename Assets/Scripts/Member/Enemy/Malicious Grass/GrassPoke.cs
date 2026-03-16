@@ -16,8 +16,8 @@ public class GrassPoke : Skill
         SelfOnly = false;
         HasSelfSkill = false;
 
-        skillValuesMin = new List<List<int>> { new List<int> { 7, 9, 11 } };
-        skillValuesMax = new List<List<int>> { new List<int> { 12, 14, 16 } };
+        skillValuesMin = new List<List<int>> { new List<int> { 6} };
+        skillValuesMax = new List<List<int>> { new List<int> { 9} };
         skillValuesSelf = new List<bool> { false };
 
         effectTypes = new List<Type>();

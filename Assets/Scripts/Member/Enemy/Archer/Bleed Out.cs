@@ -17,11 +17,11 @@ public class BleedOut : Skill
         HasSelfSkill = false;
 
         skillValuesMin = new List<List<int>> { new List<int> { 14 } };
-        skillValuesMax = new List<List<int>> { new List<int> { 16 } };
+        skillValuesMax = new List<List<int>> { new List<int> { 19 } };
         skillValuesSelf = new List<bool> { false };
 
-        effectLengths = new List<List<int>> { new List<int> { 3, 3, 3 } };
-        effectValues = new List<List<int>> { new List<int> { 3, 4, 5 } };
+        effectLengths = new List<List<int>> { new List<int> { 3} };
+        effectValues = new List<List<int>> { new List<int> { 5}};
         effectTypes = new List<Type> { typeof(DoTEffect) };
         effectValuesSelf = new List<bool> {false };
 

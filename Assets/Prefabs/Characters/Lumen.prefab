@@ -175,9 +175,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af85767990daa0a49891acfa364c5539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  memberName: Sorceress
-  maxHealth: 100
-  speed: 4
+  memberName: Sorcerer
+  maxHealth: 40
+  speed: 6
   Position: 0
   Skills: []
   Targetable: 0
@@ -186,7 +186,7 @@ MonoBehaviour:
   TargetedArrowAnimator: {fileID: 0}
   EffectBadgeManager: {fileID: 0}
   IconId: 0
-  memberDesc: lightning before the thunder, thunder thunder, thdueasdsadadasdadasdasd
+  memberDesc: Backline support with lots of heals to keep the team alive
 --- !u!1001 &1226926640632072850
 PrefabInstance:
   m_ObjectHideFlags: 0

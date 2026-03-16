@@ -13,7 +13,6 @@ public class Settings : MonoBehaviour
     [SerializeField] AudioSource musicSource;
 
     [SerializeField] TMPro.TMP_Dropdown resolutionDropdown;
-    [SerializeField] Toggle fullscreenToggle;
 
     static Settings instance;
     public static Settings Instance => instance;
@@ -46,13 +45,7 @@ public class Settings : MonoBehaviour
         String[] parts = resolution.Split("x");
         int width = int.Parse(parts[0]);
         int height = int.Parse(parts[1]);
-        if (fullscreenToggle.isOn)
-        {
-            Screen.SetResolution(width, height, Screen.fullScreen);
-        }
-        else
-        {
-            Screen.SetResolution(width, height, FullScreenMode.Windowed);
-        }
+        
+        Screen.SetResolution(width, height, FullScreenMode.Windowed);
     }
 }

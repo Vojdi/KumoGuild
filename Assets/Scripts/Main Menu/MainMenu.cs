@@ -5,6 +5,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject mainMenuGj;
     [SerializeField] GameObject settingsGj;
     [SerializeField] GameObject teamSelectionGj;
+    [SerializeField] GameObject guideGj;
 
     [SerializeField] OnTextHover settingsButton;
     [SerializeField] OnTextHover teamSelectButton;
@@ -38,5 +39,10 @@ public class MainMenu : MonoBehaviour
     {
         mainMenuGj.SetActive(false);
         teamSelectionGj.SetActive(true);
+    }
+    public void ToGuideButtonClick()
+    {
+        mainMenuGj.SetActive(false);
+        guideGj.SetActive(true);
     }
 }

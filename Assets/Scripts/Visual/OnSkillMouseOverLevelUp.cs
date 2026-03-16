@@ -12,13 +12,20 @@ public class OnSkillMouseOverLevelUp : MonoBehaviour, IPointerEnterHandler, IPoi
     }
     public void OnPointerExit(PointerEventData pointerEventData)
     {
-        StopCoroutine(holdCoroutine);
-        LevelUpPanel.Instance.SkillHoveredOut();
+        if(holdCoroutine != null)
+        {
+            StopCoroutine(holdCoroutine);
+            LevelUpPanel.Instance.SkillHoveredOut();
+        }
     }
     IEnumerator HoldMouseOver()
     {
-        yield return new WaitForSeconds(0.6f * Time.timeScale);
-        StartCoroutine(LevelUpPanel.Instance.SkillHoveredOver(buttonId));
+
+        if(!LevelUpPanel.Instance.CheckIfUpgraded(buttonId))
+        {
+            yield return new WaitForSeconds(0.6f * Time.timeScale);
+            StartCoroutine(LevelUpPanel.Instance.SkillHoveredOver(buttonId));
+        }
     }
     private void OnDisable()
     {

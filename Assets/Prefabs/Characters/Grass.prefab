@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   memberName: Malicious Grass
-  maxHealth: 1
+  maxHealth: 35
   speed: 5
   Position: 0
   Skills: []

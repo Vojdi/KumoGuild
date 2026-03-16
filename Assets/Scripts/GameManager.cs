@@ -51,13 +51,6 @@ public class GameManager : MonoBehaviour
         waveCount = 0;
         bossDead = false;
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            OptionsDecide();
-        }
-    }
     private void Start()
     {
         source.volume = PlayerPrefs.GetFloat("audio");
@@ -311,7 +304,7 @@ public class GameManager : MonoBehaviour
                 List<EnemyMember> listPossibleEnemies = new List<EnemyMember>();
                 foreach (GameObject gj in enemyPrefabs)
                 {
-                    Debug.Log(gj.GetComponent<EnemyMember>().DesiredPositions.Count + "dpc");
+                    
                     if (gj.GetComponent<EnemyMember>().DesiredPositions.Contains(i + 3))
                     {
                         listPossibleEnemies.Add(gj.GetComponent<EnemyMember>());

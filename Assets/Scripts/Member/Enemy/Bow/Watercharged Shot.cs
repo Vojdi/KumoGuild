@@ -16,8 +16,8 @@ public class WaterchargedShot : Skill
         SelfOnly = false;
         HasSelfSkill = false;
 
-        skillValuesMin = new List<List<int>> { new List<int> { 10, 12, 14 } };
-        skillValuesMax = new List<List<int>> { new List<int> { 20, 24, 28 } };
+        skillValuesMin = new List<List<int>> { new List<int> { 18} };
+        skillValuesMax = new List<List<int>> { new List<int> { 22} };
         skillValuesSelf = new List<bool> { false };
 
         effectTypes = new List<Type>();

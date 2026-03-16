@@ -20,8 +20,8 @@ public class BehindMe : Skill
         skillValuesMax = new List<List<int>>();
         skillValuesSelf = new List<bool>();
 
-        effectLengths = new List<List<int>> { new List<int> { 2, 3, 4},new List<int>{2,2,2 }};
-        effectValues = new List<List<int>> { new List<int> {35, 50, 65}, new List<int> { 0, 0, 0 } };
+        effectLengths = new List<List<int>> { new List<int> { 2, 3},new List<int>{2,2 }};
+        effectValues = new List<List<int>> { new List<int> {25, 45}, new List<int> { 0, 0}};
         effectTypes = new List<Type> { typeof(ProtEffect), typeof(TauntEffect)};
         effectValuesSelf = new List<bool> {true,true};
 

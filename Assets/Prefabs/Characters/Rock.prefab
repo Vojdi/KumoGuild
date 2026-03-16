@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   memberName: Depressed Rock
-  maxHealth: 1
+  maxHealth: 50
   speed: 2
   Position: 0
   Skills: []

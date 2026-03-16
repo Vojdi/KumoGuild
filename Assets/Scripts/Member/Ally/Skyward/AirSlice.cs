@@ -18,8 +18,8 @@ public class AirSlice : Skill
         SelfOnly = false;
         HasSelfSkill = false;
         
-        skillValuesMin = new List<List<int>> { new List<int> { 8, 11, 14 } };
-        skillValuesMax = new List<List<int>> { new List<int> { 15, 17, 20 } };
+        skillValuesMin = new List<List<int>> { new List<int> {13, 16} };
+        skillValuesMax = new List<List<int>> { new List<int> { 18, 21 } };
         skillValuesSelf = new List<bool> { false };
 
         effectTypes = new List<Type>();

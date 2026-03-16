@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   memberName: Archer
-  maxHealth: 30
+  maxHealth: 50
   speed: 1
   Position: 0
   Skills: []

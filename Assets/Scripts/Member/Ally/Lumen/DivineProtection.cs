@@ -13,7 +13,7 @@ public class DivineProtection : Skill
         skillType = "support";
 
         ReachablePositions = new List<int> { 0, 1, 2 };
-        UsableFromPositions = new List<int> { 0, 1 };
+        UsableFromPositions = new List<int> { 0};
 
         SelfOnly = false;
         HasSelfSkill = false;
@@ -23,8 +23,8 @@ public class DivineProtection : Skill
         skillValuesSelf = new List<bool>();
 
         effectTypes = new List<Type> {typeof(ProtEffect)};
-        effectLengths = new List<List<int>> { new List<int> {2,2,3 }};
-        effectValues = new List<List<int>> { new List<int> { 35, 50, 65 } };
+        effectLengths = new List<List<int>> { new List<int> {2,3 }};
+        effectValues = new List<List<int>> { new List<int> { 25,45 } };
         effectValuesSelf = new List<bool> {false};
 
         Level = 0;

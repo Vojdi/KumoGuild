@@ -1,9 +1,11 @@
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Android.Types;
+
 using Unity.VisualScripting;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -426,7 +428,7 @@ public class TeamSelection : MonoBehaviour
             }
             else
             {
-                warningText.text = "At least one skill for each selected member has chosen";
+                warningText.text = "At least one skill for each selected member has to be chosen";
             }
             warningText.gameObject.SetActive(true);
         }
